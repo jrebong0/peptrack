@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router'
 import { AppComponent } from './app.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { LoginComponent } from './login/login.component';
+import { HeaderComponent } from './components/header/header.component';
 
 
 const appRoutes: Routes = [
@@ -14,7 +15,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     EmployeesComponent,
-    LoginComponent
+    LoginComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
