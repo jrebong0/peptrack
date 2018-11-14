@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <form (ngSubmit)="onSubmit()" #f="ngForm">
+                <div id="user-data"
+                     ngModelGroup="employeeData"
+                     #userData="ngModelGroup">
+                  <div class="form-group">
+                      <label for="firstname">Firstname</label>
+                      <input type="text"
+                          id="firstname"
+                          class="form-control"
+                          ngModel
+                          name="firstname"
+                          required>
+                  </div>
+                  <div class="form-group">
+                      <label for="lastname">Lastname</label>
+                      <input type="text"
+                          id="lastname"
+                          class="form-control"
+                          ngModel
+                          name="lastname"
+                          required>
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Mail</label>
+                    <input type="email"
+                        id="email"
+                        class="form-control"
+                        ngModel
+                        name="email"
+                        required
+                        email
+                        #email="ngModel">
+                    <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email!</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="studio">Studio</label>
+                    <select id="studio"
+                        class="form-control"
+                        ngModel
+                        name="studio">
+                        <option value="studio1">Studio 1</option>
+                        <option value="studio2">Studio 2</option>
+                        <option value="studio3">Studio 3</option>
+                        <option value="studio4">Studio 4</option>
+                        <option value="studio5">Studio 5</option>
+                    </select>
+                  </div>
+                  <fieldset class="form-group">
+                    <label for="emp_status">Employee Status</label>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="radio"
+                            class="form-check-input"
+                            name="emp_status"
+                            ngModel
+                            id="optionsRadios1"
+                            value="Active"
+                            checked>
+                        Active
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="radio"
+                               class="form-check-input"
+                               name="emp_status"
+                               ngModel
+                               id="optionsRadios2"
+                               value="Inactive">
+                        Inactive
+                      </label>
+                    </div>
+                  </fieldset>
+                </div>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
