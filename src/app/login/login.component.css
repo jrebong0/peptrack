@@ -1,0 +1,9 @@
+.loginWrapper {
+    width: 500px;
+    margin: 100px auto; 
+    overflow: hidden;
+}
+
+.loginWrapper button {
+    right: 0;
+}
