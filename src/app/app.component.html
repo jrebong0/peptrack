@@ -18,3 +18,9 @@
   </li>
 </ul>
 
+<ul>
+  <li class="text" *ngFor="let item of tempEmployees | async">
+    {{item.firstName}}
+    {{item.lastName}}
+  </li>
+</ul>
