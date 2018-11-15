@@ -21,9 +21,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { environment } from '../environments/environment';
 
 const appRoutes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'employees', component: EmployeesComponent },
-  { path: 'employees/create', component: EmployeeCreateComponent }
+  { path: 'employees/create', component: EmployeeCreateComponent },
+  { path: 'home', component: HomeComponent }
+
 ];
 
 @NgModule({
