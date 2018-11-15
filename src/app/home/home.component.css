@@ -1,0 +1,19 @@
+.container {
+  margin-top: 20px;
+}
+
+.fill-width {
+  width: 100%;
+}
+
+.card {
+  min-height: 350px;
+}
+
+.title-image {
+  text-align: center;
+}
+
+.title-image .image{
+  font-size: 42px;
+}
