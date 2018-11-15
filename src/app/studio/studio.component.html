@@ -16,7 +16,7 @@
                             <label for="tower" class="font-weight-bold">Tower List</label>
                             <select name="tower" id="tower" class="form-control" required ngModel #tower="ngModel">
                                 <option disabled selected value> -- select a tower -- </option>
-                                <option [value]="tower" *ngFor="let tower of towerList">{{tower}}</option>
+                                <option [value]="tower.name" *ngFor="let tower of towerList">{{tower.name | uppercase}}</option>
                             </select>
                             <div class="help-control text-danger" *ngIf="tower.invalid &&  (tower.dirty || tower.touched)">Tower is required</div>
                         </div>
