@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { EmployeeService } from 'src/app/services/employee.service';
+import { Employee } from 'src/app/models/employee.model';
 
 @Component({
   selector: 'employee-create',
@@ -7,32 +9,37 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./employee-create.component.css']
 })
 export class EmployeeCreateComponent implements OnInit {
-    @ViewChild('f') employeeForm: NgForm;
+  @ViewChild('f') employeeForm: NgForm;
+  studios: {}[];
+  securityGroups: {}[];
 
-    submitted = false;
+  submitted = false;
 
-    employee = {
-        firstname: '',
-        lastname: '',
-        email: '',
-        studio: '',
-        emp_status: ''
-    };
+  employee: Employee;
 
-    constructor() { }
+  constructor(
+    private employeeService: EmployeeService
+  ) {
+    this.studios = [
+      { key: 's1', name: 'Studio 1', tower: 't1'},
+      { key: 's2', name: 'Studio 2', tower: 't1'},
+      { key: 's3', name: 'Studio 3', tower: 't2'},
+      { key: 's4', name: 'Studio 4', tower: 't2'},
+      { key: 's5', name: 'Studio 5', tower: 't2'}
+    ];
+    this.securityGroups = [
+      { key: 'None', name: 'None' },
+      { key: 'Super Admin', name: 'Super Admin' },
+      { key: 'Admin', name: 'Admin' },
+      { key: 'Moderator', name: 'Moderator' }
+    ];
+  }
 
-    ngOnInit() {
-    }
+  ngOnInit() {
+  }
 
-    onSubmit() {
-        this.submitted = true;
-        console.log(this.employeeForm.value);
-        this.employee.firstname = this.employeeForm.value.employeeData.username;
-        this.employee.lastname = this.employeeForm.value.employeeData.lastname;
-        this.employee.email = this.employeeForm.value.employeeData.email;
-        this.employee.studio = this.employeeForm.value.employeeData.studio;
-      this.employee.emp_status = this.employeeForm.value.employeeData.emp_status;
-
-        this.employeeForm.reset();
-    }
+  submit(data) {
+    this.employeeService.addEmployee(data.value);
+    this.employeeForm.reset();
+  }
 }
