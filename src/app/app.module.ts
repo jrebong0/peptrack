@@ -8,9 +8,12 @@ import { Routes, RouterModule } from '@angular/router'
 import { AppComponent } from './app.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { LoginComponent } from './login/login.component';
+
+import { HeaderComponent } from './components/header/header.component';
 import { EmployeeCreateComponent } from './employees/employee-create/employee-create.component';
 import { StudioComponent } from './studio/studio.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 
 
 import { environment } from '../environments/environment';
@@ -26,6 +29,7 @@ const appRoutes: Routes = [
     AppComponent,
     EmployeesComponent,
     LoginComponent,
+    HeaderComponent,
     EmployeeCreateComponent,
     StudioComponent,
   ],
