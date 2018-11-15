@@ -17,6 +17,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 import { environment } from '../environments/environment';
+import { TowersComponent } from './towers/towers.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -32,6 +33,7 @@ const appRoutes: Routes = [
     HeaderComponent,
     EmployeeCreateComponent,
     StudioComponent,
+    TowersComponent
   ],
   imports: [
     BrowserModule,
