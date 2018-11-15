@@ -12,7 +12,8 @@ export class StudioComponent implements OnInit {
 
     towerList: string[] = ['A', 'B', 'C', 'D'];
     studioList: Studio[] = [];
-    studioMode: string = 'add';
+    editMode = false;
+    editIndex = null;
 
   constructor() { }
 
@@ -21,11 +22,28 @@ export class StudioComponent implements OnInit {
   }
 
   onSubmitStudio() {
-      console.log('submit', this.studioForm);
+    console.log('submit', this.studioForm);
+    if(this.editMode) {
+        this.studioList.splice(this.editIndex, 1);
+    }
+    this.studioList.unshift(this.studioForm.value);
+    this.onCancel();
   }
 
-  checkModeState(mode: string) {
-    return mode === this.studioMode;
+  checkModeState() {
+    return this.editMode;
+  }
+
+  onEditStudio(index: number) {
+      this.editIndex = index;
+      this.studioForm.controls['name'].setValue(this.studioList[index].name);
+      this.studioForm.controls['tower'].setValue(this.studioList[index].tower);
+      this.editMode = true;
+  }
+
+  onCancel() {
+    this.editMode = false;
+    this.studioForm.reset();
   }
 
 }

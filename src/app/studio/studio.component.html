@@ -5,7 +5,7 @@
             <br>
             <div class="card border-info">
                 <div class="card-body">
-                    <h2>Create Studio</h2>
+                    <h2>{{editMode ? 'Update' : 'Create'}} Studio</h2>
                     <form #studioForm="ngForm" (ngSubmit)="onSubmitStudio()">
                         <div class="form-group">
                             <label for="name" class="font-weight-bold">Name</label>
@@ -21,8 +21,9 @@
                             <div class="help-control text-danger" *ngIf="tower.invalid &&  (tower.dirty || tower.touched)">Tower is required</div>
                         </div>
                         <br>
-                        <button *ngIf="checkModeState('add')" [disabled]="!studioForm.valid" class="btn btn-primary">Add</button>
-                        <button *ngIf="checkModeState('edit')" [disabled]="!studioForm.valid" class="btn btn-success">Update</button>
+                        <button *ngIf="!checkModeState()" [disabled]="!studioForm.valid" class="btn btn-primary">Add</button>
+                        <button *ngIf="checkModeState()" [disabled]="!studioForm.valid" class="btn btn-success">Update</button>
+                        <button type="button" *ngIf="checkModeState()" class="btn btn-secondary ml-1" (click)="onCancel()">Cancel</button>
                     </form>
                 </div>
             </div>
@@ -31,6 +32,13 @@
             <div class="card border-info">
                 <div class="card-body">
                     <h2>Studio List</h2>
+                    <div class="card border-info" *ngFor="let studio of studioList; let i = index">
+                        <div class="card-body">
+                            <h1 for="">{{studio.name}}</h1>
+                            <p for="">{{studio.tower}}</p>
+                            <button class="btn btn-warning" (click)="onEditStudio(i)">Edit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
