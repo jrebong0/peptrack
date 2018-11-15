@@ -1,2 +1,9 @@
 <header></header>
 <router-outlet></router-outlet>
+<app-studio></app-studio>
+<ul>
+  <li class="text" *ngFor="let item of tempEmployees | async">
+    {{item.firstName}}
+    {{item.lastName}}
+  </li>
+</ul>
