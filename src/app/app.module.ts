@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { LoginComponent } from './login/login.component';
 import { StudioComponent } from './studio/studio.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 const appRoutes: Routes = [
@@ -16,11 +17,13 @@ const appRoutes: Routes = [
     AppComponent,
     EmployeesComponent,
     LoginComponent,
-    StudioComponent
+    StudioComponent,
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

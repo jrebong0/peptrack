@@ -1,3 +1,38 @@
-<p>
-  studio works!
-</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <br>
+            <div class="card border-info">
+                <div class="card-body">
+                    <h2>Create Studio</h2>
+                    <form #studioForm="ngForm" (ngSubmit)="onSubmitStudio()">
+                        <div class="form-group">
+                            <label for="name" class="font-weight-bold">Name</label>
+                            <input type="text" id="name" name="name" class="form-control" ngModel #name="ngModel" required>
+                            <div class="help-control text-danger" *ngIf="name.invalid &&  (name.dirty || name.touched)">Name is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tower" class="font-weight-bold">Tower List</label>
+                            <select name="tower" id="tower" class="form-control" required ngModel #tower="ngModel">
+                                <option disabled selected value> -- select a tower -- </option>
+                                <option [value]="tower" *ngFor="let tower of towerList">{{tower}}</option>
+                            </select>
+                            <div class="help-control text-danger" *ngIf="tower.invalid &&  (tower.dirty || tower.touched)">Tower is required</div>
+                        </div>
+                        <br>
+                        <button *ngIf="checkModeState('add')" [disabled]="!studioForm.valid" class="btn btn-primary">Add</button>
+                        <button *ngIf="checkModeState('edit')" [disabled]="!studioForm.valid" class="btn btn-success">Update</button>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="card border-info">
+                <div class="card-body">
+                    <h2>Studio List</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
