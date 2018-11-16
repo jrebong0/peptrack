@@ -19,6 +19,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 import { environment } from '../environments/environment';
+import { TowersComponent } from './towers/towers.component';
+import { EmployeeService } from './services/employee.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -38,7 +40,8 @@ const appRoutes: Routes = [
     EmployeeCreateComponent,
     StudioComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    TowersComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,7 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ EmployeeService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
