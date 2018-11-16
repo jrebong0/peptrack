@@ -10,6 +10,8 @@ import { EmployeesComponent } from './employees/employees.component';
 import { LoginComponent } from './login/login.component';
 
 import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HomeComponent } from './home/home.component';
 import { EmployeeCreateComponent } from './employees/employee-create/employee-create.component';
 import { StudioComponent } from './studio/studio.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -17,11 +19,16 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 import { environment } from '../environments/environment';
+import { TowersComponent } from './towers/towers.component';
+import { EmployeeService } from './services/employee.service';
 
 const appRoutes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'employees', component: EmployeesComponent },
-  { path: 'employees/create', component: EmployeeCreateComponent }
+  { path: 'employees/create', component: EmployeeCreateComponent },
+  { path: 'home', component: HomeComponent }
+
 ];
 
 @NgModule({
@@ -32,6 +39,9 @@ const appRoutes: Routes = [
     HeaderComponent,
     EmployeeCreateComponent,
     StudioComponent,
+    FooterComponent,
+    HomeComponent,
+    TowersComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +52,7 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ EmployeeService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

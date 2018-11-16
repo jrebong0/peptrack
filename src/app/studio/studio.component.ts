@@ -1,32 +1,55 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import {Studio} from '../models/studio.model';
 import {NgForm} from '@angular/forms';
+import {TowerService} from '../services/tower.service';
+import {StudioService} from '../services/studio.service';
 
 @Component({
   selector: 'app-studio',
   templateUrl: './studio.component.html',
   styleUrls: ['./studio.component.css']
 })
-export class StudioComponent implements OnInit {
+export class StudioComponent implements OnInit, OnDestroy {
     @ViewChild('studioForm') studioForm: NgForm;
 
-    towerList: string[] = ['A', 'B', 'C', 'D'];
+    // towerList: string[] = ['A', 'B', 'C', 'D'];
+    towerList: any[] = [];
     studioList: Studio[] = [];
     editMode = false;
     editIndex = null;
 
-  constructor() { }
+  constructor(
+      private towerService: TowerService,
+      private studioService: StudioService
+  ) { }
 
   ngOnInit() {
-
+    this.towerService.getTowerList().subscribe(
+        (list: any[]) => {
+            this.towerList = list;
+            console.log('getTowerList list', list);
+        },
+        (error) => console.log('getTowerList response', error),
+    );
+    this.studioService.getStudioList().subscribe(
+      (list: any[]) => {
+           this.studioList = list;
+           console.log('getStudioList list', list);
+      },
+      (error) => console.log('getStudioList response', error),
+    );
   }
 
   onSubmitStudio() {
     console.log('submit', this.studioForm);
     if(this.editMode) {
-        this.studioList.splice(this.editIndex, 1);
+        // this.studioList.splice(this.editIndex, 1);
+        // this.studioList.unshift(this.studioForm.value);
+        // this.studioService.editStudio(this.studioList[this.editIndex], this.editIndex).;
+        this.studioService.updateStudioList(this.studioForm.value, this.studioList[this.editIndex].key);
+    } else {
+        this.studioService.addStudio(this.studioForm.value);
     }
-    this.studioList.unshift(this.studioForm.value);
     this.onCancel();
   }
 
@@ -34,10 +57,14 @@ export class StudioComponent implements OnInit {
     return this.editMode;
   }
 
+  ngOnDestroy() {
+      this.editMode = false;
+  }
+
   onEditStudio(index: number) {
       this.editIndex = index;
-      this.studioForm.controls['name'].setValue(this.studioList[index].name);
-      this.studioForm.controls['tower'].setValue(this.studioList[index].tower);
+      this.studioForm.controls['name'].setValue(this.studioList[index].data.name);
+      this.studioForm.controls['tower'].setValue(this.studioList[index].data.tower);
       this.editMode = true;
   }
 
