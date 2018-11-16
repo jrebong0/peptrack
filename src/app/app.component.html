@@ -1,4 +1,6 @@
-<header></header>
-<router-outlet></router-outlet>
+<header *ngIf="userAccessServ.hasUserLoggedIn()"></header>
+<div class="main-content">
+  <router-outlet></router-outlet>
+</div>
 <footer></footer>
 

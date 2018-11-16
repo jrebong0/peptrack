@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderItem } from 'src/app/models/components/header/header-item.model';
+import { UserAccessService } from 'src/app/services/user-access.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'header',
@@ -26,9 +28,18 @@ export class HeaderComponent implements OnInit {
     isActive: false,
     disabled: false
   }];
-  constructor() { }
+
+  constructor(
+    private userAccessServ: UserAccessService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  onUserLogout() {
+    this.userAccessServ.logout();
+    this.router.navigateByUrl("/login");
   }
 
 }

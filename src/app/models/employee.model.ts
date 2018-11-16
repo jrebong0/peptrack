@@ -11,6 +11,5 @@ export interface Employee {
     status: string;
     type: string;
     role: Role;
-    securityGroup: SecurityGroup;
-    permissions?: Permission[]; /* Temporarily set to Optional to test login */
+    securityGroup: SecurityGroup; /* Temporarily set to Optional to test login */
 }

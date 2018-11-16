@@ -1,7 +1,5 @@
 .footer-background {
-  position: fixed;
-  bottom: 0;
-  margin-top: 100px;
+  position: absolute;
   background-color: #003363;
   min-width: 100%;
   min-height: 50px;
