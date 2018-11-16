@@ -5,13 +5,49 @@
           <img src="../../assets/images/logo.jpg">
         </div>
         <div class="col-md-8">
-          <form>
+          <form
+            (ngSubmit)="onSubmit(loginForm)"
+            #loginForm="ngForm">
             <div class="form-group">
-              <label for="username">Username: </label>
-              <input type="text" id="username" name="username" class="form-control">
+              <label for="email">Email: </label>
+              <input
+                ngModel
+                type="text"
+                id="email"
+                name="email"
+                class="form-control"
+                #email="ngModel"
+                required
+                pattern="/[a-z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+=?^_`
+                  {|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:
+                  [a-z0-9-]*[a-z0-9])?/g">
               <label for="password">Password: </label>
-              <input  type="password" id="password" name="password" ngModel class="form-control"><br/>
-              <button class="btn btn-primary" type="submit">Sign In</button>
+              <input
+                ngModel
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                #password="ngModel"
+                required>
+              <br/>
+              <button
+                class="btn btn-primary"
+                type="submit"
+                [disabled]="email.errors?.required ||
+                  password.errors?.required">
+                Sign In
+              </button>
+              <div *ngIf="(!email.valid && (email.dirty || email.touched)) ||
+                (!password.valid && (password.dirty || password.touched))">
+                <br/>
+                <span
+                  class="alert alert-danger"
+                  *ngIf="email.errors?.required ||
+                    password.errors?.required">
+                  Email/Password required.
+                </span>
+              </div>
             </div>
           </form>
         </div>
