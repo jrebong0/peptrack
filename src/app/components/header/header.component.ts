@@ -7,33 +7,22 @@ import { HeaderItem } from 'src/app/models/components/header/header-item.model';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  headerItems: HeaderItem[] = [{
-    text: 'Home',
-    url: "",
-    isActive: true,
-    disabled: false
-  },
+  headerItems: HeaderItem[] = [
   {
     text: 'Employees',
-    url: "",
+    url: "/employees",
     isActive: false,
     disabled: false
   },
   {
     text: 'Towers',
-    url: "",
+    url: "/towers",
     isActive: false,
     disabled: false
   },
   {
     text: 'Studios',
-    url: "",
-    isActive: false,
-    disabled: false
-  },
-  {
-    text: 'Admin',
-    url: "",
+    url: "/studios",
     isActive: false,
     disabled: false
   }];
