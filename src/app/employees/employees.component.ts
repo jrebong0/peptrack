@@ -3,6 +3,9 @@ import { EmployeeService } from '../services/employee.service';
 import { Observable } from 'rxjs';
 import { RolesService } from '../services/roles.service';
 import { Role } from '../models/role.model';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
+import { Studio } from '../models/studio.model';
 
 @Component({
   selector: 'app-employees',
@@ -10,30 +13,66 @@ import { Role } from '../models/role.model';
   styleUrls: ['./employees.component.css']
 })
 export class EmployeesComponent implements OnInit {
-  employees: Observable<any[]>;
+  employees: any[];
   towers: {}[];
-  studios: {}[];
-  roles: Observable<any[]>;
+  studios: any[];
+  roles: Role[];
 
   constructor(
     private employeeService: EmployeeService,
-    private rolesService: RolesService
+    private rolesService: RolesService,
+    private db: AngularFirestore // used for getting studios (temp until StudioService is refactored)
   ) { }
 
   ngOnInit() {
-    this.employees = this.employeeService.getEmployees();
-    this.roles = this.rolesService.getRoles();
+    // retrieve roles
+    this.rolesService.getRoles().subscribe(
+      item => {
+        this.roles = item;
+        console.log('role', this.roles);
+      }
+    );
+
+    // retrieve studios
+    // @todo: temporary until StudiosSevice is refactored
+    this.db.collection<any>('studio').snapshotChanges().pipe(
+      map(items => {
+        return items.map( item => {
+          const id = item.payload.doc.id;
+          const data = item.payload.doc.data();
+          return {id, ...data};
+        });
+      })
+    ).subscribe(
+      (list: any[]) => {
+        this.studios = list;
+        console.log('studios', this.studios);
+      },
+      (error) => console.log('studio service error', error)
+    );
+
+    // retrieve towers
+    // @todo: retrieve from service
     this.towers = [
-      { key: 't1', name: 'Tower 1'},
-      { key: 't2', name: 'Tower 2'}
+      { id: 't1', name: 'Tower 1'},
+      { id: 't2', name: 'Tower 2'}
     ];
-    this.studios = [
-      { key: 's1', name: 'Studio 1', tower: 't1'},
-      { key: 's2', name: 'Studio 2', tower: 't1'},
-      { key: 's3', name: 'Studio 3', tower: 't2'},
-      { key: 's4', name: 'Studio 4', tower: 't2'},
-      { key: 's5', name: 'Studio 5', tower: 't2'}
-    ];
+
+    // retrieve employees
+    this.employeeService.getEmployees().subscribe(
+      (list: any[]) => {
+        this.employees = list;
+        console.log('employees', this.employees);
+      },
+      (error) => console.log('employee service error', error)
+    );
   }
 
+  getRole(id: string) {
+    return this.roles.find(x => x.id == id).name;
+  }
+
+  getStudio(id: string) {
+    return this.studios.find(x => x.id == id).name;
+  }
 }

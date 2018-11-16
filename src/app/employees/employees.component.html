@@ -14,21 +14,21 @@
         <label for="towerFilter" class="form-label">Select Tower</label>
         <select name="tower" id="towerFilter" class="form-control form-control-sm">
           <option value="all">All</option>
-          <option *ngFor="let item of towers" [value]="item.key">{{item.name}}</option>
+          <option *ngFor="let item of towers" [value]="item.id">{{item.name}}</option>
         </select>
       </div>
       <div class="col">
         <label for="studioFilter" class="form-label">Select Studio</label>
         <select name="studio" id="studioFilter" class="form-control form-control-sm">
           <option value="all">All</option>
-          <option *ngFor="let item of studios" [value]="item.key">{{item.name}}</option>
+          <option *ngFor="let item of studios" [value]="item.id">{{item.name}}</option>
         </select>
       </div>
       <div class="col">
         <label for="roleFilter" class="form-label">Select Role</label>
         <select name="role" id="roleFilter" class="form-control form-control-sm">
           <option value="all">All</option>
-          <option *ngFor="let item of roles | async" [value]="item.name">{{item.name}}</option>
+          <option *ngFor="let item of roles" [value]="item.id">{{item.name}}</option>
         </select>
       </div>
     </div>
@@ -39,15 +39,17 @@
       <tr>
         <th>Studio</th>
         <th>Employee</th>
+        <th>Email</th>
         <th>Role</th>
         <th>Options</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of employees | async">
-        <td></td>
-        <td>{{item.firstName}} {{item.lastName}}</td>
-        <td></td>
+      <tr *ngFor="let item of employees">
+        <td [innerHTML]="getStudio(item.studio.id)"></td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.firstName }} {{ item.lastName }}</td>
+        <td [innerHTML]="getRole(item.role.id)"></td>
         <td>
           <input type="button" class="btn btn-success btn-sm ml-2" value="View">
           <input type="button" class="btn btn-primary btn-sm ml-2" value="Edit">
@@ -57,7 +59,7 @@
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="4">paging</td>
+        <td colspan="5">paging</td>
       </tr>
     </tfoot>
   </table>
