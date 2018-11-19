@@ -27,27 +27,25 @@ export class StudioComponent implements OnInit, OnDestroy {
     this.towerService.getTowerList().subscribe(
         (list: any[]) => {
             this.towerList = list;
-            console.log('getTowerList list', list);
         },
         (error) => console.log('getTowerList response', error),
     );
     this.studioService.getStudioList().subscribe(
       (list: any[]) => {
            this.studioList = list;
-           console.log('getStudioList list', list);
       },
       (error) => console.log('getStudioList response', error),
     );
   }
 
   onSubmitStudio() {
-    console.log('submit', this.studioForm);
     if(this.editMode) {
         // this.studioList.splice(this.editIndex, 1);
         // this.studioList.unshift(this.studioForm.value);
         // this.studioService.editStudio(this.studioList[this.editIndex], this.editIndex).;
         this.studioService.updateStudioList(this.studioForm.value, this.studioList[this.editIndex].key);
     } else {
+        const studioName = this.studioForm.form;
         this.studioService.addStudio(this.studioForm.value);
     }
     this.onCancel();
@@ -63,8 +61,8 @@ export class StudioComponent implements OnInit, OnDestroy {
 
   onEditStudio(index: number) {
       this.editIndex = index;
-      this.studioForm.controls['name'].setValue(this.studioList[index].data.name);
-      this.studioForm.controls['tower'].setValue(this.studioList[index].data.tower);
+      this.studioForm.controls['name'].setValue(this.studioList[index].name);
+      this.studioForm.controls['tower'].setValue(this.studioList[index].tower);
       this.editMode = true;
   }
 

@@ -16,7 +16,7 @@
                             <label for="tower" class="font-weight-bold">Tower List</label>
                             <select name="tower" id="tower" class="form-control" required ngModel #tower="ngModel">
                                 <option disabled selected value> -- select a tower -- </option>
-                                <option [value]="tower.data?.name" *ngFor="let tower of towerList">{{tower.data?.name | uppercase}}</option>
+                                <option [value]="tower.key" *ngFor="let tower of towerList">{{tower?.name | uppercase}}</option>
                             </select>
                             <div class="help-control text-danger" *ngIf="tower.invalid &&  (tower.dirty || tower.touched)">Tower is required</div>
                         </div>
@@ -34,8 +34,8 @@
                     <h2>Studio List</h2>
                     <div class="card border-info" *ngFor="let studio of studioList; let i = index">
                         <div class="card-body">
-                            <h1 for="">{{studio.data?.name}}</h1>
-                            <p for="">{{studio.data?.tower}}</p>
+                            <h1 for="">{{studio?.name}}</h1>
+                            <p for="">{{studio?.tower | towerFilter: towerList}}</p>
                             <button class="btn btn-warning" (click)="onEditStudio(i)">Edit</button>
                         </div>
                     </div>

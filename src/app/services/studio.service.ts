@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import {Studio} from '../models/studio.model';
+import { AngularFirestore, Reference } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -8,36 +7,45 @@ import { map } from 'rxjs/operators';
 })
 export class StudioService {
 
-  constructor(private db: AngularFirestore) { }
+    constructor(private db: AngularFirestore) { }
 
-  getStudioList() {
-    // return this.db.collection('studio').valueChanges();
-    return this.db.collection('studio').snapshotChanges().pipe(
-      map(items => {
-        console.log('map[', items);
-        return items.map(
-          item => {
-            const key = item.payload.doc.id;
-            const data = item.payload.doc.data();
-            return { key, data };
-          }
+    getStudioList() {
+        return this.db.collection('studio').snapshotChanges().pipe(
+            map(items=>{
+                return items.map(
+                    (item:any) => {
+                        let key = item.payload.doc.id;
+                        let data = item.payload.doc.data();
+                        data.tower = data.tower.path;
+                        return {key, ...data};
+                    }
+                );
+            })
         );
-      })
-    );
-  }
+    }
 
-  //   editStudio(value: Studio, index: number) {
-  //     this.db.collection('studio').stateChanges();
-  //   }
-  updateStudioList(editItem: { name: string, tower: string }, key: string): void {
-    // console.log(this.db.collection('studio').doc);
-    console.log('updateStudioList', editItem, key);
-    this.db.collection('studio').doc(key).update(editItem);
-  }
+    updateStudioList(editItem: {name: string, tower: string}, key: string):void {
+        let newTowerRef = this.getReferencePath(editItem.tower);
+        let updatedData = {
+            name: editItem.name,
+            tower: newTowerRef
+        };
+        this.db.collection('studio').doc(key).update(updatedData);
+    }
 
-  addStudio(item: { name: string, tower: string }) {
-    const newItem = item;
-    //newItem.type = 'admin';
-    this.db.collection('studio').add(item);
-  }
+    addStudio(item: {name: string, tower: string}) {
+        let newTowerRef = this.getReferencePath(item.tower);
+        let newStudio = {
+            name: item.name, 
+            tower: newTowerRef, 
+            type: 'admin'
+        };
+        this.db.collection('studio').add(newStudio);
+    }
+
+    getReferencePath(tower: string) {
+        let path = tower.split('/');
+        let towerPath = this.db.collection(path[0]).doc(path[1]).ref;
+        return towerPath;
+    }
 }
