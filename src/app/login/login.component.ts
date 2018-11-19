@@ -13,8 +13,14 @@ import { UserAccessService } from 'src/app/services/user-access.service';
 export class LoginComponent implements OnInit {
   employees: Employee[];
   employee: Employee;
+
   return: string = "";
   errorMessage: string = "";
+
+  isExisting: boolean;
+  noAccount: string;
+
+
   constructor(
     private employeeSrv: EmployeeService,
     private userAccessServ: UserAccessService,
@@ -23,9 +29,12 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     try {
       this.route.queryParams
-        .subscribe(params => this.return = params['return'] || '/home');
+        .subscribe(params => this.
+                   
+                   = params['return'] || '/home');
 
       if (this.userAccessServ.hasUserLoggedIn()) {
         this.router.navigate(["/"]);
@@ -37,6 +46,7 @@ export class LoginComponent implements OnInit {
           }
         );
       }
+
     } catch (error) {
       console.log(error);
     }
@@ -63,6 +73,7 @@ export class LoginComponent implements OnInit {
       }
       else {
         this.errorMessage = "Invalid username/password";
+        return false;
       }
     } catch (error) {
       this.errorMessage = "Cannot get employee data";

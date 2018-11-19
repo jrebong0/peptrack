@@ -22,6 +22,8 @@ import { environment } from '../environments/environment';
 import { TowersComponent } from './towers/towers.component';
 import { EmployeeService } from './services/employee.service';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
+import { ModalComponent } from './components/modal/modal.component';
+
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -31,7 +33,6 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
   { path: 'towers', component: TowersComponent, canActivate: [AuthGuardService] },
   { path: 'studios', component: StudioComponent, canActivate: [AuthGuardService] }
-
 ];
 
 @NgModule({
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
     StudioComponent,
     FooterComponent,
     HomeComponent,
-    TowersComponent
+    TowersComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
