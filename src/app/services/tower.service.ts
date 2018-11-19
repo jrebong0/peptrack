@@ -34,7 +34,7 @@ export class TowerService {
         let newTower = {
             name: name,
             type: 'admin',
-            created: new Date();
+            created: new Date()
         };
         this.db.collection('tower').add(newTower);
     }
