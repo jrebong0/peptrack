@@ -1,0 +1,49 @@
+.tower-container {
+    width: 50%;
+    margin: 0 auto;
+}
+.tower-container a {
+    cursor: pointer;
+}
+.tower-header a:hover {
+    color: #0066ff;
+}
+.tower-header {
+    padding: 5px;
+    background-color: #003363;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: white;
+    text-align: center;
+}
+.tower-title {
+    font-size: 20px;
+    padding: 0 10px;
+}
+.tower-names a {
+    text-align: right;
+    padding: 0 5px;
+}
+.tower-names {
+    width: 100%;
+    padding: 0;
+}
+.tower-names li {
+    padding: 10px;
+    border: thin solid #ccc;
+    border-top: none;
+}
+.tower-names li:nth-child(even),
+.tower-names li:nth-child(even) {
+    background-color: #efefef;
+}
+.tower-names li:last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.tower-remove:hover {
+    color: red!important;
+}
+.tower-edit:hover {
+    color: green!important;
+}

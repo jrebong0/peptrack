@@ -1,3 +1,23 @@
-<p>
-  towers works!
-</p>
+<div class="container">
+  <div class="tower-container">
+    <div class="tower-list row">
+      <div class="tower-header col-md-12">
+        <span class="tower-title">Towers</span>
+        <a class="tower-add" title="Add Tower">
+          <i class="fa fa-plus"></i>
+        </a>
+      </div>
+      <ul class="tower-names">
+        <li *ngFor="let number of [1, 2, 3, 4, 5]">
+          <span>Tower {{ number }}</span>
+          <a class="tower-remove pull-right" title="Delete Tower">
+            <i class="fa fa-remove"></i>
+          </a>
+          <a class="tower-edit pull-right" title="Edit Tower">
+            <i class="fa fa-pencil"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

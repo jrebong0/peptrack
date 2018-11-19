@@ -12,6 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   employees: Employee[];
   employee: Employee;
+  isExisting: boolean;
+  noAccount: string;
 
   constructor(
     private employeeSrv: EmployeeService,
@@ -26,6 +28,7 @@ export class LoginComponent implements OnInit {
           this.employees = any;
         }
       );
+      this.isExisting = true;
     } catch (error) {
       console.log(error);
     }
@@ -33,7 +36,11 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (this.getUserDetails(form.value.email, form.value.password)) {
-      this.router.navigate(["/"]); /* Routing ready */
+      this.router.navigate(["/"]);
+    }
+    else {
+      this.isExisting = false;
+      this.noAccount = "Account does not exist.";
     };
   }
 
@@ -46,7 +53,7 @@ export class LoginComponent implements OnInit {
         return this.employee.password === userPass ? true : false;
       }
       else {
-        console.log("Account does not exist.");
+        return false;
       }
     } catch (error) {
       console.log(error);

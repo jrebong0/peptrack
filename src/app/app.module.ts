@@ -21,13 +21,16 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { environment } from '../environments/environment';
 import { TowersComponent } from './towers/towers.component';
 import { EmployeeService } from './services/employee.service';
+import { ModalComponent } from './components/modal/modal.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'employees', component: EmployeesComponent },
   { path: 'employees/create', component: EmployeeCreateComponent },
-  { path: 'home', component: HomeComponent }
+  { path: 'home', component: HomeComponent },
+  { path: 'towers', component: TowersComponent },
+  { path: 'studios', component: StudioComponent }
 
 ];
 
@@ -41,7 +44,8 @@ const appRoutes: Routes = [
     StudioComponent,
     FooterComponent,
     HomeComponent,
-    TowersComponent
+    TowersComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
