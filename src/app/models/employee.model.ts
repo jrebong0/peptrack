@@ -13,5 +13,4 @@ export interface Employee {
     role: Role;
     studio?: any; // @todo Refactor studio model and service
     securityGroup: SecurityGroup;
-    permissions?: string[]; /* Temporarily set to Optional to test login */
 }

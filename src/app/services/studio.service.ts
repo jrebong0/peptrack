@@ -35,8 +35,9 @@ updateStudioList(editItem: {name: string, tower: string}, key: string):void {
     this.db.collection('studio').doc(key).update(editItem);
 }
 
-  addStudio(item: {name: string, tower: string}) {
+  addStudio(item: {name: string, tower: string, type: string}) {
       const newItem = item;
       newItem.type = 'admin';
         this.db.collection('studio').add(item);
+    }
 }
