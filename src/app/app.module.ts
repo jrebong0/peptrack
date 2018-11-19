@@ -21,14 +21,15 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { environment } from '../environments/environment';
 import { TowersComponent } from './towers/towers.component';
 import { EmployeeService } from './services/employee.service';
+import {TowerFilterPipe} from './studio/studio.pipe';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'employees', component: EmployeesComponent },
   { path: 'employees/create', component: EmployeeCreateComponent },
-  { path: 'home', component: HomeComponent }
-
+  { path: 'home', component: HomeComponent },
+  { path: 'studios', component: StudioComponent }
 ];
 
 @NgModule({
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
     StudioComponent,
     FooterComponent,
     HomeComponent,
-    TowersComponent
+    TowersComponent,
+    TowerFilterPipe
   ],
   imports: [
     BrowserModule,

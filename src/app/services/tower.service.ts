@@ -17,7 +17,8 @@ export class TowerService {
             console.log('map[', items);
             return items.map(
                 item => {
-                    const key = item.payload.doc.id;
+                    console.log('tower ref', item.payload.doc.ref.path);
+                    const key = item.payload.doc.ref.path;
                     const data = item.payload.doc.data();
                     return {key, data};
                 }

@@ -40,6 +40,12 @@ export class StudioComponent implements OnInit, OnDestroy {
     );
   }
 
+  getTowerInfo(key: string) {
+    const result = this.towerList.filter(item=> {return item.key === key})[0];
+    console.log('result', result);
+    return result ? result.data.name : '';
+  }
+
   onSubmitStudio() {
     console.log('submit', this.studioForm);
     if(this.editMode) {
@@ -48,6 +54,8 @@ export class StudioComponent implements OnInit, OnDestroy {
         // this.studioService.editStudio(this.studioList[this.editIndex], this.editIndex).;
         this.studioService.updateStudioList(this.studioForm.value, this.studioList[this.editIndex].key);
     } else {
+        const studioName = this.studioForm.form;
+        console.log('studioName', studioName);
         this.studioService.addStudio(this.studioForm.value);
     }
     this.onCancel();
