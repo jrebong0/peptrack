@@ -43,7 +43,7 @@ export class StudioComponent implements OnInit, OnDestroy {
   getTowerInfo(key: string) {
     const result = this.towerList.filter(item=> {return item.key === key})[0];
     console.log('result', result);
-    return result ? result.data.name : '';
+    return result ? result.name : '';
   }
 
   onSubmitStudio() {
@@ -71,8 +71,8 @@ export class StudioComponent implements OnInit, OnDestroy {
 
   onEditStudio(index: number) {
       this.editIndex = index;
-      this.studioForm.controls['name'].setValue(this.studioList[index].data.name);
-      this.studioForm.controls['tower'].setValue(this.studioList[index].data.tower);
+      this.studioForm.controls['name'].setValue(this.studioList[index].name);
+      this.studioForm.controls['tower'].setValue(this.studioList[index].tower);
       this.editMode = true;
   }
 

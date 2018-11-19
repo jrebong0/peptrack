@@ -21,7 +21,7 @@ export class StudioService {
                             console.log('data', data.tower.path);
                         }
                         data.tower = data.tower.path;
-                        return {key, data};
+                        return {key, ...data};
                     }
                 );
             })
@@ -29,17 +29,27 @@ export class StudioService {
     }
 
     updateStudioList(editItem: {name: string, tower: string}, key: string):void {
-        let path = editItem.tower.split('/');
-        let towerPath = this.db.collection(path[0]).doc(path[1]).ref;
+        let newTowerRef = this.getReferencePath(editItem.tower);
         let updatedData = {
             name: editItem.name,
-            tower: towerPath
+            tower: newTowerRef
         };
         this.db.collection('studio').doc(key).update(updatedData);
     }
 
     addStudio(item: {name: string, tower: string}) {
-        let newStudio = {name: item.name, tower: item.tower, type: 'admin'};
+        let newTowerRef = this.getReferencePath(item.tower);
+        let newStudio = {
+            name: item.name, 
+            tower: newTowerRef, 
+            type: 'admin'
+        };
         this.db.collection('studio').add(newStudio);
+    }
+
+    getReferencePath(tower: string) {
+        let path = tower.split('/');
+        let towerPath = this.db.collection(path[0]).doc(path[1]).ref;
+        return towerPath;
     }
 }
