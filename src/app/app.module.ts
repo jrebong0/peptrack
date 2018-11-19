@@ -47,11 +47,8 @@ const appRoutes: Routes = [
     FooterComponent,
     HomeComponent,
     TowersComponent,
-<<<<<<< HEAD
-    TowerFilterPipe
-=======
+    TowerFilterPipe,
     ModalComponent
->>>>>>> 0aa0a3be4c9b391eb277ceaec1cd031916f14828
   ],
   imports: [
     BrowserModule,
