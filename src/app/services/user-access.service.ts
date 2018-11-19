@@ -11,7 +11,7 @@ export class UserAccessService {
   }
 
   insertUserToken(employee: Employee) {
-    localStorage.setItem("currentUser", JSON.stringify(employee));
+    localStorage.setItem("currentUser", employee.id);
   }
 
   getUserToken() : Employee {

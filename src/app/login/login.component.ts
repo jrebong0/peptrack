@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   isExisting: boolean;
   noAccount: string;
 
-
   constructor(
     private employeeSrv: EmployeeService,
     private userAccessServ: UserAccessService,
@@ -29,12 +28,11 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     try {
       this.route.queryParams
-        .subscribe(params => this.
-                   
-                   = params['return'] || '/home');
+        .subscribe(params =>
+          this.return = params['return'] || '/home'
+        );
 
       if (this.userAccessServ.hasUserLoggedIn()) {
         this.router.navigate(["/"]);
@@ -46,7 +44,6 @@ export class LoginComponent implements OnInit {
           }
         );
       }
-
     } catch (error) {
       console.log(error);
     }
