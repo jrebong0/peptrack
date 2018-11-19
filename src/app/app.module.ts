@@ -5,32 +5,31 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { Routes, RouterModule } from '@angular/router'
 
+import { AuthGuardService } from 'src/app/services/auth-guard.service';
+
 import { AppComponent } from './app.component';
 import { EmployeesComponent } from './employees/employees.component';
+import { EmployeeCreateComponent } from './employees/employee-create/employee-create.component';
+import { EmployeeEditComponent } from './employees/employee-edit/employee-edit.component';
 import { LoginComponent } from './login/login.component';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './home/home.component';
-import { EmployeeCreateComponent } from './employees/employee-create/employee-create.component';
 import { StudioComponent } from './studio/studio.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { environment } from '../environments/environment';
 import { TowersComponent } from './towers/towers.component';
-import { EmployeeService } from './services/employee.service';
-import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { ModalComponent } from './components/modal/modal.component';
-import {TowerFilterPipe} from './studio/studio.pipe';
-
+import { TowerFilterPipe } from './studio/studio.pipe';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'employees', component: EmployeesComponent, canActivate: [AuthGuardService] },
   { path: 'employees/create', component: EmployeeCreateComponent, canActivate: [AuthGuardService] },
+  { path: 'employees/edit/:id', component: EmployeeEditComponent, canActivate: [AuthGuardService] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
   { path: 'towers', component: TowersComponent, canActivate: [AuthGuardService] },
   { path: 'studios', component: StudioComponent, canActivate: [AuthGuardService] }
@@ -48,7 +47,8 @@ const appRoutes: Routes = [
     HomeComponent,
     TowersComponent,
     TowerFilterPipe,
-    ModalComponent
+    ModalComponent,
+    EmployeeEditComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +59,7 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ EmployeeService ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

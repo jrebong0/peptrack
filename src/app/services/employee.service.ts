@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Employee } from '../models/employee.model';
 import { map } from 'rxjs/operators';
+import { Role } from '../models/role.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,31 +30,49 @@ export class EmployeeService {
     );
   }
 
+  getEmployee(id) {
+    return this.db.collection('employees').doc(id).snapshotChanges().pipe(
+      map(item => {
+        const id = item.payload.id;
+        const data: any = item.payload.data();
+        return {id, ...data};
+      })
+    );
+  }
+
   /**
    * add Employee to Firebase
-   * @todo Must set role, securityGroup, and studio as
-   *  reference field and not a <string>
    * @param data Employee object
    */
   addEmployee(data) {
-    const roleRef = this.db.doc('/roles/' + data.role);
-    const securityGroupRef = this.db.doc('/securityGroups/' + data.securityGroup);
-    const studioRef = this.db.doc('/studio/' + data.studio);
+    const roleRef = this.db.doc('/roles/' + data.role).ref;
+    const securityGroupRef = this.db.doc('/securityGroups/' + data.securityGroup).ref;
+    const studioRef = this.db.doc('/studio/' + data.studio).ref;
+
+    data.role = roleRef;
+    data.securityGroup = securityGroupRef;
+    data.studio = studioRef;
+    data.dateCreated = new Date().toString();
+
+    this.employeesCollection.add(data);
+  }
+
+  /**
+   * update Employee from Firebase
+   * @param data Employee object
+   */
+  editEmployee(data) {
+    console.log(data);
     
-    // @see todo
-    // delete data.role;
-    // delete data.securityGroup;
-    // delete data.studio;
+    const roleRef = this.db.doc('/roles/' + data.role).ref;
+    const securityGroupRef = this.db.doc('/securityGroups/' + data.securityGroup).ref;
+    const studioRef = this.db.doc('/studio/' + data.studio).ref;
 
-    const employeeRef = this.employeesCollection.add(data);
+    data.role = roleRef;
+    data.securityGroup = securityGroupRef;
+    data.studio = studioRef;
+    data.dateModified = new Date().toString();
 
-    // @see todo
-    // employeeRef.then(doc => {
-    //   doc.set({
-    //     role: roleRef,
-    //     securityGroup: securityGroupRef,
-    //     studio: studioRef
-    //   });
-    // });
+    this.db.doc('/employees/' + data.id).update(data);
   }
 }
