@@ -22,6 +22,7 @@ import { environment } from '../environments/environment';
 import { TowersComponent } from './towers/towers.component';
 import { EmployeeService } from './services/employee.service';
 import {TowerFilterPipe} from './studio/studio.pipe';
+import { ModalComponent } from './components/modal/modal.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -29,7 +30,10 @@ const appRoutes: Routes = [
   { path: 'employees', component: EmployeesComponent },
   { path: 'employees/create', component: EmployeeCreateComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'studios', component: StudioComponent },
+  { path: 'towers', component: TowersComponent },
   { path: 'studios', component: StudioComponent }
+
 ];
 
 @NgModule({
@@ -43,7 +47,11 @@ const appRoutes: Routes = [
     FooterComponent,
     HomeComponent,
     TowersComponent,
+<<<<<<< HEAD
     TowerFilterPipe
+=======
+    ModalComponent
+>>>>>>> 0aa0a3be4c9b391eb277ceaec1cd031916f14828
   ],
   imports: [
     BrowserModule,
