@@ -24,6 +24,7 @@ import { EmployeeService } from './services/employee.service';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { ModalComponent } from './components/modal/modal.component';
 import {TowerFilterPipe} from './studio/studio.pipe';
+import { ExcelProcessComponent } from './excel-process/excel-process.component';
 
 
 const appRoutes: Routes = [
@@ -48,7 +49,8 @@ const appRoutes: Routes = [
     HomeComponent,
     TowersComponent,
     TowerFilterPipe,
-    ModalComponent
+    ModalComponent,
+    ExcelProcessComponent
   ],
   imports: [
     BrowserModule,
