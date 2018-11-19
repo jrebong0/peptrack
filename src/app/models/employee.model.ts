@@ -2,7 +2,7 @@ import { SecurityGroup } from "./security.group.model";
 import { Role } from "./role.model";
 
 export interface Employee {
-    key: string;
+    id?: string;
     email: string;
     employeeId: number;
     firstName: string;
@@ -11,5 +11,7 @@ export interface Employee {
     status: string;
     type: string;
     role: Role;
-    securityGroup: SecurityGroup; /* Temporarily set to Optional to test login */
+    studio?: any; // @todo Refactor studio model and service
+    securityGroup: SecurityGroup;
+    permissions?: string[]; /* Temporarily set to Optional to test login */
 }
