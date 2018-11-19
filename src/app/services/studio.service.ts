@@ -12,14 +12,10 @@ export class StudioService {
     getStudioList() {
         return this.db.collection('studio').snapshotChanges().pipe(
             map(items=>{
-                console.log('map[', items);
                 return items.map(
                     (item:any) => {
                         let key = item.payload.doc.id;
                         let data = item.payload.doc.data();
-                        if(data) {
-                            console.log('data', data.tower.path);
-                        }
                         data.tower = data.tower.path;
                         return {key, ...data};
                     }
