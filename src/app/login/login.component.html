@@ -34,18 +34,16 @@
               <button
                 class="btn btn-primary"
                 type="submit"
-                [disabled]="email.errors?.required ||
-                  password.errors?.required">
+                [disabled]=" (!email.valid && !(email.dirty || email.touched)) ||
+                (!password.valid && !(password.dirty || password.touched))">
                 Sign In
               </button>
-              <div *ngIf="(!email.valid && (email.dirty || email.touched)) ||
-                (!password.valid && (password.dirty || password.touched))">
+              <div *ngIf="errorMessage.length > 0">
                 <br/>
                 <span
                   class="alert alert-danger"
-                  *ngIf="email.errors?.required ||
-                    password.errors?.required">
-                  Email/Password required.
+                  *ngIf="errorMessage.length > 0">
+                  {{errorMessage}}
                 </span>
               </div>
               <br/>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserAccessService } from 'src/app/services/user-access.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'peptrack';
 
-  constructor() {
+  constructor(private userAccessServ: UserAccessService) {
   }
 }

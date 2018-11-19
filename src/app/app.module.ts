@@ -21,19 +21,19 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { environment } from '../environments/environment';
 import { TowersComponent } from './towers/towers.component';
 import { EmployeeService } from './services/employee.service';
-import {TowerFilterPipe} from './studio/studio.pipe';
+import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { ModalComponent } from './components/modal/modal.component';
+import {TowerFilterPipe} from './studio/studio.pipe';
+
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'employees', component: EmployeesComponent },
-  { path: 'employees/create', component: EmployeeCreateComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'studios', component: StudioComponent },
-  { path: 'towers', component: TowersComponent },
-  { path: 'studios', component: StudioComponent }
-
+  { path: 'employees', component: EmployeesComponent, canActivate: [AuthGuardService] },
+  { path: 'employees/create', component: EmployeeCreateComponent, canActivate: [AuthGuardService] },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
+  { path: 'towers', component: TowersComponent, canActivate: [AuthGuardService] },
+  { path: 'studios', component: StudioComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({
