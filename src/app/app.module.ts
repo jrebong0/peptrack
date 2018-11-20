@@ -26,6 +26,10 @@ import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { ReferenceService } from 'src/app/services/reference.service';
 import { ModalComponent } from './components/modal/modal.component';
 import {TowerFilterPipe} from './studio/studio.pipe';
+import { ExcelUploadComponent } from './excel-upload/excel-upload.component';
+import { ExcelEditorComponent } from './excel-editor/excel-editor.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { TardinessComponent } from './tardiness/tardiness.component';
 
 
 const appRoutes: Routes = [
@@ -35,7 +39,8 @@ const appRoutes: Routes = [
   { path: 'employees/create', component: EmployeeCreateComponent, canActivate: [AuthGuardService] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
   { path: 'towers', component: TowersComponent, canActivate: [AuthGuardService] },
-  { path: 'studios', component: StudioComponent, canActivate: [AuthGuardService] }
+  { path: 'studios', component: StudioComponent, canActivate: [AuthGuardService] },
+  { path: 'tardiness', component: TardinessComponent, canActivate: [AuthGuardService] },
 ];
 
 @NgModule({
@@ -50,7 +55,10 @@ const appRoutes: Routes = [
     HomeComponent,
     TowersComponent,
     TowerFilterPipe,
-    ModalComponent
+    ModalComponent,
+    ExcelUploadComponent,
+    ExcelEditorComponent,
+    TardinessComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +68,8 @@ const appRoutes: Routes = [
     AngularFireAuthModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    AgGridModule.withComponents([])
   ],
   providers: [ EmployeeService, ReferenceService ],
   bootstrap: [AppComponent]

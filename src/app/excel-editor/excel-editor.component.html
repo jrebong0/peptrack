@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="col-md-12">
+        <h4>{{headerName}}</h4>
+        <ag-grid-angular 
+            #tableGrid
+            style="width: 100%; height: 200px;" 
+            class="ag-theme-balham"
+            [rowData]="rowData" 
+            [columnDefs]="columnDefs"
+            [defaultColDef]="defaultColDef"
+            [stopEditingWhenGridLosesFocus]="true"
+            [suppressColumnVirtualisation]="true"
+            [enableColResize]="true"
+            (firstDataRendered)="onFirstDataRendered($event)"
+        >
+        </ag-grid-angular>
+        <br>
+        <button type="button" class="btn btn-primary" [disabled]="!showSave" (click)="saveChanges()">Save</button>
+        <br>
+        <br>
+    </div>
+</div>
