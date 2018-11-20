@@ -28,6 +28,7 @@ import {TowerFilterPipe} from './studio/studio.pipe';
 import { ExcelUploadComponent } from './excel-upload/excel-upload.component';
 import { ExcelEditorComponent } from './excel-editor/excel-editor.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { TardinessComponent } from './tardiness/tardiness.component';
 
 
 const appRoutes: Routes = [
@@ -37,7 +38,8 @@ const appRoutes: Routes = [
   { path: 'employees/create', component: EmployeeCreateComponent, canActivate: [AuthGuardService] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
   { path: 'towers', component: TowersComponent, canActivate: [AuthGuardService] },
-  { path: 'studios', component: StudioComponent, canActivate: [AuthGuardService] }
+  { path: 'studios', component: StudioComponent, canActivate: [AuthGuardService] },
+  { path: 'tardiness', component: TardinessComponent, canActivate: [AuthGuardService] },
 ];
 
 @NgModule({
@@ -54,7 +56,8 @@ const appRoutes: Routes = [
     TowerFilterPipe,
     ModalComponent,
     ExcelUploadComponent,
-    ExcelEditorComponent
+    ExcelEditorComponent,
+    TardinessComponent
   ],
   imports: [
     BrowserModule,

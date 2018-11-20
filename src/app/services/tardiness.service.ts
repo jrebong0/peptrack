@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import {log} from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,20 @@ export class TardinessService {
                     (item:any) => {
                         let key = item.payload.doc.id;
                         let data = item.payload.doc.data();
-                        data.tower = data.tower.path;
-                        return {key, ...data};
+                        let tardiness = data.tardiness;
+                        let employee = data.employee;
+                        // let employeeName;
+                        // console.log('employee', employee, employee.id);
+                        // let getEmployeeInfo = this.db.collection('employees').doc(employee.id).get().subscribe(
+                        //     (data:any) => {
+                        //         console.log('employee data', data.data());
+                        //         // let employeeCompleteData = data.data();
+                        //         return {key, tardiness, data};
+                        //     }
+                        // );
+                        // console.log('getEmployeeInfo', getEmployeeInfo);
+                        
+                        return {key, tardiness, employee};
                     }
                 );
             })
