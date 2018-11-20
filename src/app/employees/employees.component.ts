@@ -6,6 +6,8 @@ import { Role } from '../models/role.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { Studio } from '../models/studio.model';
+import { Employee } from '../models/employee.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employees',
@@ -19,6 +21,7 @@ export class EmployeesComponent implements OnInit {
   roles: Role[];
 
   constructor(
+    private router: Router,
     private employeeService: EmployeeService,
     private rolesService: RolesService,
     private db: AngularFirestore // used for getting studios (temp until StudioService is refactored)
@@ -74,5 +77,9 @@ export class EmployeesComponent implements OnInit {
 
   getStudio(id: string) {
     return this.studios.find(x => x.id == id).name;
+  }
+
+  editEmployee(data: Employee) {
+    this.router.navigate(['employees/edit', data.id]);
   }
 }

@@ -8,8 +8,7 @@ export interface Employee {
     firstName: string;
     lastName: string;
     password: string;
-    status: string;
-    type: string;
+    status?: string;
     role: Role;
     studio?: any; // @todo Refactor studio model and service
     securityGroup: SecurityGroup;
