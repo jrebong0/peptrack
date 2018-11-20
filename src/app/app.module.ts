@@ -17,7 +17,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { StudioComponent } from './studio/studio.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { environment } from '../environments/environment';
 import { TowersComponent } from './towers/towers.component';
@@ -57,7 +58,8 @@ const appRoutes: Routes = [
     AngularFirestoreModule,
     AngularFireAuthModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
