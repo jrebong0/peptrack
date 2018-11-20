@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../services/employee.service';
-import { Observable } from 'rxjs';
 import { RolesService } from '../services/roles.service';
 import { Role } from '../models/role.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
-import { Studio } from '../models/studio.model';
 import { Employee } from '../models/employee.model';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-employees',
@@ -19,8 +18,10 @@ export class EmployeesComponent implements OnInit {
   towers: {}[];
   studios: any[];
   roles: Role[];
+  selectedEmployee: Employee;
 
   constructor(
+    private modalService: NgbModal,
     private router: Router,
     private employeeService: EmployeeService,
     private rolesService: RolesService,
@@ -28,6 +29,8 @@ export class EmployeesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // @todo combine observables
+
     // retrieve roles
     this.rolesService.getRoles().subscribe(
       item => {
@@ -81,5 +84,15 @@ export class EmployeesComponent implements OnInit {
 
   editEmployee(data: Employee) {
     this.router.navigate(['employees/edit', data.id]);
+  }
+
+  deleteEmployee() {
+    this.employeeService.deleteEmployee(this.selectedEmployee);
+    this.modalService.dismissAll();
+  }
+
+  openDeleteModal(content, item) {
+    this.selectedEmployee = item;
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
 }

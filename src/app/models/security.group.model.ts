@@ -1,5 +1,12 @@
-export interface SecurityGroup {
+export class SecurityGroup {
     id?: string; // Firebase key
-    path?: string; // @todo: this should be removed
     name: string;
+
+    constructor(
+        id: string = '',
+        name: string = ''
+    ) {
+        this.id = id;
+        this.name = name;
+    }
 }

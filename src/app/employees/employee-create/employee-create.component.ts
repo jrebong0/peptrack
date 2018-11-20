@@ -5,8 +5,10 @@ import { Employee } from 'src/app/models/employee.model';
 import { RolesService } from 'src/app/services/roles.service';
 import { Role } from 'src/app/models/role.model';
 import { SecurityGroupService } from 'src/app/services/security-group.service';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
+import { SecurityGroup } from 'src/app/models/security.group.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'employee-create',
@@ -15,8 +17,7 @@ import { map } from 'rxjs/operators';
 })
 export class EmployeeCreateComponent implements OnInit {
   @ViewChild('f') employeeForm: NgForm;
-  studios: {}[];
-  securityGroups: {}[];
+  securityGroups: SecurityGroup[];
   roles: Role[];
 
   submitted = false;
@@ -27,47 +28,26 @@ export class EmployeeCreateComponent implements OnInit {
     private employeeService: EmployeeService,
     private rolesService: RolesService,
     private securityGroupService: SecurityGroupService,
-    private db: AngularFirestore
+    private router: Router
   ) { }
 
   ngOnInit() {
-    // retrieve roles
-    this.rolesService.getRoles().subscribe(
-      items => {
-        this.roles = items;
-        console.log('role', this.roles);
-      }
-    );
-
-    // retrieve securityGroups
-    this.securityGroupService.getSecurityGroups().subscribe(
-      items => {
-        this.securityGroups = items;
-        console.log('secirutygroups', this.securityGroups);
-      }
-    );
-
-    // retrieve studios
-    // @todo: temporary until StudiosSevice is refactored
-    this.db.collection<any>('studio').snapshotChanges().pipe(
-      map(items => {
-        return items.map( item => {
-          const id = item.payload.doc.id;
-          const data = item.payload.doc.data();
-          return {id, ...data};
-        });
+    combineLatest(
+      this.rolesService.getRoles(),
+      this.securityGroupService.getSecurityGroups()
+    ).pipe(
+      map(([roles, securityGroups]) => {
+        return { roles, securityGroups };
       })
-    ).subscribe(
-      (list: any[]) => {
-        this.studios = list;
-        console.log('studios', this.studios);
-      },
-      (error) => console.log('studio service error', error)
-    );
+    ).subscribe((observer) => {
+      this.roles = observer.roles;
+      this.securityGroups = observer.securityGroups;
+    });
   }
 
   submit(data) {
     this.employeeService.addEmployee(data.value);
     this.employeeForm.reset();
+    this.router.navigate(['employees']);
   }
 }

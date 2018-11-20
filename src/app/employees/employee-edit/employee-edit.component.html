@@ -46,19 +46,13 @@
     </div>
     <div class="form-group">
       <label for="role" class="form-label">Role</label>
-      <select name="role" id="role" class="form-control" [ngModel]="employee.role">
+      <select *ngIf="roles" name="role" id="role" class="form-control" [ngModel]="employee.role.id">
         <option *ngFor="let item of roles" [value]="item.id">{{item.name}}</option>
       </select>
     </div>
     <div class="form-group">
-      <label for="studio" class="form-label">Studio</label>
-      <select name="studio" id="studio" class="form-control" [ngModel]="employee.studio">
-        <option *ngFor="let item of studios" [value]="item.id">{{item.name}}</option>
-      </select>
-    </div>
-    <div class="form-group">
       <label for="securityGroup" class="form-label">Security Group</label>
-      <select name="securityGroup" id="securityGroup" class="form-control" [ngModel]="employee.securityGroup">
+      <select *ngIf="securityGroups" name="securityGroup" id="securityGroup" class="form-control" [ngModel]="employee.securityGroup.id">
         <option *ngFor="let item of securityGroups" [value]="item.id">{{item.name}}</option>
       </select>
     </div>
