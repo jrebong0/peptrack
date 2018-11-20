@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { Tower } from '../models/tower.model';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class TowerService {
 
@@ -23,19 +24,11 @@ export class TowerService {
         );
     }
 
-    updateTower(name: string, key: string):void {
-        let updatedData = {
-            name: name
-        };
-        this.db.collection('tower').doc(key).update(updatedData);
+    updateTower(tower: Tower) {
+        this.db.collection('tower').doc(tower.key).update(tower);
     }
 
-    addStudio(name: string) {
-        let newTower = {
-            name: name,
-            type: 'admin',
-            created: new Date()
-        };
-        this.db.collection('tower').add(newTower);
+    addTower(tower: Tower) {
+        this.db.collection('tower').add(tower);
     }
 }
