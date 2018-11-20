@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UserAccessService} from '../services/user-access.service';
 
 @Component({
   selector: 'home',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userAccessService: UserAccessService) { }
 
   ngOnInit() {
+  }
+
+  onProcessUpload(event) {
+    console.log('onProcessUpload', event);
+  }
+
+  onUpdateEditData(event) {
+    console.log('onUpdateEditData', event, 'userAccessService', this.userAccessService.getUserToken());
   }
 
 }

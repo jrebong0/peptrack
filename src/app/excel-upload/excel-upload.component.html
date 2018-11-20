@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="col-md-12">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <button 
+                    type="button" 
+                    class="input-group-text"
+                    id="inputGroupFileAddon01" 
+                    class="btn btn-info" 
+                    (click)="Upload()" 
+                    [disabled]="!activateUpload"
+                >Upload</button>
+            </div>
+            <div class="custom-file">
+                <input 
+                    type="file" 
+                    class="custom-file-input" 
+                    id="inputGroupFile01" 
+                    aria-describedby="inputGroupFileAddon01"
+                    (change)="incomingfile($event)" 
+                    placeholder="Upload file" 
+                    accept=".xlsx"
+                >
+                <label class="custom-file-label" for="inputGroupFile01">{{uploadFileName}}</label>
+            </div>
+        </div>
+    </div>
+</div>

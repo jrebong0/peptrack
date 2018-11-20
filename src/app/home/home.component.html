@@ -27,3 +27,10 @@
     </div>
   </div>
 </div>
+
+<!-- temporary set for verification -->
+<hr>
+<app-excel-upload (processUpload)="onProcessUpload($event)"></app-excel-upload>
+<hr>
+<app-excel-editor [headerName]="'Current Car Prices'" (updateEditData)="onUpdateEditData($event)"></app-excel-editor>
+<!-- -------------------------------- -->
