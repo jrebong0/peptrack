@@ -18,7 +18,8 @@ export class HomeComponent implements OnInit {
   }
 
   onUpdateEditData(event) {
-    console.log('onUpdateEditData', event, 'userAccessService', this.userAccessService.getUserToken());
+    console.log('onUpdateEditData', event, 'userAccessService', );
+    
   }
 
 }

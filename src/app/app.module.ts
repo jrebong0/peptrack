@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { EmployeeCreateComponent } from './employees/employee-create/employee-create.component';
 import { StudioComponent } from './studio/studio.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -63,6 +64,7 @@ const appRoutes: Routes = [
     AngularFireAuthModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
     AgGridModule.withComponents([])
   ],
   providers: [ EmployeeService ],
