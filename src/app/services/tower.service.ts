@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { ReferenceService } from '../services/reference.service';
 import { map } from 'rxjs/operators';
 import { Tower } from '../models/tower.model';
 
@@ -8,7 +9,8 @@ import { Tower } from '../models/tower.model';
 })
 export class TowerService {
 
-    constructor(private db: AngularFirestore) { }
+    constructor(private db: AngularFirestore,
+        private refService: ReferenceService) { }
 
     getTowerList() {
         return this.db.collection('tower').stateChanges().pipe(
@@ -24,11 +26,17 @@ export class TowerService {
         );
     }
 
-    updateTower(tower: Tower) {
-        this.db.collection('tower').doc(tower.key).update(tower);
+    updateTower(tower: Tower, key: string) {
+        let newKey = key.split("/");
+        tower.createdBy = this.refService.getReferencePath(
+            'employee/'.concat(tower.createdBy)
+        );
+        this.db.collection('tower').doc(newKey[1]).update(tower);
     }
 
     addTower(tower: Tower) {
+        tower.createdBy = this.refService.getReferencePath(
+            'employee/'.concat(tower.createdBy));
         this.db.collection('tower').add(tower);
     }
 }

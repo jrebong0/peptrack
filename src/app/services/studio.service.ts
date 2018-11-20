@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, Reference } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { ReferenceService } from '../services/reference.service';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -7,7 +8,8 @@ import { map } from 'rxjs/operators';
 })
 export class StudioService {
 
-    constructor(private db: AngularFirestore) { }
+    constructor(private db: AngularFirestore,
+        private refService: ReferenceService) { }
 
     getStudioList() {
         return this.db.collection('studio').snapshotChanges().pipe(
@@ -25,7 +27,7 @@ export class StudioService {
     }
 
     updateStudioList(editItem: {name: string, tower: string}, key: string):void {
-        let newTowerRef = this.getReferencePath(editItem.tower);
+        let newTowerRef = this.refService.getReferencePath(editItem.tower);
         let updatedData = {
             name: editItem.name,
             tower: newTowerRef
@@ -34,18 +36,12 @@ export class StudioService {
     }
 
     addStudio(item: {name: string, tower: string}) {
-        let newTowerRef = this.getReferencePath(item.tower);
+        let newTowerRef = this.refService.getReferencePath(item.tower);
         let newStudio = {
-            name: item.name, 
-            tower: newTowerRef, 
+            name: item.name,
+            tower: newTowerRef,
             type: 'admin'
         };
         this.db.collection('studio').add(newStudio);
-    }
-
-    getReferencePath(tower: string) {
-        let path = tower.split('/');
-        let towerPath = this.db.collection(path[0]).doc(path[1]).ref;
-        return towerPath;
     }
 }
