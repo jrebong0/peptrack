@@ -35,6 +35,8 @@ export class TowerService {
     }
 
     addTower(tower: Tower) {
+        tower.createdBy = this.refService.getReferencePath(
+            'employee/'.concat(tower.createdBy));
         this.db.collection('tower').add(tower);
     }
 }

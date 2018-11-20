@@ -21,7 +21,13 @@ export class TowersComponent implements OnInit {
   ngOnInit() {
     this.towerService.getTowerList().subscribe(
       (towerList: any) => {
-        this.towers = towerList;
+        this.towers = towerList.sort(
+          (first, second) => {
+            console.log("DISPLAY: ", first, second);
+            return new Date(first.dateCreated) < new Date(second.dateCreated) ?
+              first : second;
+          }
+        );
       }
     );
   }
