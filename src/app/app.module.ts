@@ -23,6 +23,7 @@ import { environment } from '../environments/environment';
 import { TowersComponent } from './towers/towers.component';
 import { EmployeeService } from './services/employee.service';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
+import { ReferenceService } from 'src/app/services/reference.service';
 import { ModalComponent } from './components/modal/modal.component';
 import {TowerFilterPipe} from './studio/studio.pipe';
 
@@ -61,7 +62,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     NgbModule
   ],
-  providers: [ EmployeeService ],
+  providers: [ EmployeeService, ReferenceService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

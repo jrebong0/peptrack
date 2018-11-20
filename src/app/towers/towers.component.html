@@ -107,7 +107,6 @@
             </strong>
             <div class="input-group">
               <input
-                ngModel
                 id="updateName"
                 name="updateName"
                 class="form-control"
@@ -117,7 +116,14 @@
                 type="text"
                 placeholder="e.g. Tower A"
                 #updateName="ngModel"
-                required>
+                required
+                [(ngModel)]="updateTowerData.name">
+                <input
+                  id="key"
+                  name="key"
+                  type="hidden"
+                  [(ngModel)]="updateTowerData.key"
+                  #key="ngModel">
             </div>
             <span
               class="text-danger"
