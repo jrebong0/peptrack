@@ -1,7 +1,17 @@
+.header {
+}
 .header-image {
   width: 150px;
 }
-
 .btn.btn-danger {
   color: white;
+}
+.logoutButton button {
+  color: #003363;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.logoutButton button:hover {
+  border-bottom: thin solid #003363;
 }
