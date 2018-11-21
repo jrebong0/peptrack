@@ -37,7 +37,7 @@
     <div class="form-group">
       <label for="password" class="form-label">Password</label>
       <input
-        type="password"
+        type="text"
         name="password"
         id="password"
         class="form-control"
@@ -48,12 +48,6 @@
       <label for="role" class="form-label">Role</label>
       <select name="role" id="role" class="form-control" ngModel>
         <option *ngFor="let item of roles" [value]="item.id">{{item.name}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="studio" class="form-label">Studio</label>
-      <select name="studio" id="studio" class="form-control" ngModel>
-        <option *ngFor="let item of studios" [value]="item.id">{{item.name}}</option>
       </select>
     </div>
     <div class="form-group">
