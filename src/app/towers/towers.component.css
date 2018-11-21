@@ -27,10 +27,11 @@
 .tower-names {
     width: 100%;
     padding: 0;
+    max-height: 537px;
+    overflow-y: auto;
 }
 .tower-names small {
     color: #bbb;
-    font-style: italic;
 }
 .tower-names li {
     padding: 10px;

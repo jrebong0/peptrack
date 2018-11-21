@@ -30,9 +30,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     try {
       this.route.queryParams
-        .subscribe(params =>
-          this.return = params['return'] || '/home'
-        );
+      .subscribe(params =>
+        this.return = params['return'] || '/home'
+      );
 
       if (this.userAccessServ.hasUserLoggedIn()) {
         this.router.navigate(["/"]);
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
     if (this.getUserDetails(form.value.email, form.value.password)) {
       this.employee.securityGroup = { name: "Placeholder"};
       this.userAccessServ.insertUserToken(this.employee);
-      this.router.navigateByUrl(this.return); /* Routing ready */
+      this.router.navigateByUrl(this.return);
     } else {
       this.errorMessage = "Invalid username/password";
     };

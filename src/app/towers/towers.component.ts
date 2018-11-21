@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
 import { Tower } from '../models/tower.model';
 import { TowerService } from '../services/tower.service';
@@ -8,12 +8,15 @@ import { TowerService } from '../services/tower.service';
   selector: 'app-towers',
   templateUrl: './towers.component.html',
   styleUrls: ['./towers.component.css'],
-  providers: [TowerService]
+  providers: [ TowerService ]
 })
 export class TowersComponent implements OnInit {
-  tower: Tower;
   updateTowerData: Tower;
   towers: Tower[];
+  isExisting: boolean = false;
+  errorMessage: string = "";
+  errorRequiredMessage: string = "Tower name is requried.";
+  activeModal: NgbModalRef;
 
   constructor(private modalService: NgbModal,
     private towerService: TowerService) { }
@@ -21,45 +24,47 @@ export class TowersComponent implements OnInit {
   ngOnInit() {
     this.towerService.getTowerList().subscribe(
       (towerList: any) => {
-        this.towers = towerList.sort(
-          (first, second) => {
-            console.log("DISPLAY: ", first, second);
-            return new Date(first.dateCreated) < new Date(second.dateCreated) ?
-              first : second;
-          }
-        );
+        this.towers = towerList;
       }
     );
   }
 
   onSubmitAddTower(form: NgForm) {
-    this.tower = {
-      name: form.value.towerName,
-      dateCreated: Date(),
-      createdBy: localStorage.getItem('currentUser'),
-      type: 'admin'
-    };
-    this.towerService.addTower(this.tower);
-    this.modalService.dismissAll();
+    if(this.towers.some(
+        tower => tower.name === form.value.towerName
+      )) {
+      this.isExisting = true;
+      this.errorMessage = "Tower name already exist.";
+    }
+    else {
+      this.isExisting = false
+      this.towerService.addTower(form);
+      this.activeModal.close();
+    }
   }
 
   onSubmitUpdateTower(form: NgForm) {
-    this.tower = {
-      name: form.value.updateName,
-      dateCreated: Date(),
-      createdBy: localStorage.getItem('currentUser'),
-      type: 'admin'
-    };
-    this.towerService.updateTower(this.tower, form.value.key);
-    this.modalService.dismissAll();
+    if(this.towers.some(
+        tower => tower.name === form.value.updateName
+      )) {
+      this.isExisting = true;
+      this.errorMessage = "Tower name already exist.";
+    }
+    else {
+      this.isExisting = false
+      this.towerService.updateTower(form);
+      this.activeModal.close();
+    }
   }
 
   open(modal) {
-    this.modalService.open(modal, {ariaLabelledBy: 'modal-basic-title'});
+    this.activeModal = this.modalService.open(modal, {
+      ariaLabelledBy: 'modal-basic-title'
+    });
   }
 
   fillUpdateForm(content: any, towerUpdate: Tower) {
     this.open(content);
-    this.updateTowerData = towerUpdate;
+    this.updateTowerData = Object.assign({}, towerUpdate);
   }
 }

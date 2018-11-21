@@ -3,11 +3,13 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ReferenceService } from '../services/reference.service';
 import { map } from 'rxjs/operators';
 import { Tower } from '../models/tower.model';
+import { NgForm } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root'
 })
 export class TowerService {
+    tower: Tower;
 
     constructor(private db: AngularFirestore,
         private refService: ReferenceService) { }
@@ -26,17 +28,26 @@ export class TowerService {
         );
     }
 
-    updateTower(tower: Tower, key: string) {
-        let newKey = key.split("/");
-        tower.createdBy = this.refService.getReferencePath(
-            'employee/'.concat(tower.createdBy)
-        );
-        this.db.collection('tower').doc(newKey[1]).update(tower);
+    updateTower(form: NgForm) {
+        this.tower = {
+            name: form.value.updateName,
+            dateCreated: Date(),
+            createdBy: this.refService.getReferencePath(
+                'employee/'.concat(localStorage.getItem('currentUser'))),
+            type: 'admin'
+        };
+        let newKey = form.value.key.split("/");
+        this.db.collection('tower').doc(newKey[1]).update(this.tower);
     }
 
-    addTower(tower: Tower) {
-        tower.createdBy = this.refService.getReferencePath(
-            'employee/'.concat(tower.createdBy));
-        this.db.collection('tower').add(tower);
+    addTower(form: NgForm) {
+        this.tower = {
+            name: form.value.towerName,
+            dateCreated: Date(),
+            createdBy: this.refService.getReferencePath(
+                'employee/'.concat(localStorage.getItem('currentUser'))),
+            type: 'admin'
+          };
+        this.db.collection('tower').add(this.tower);
     }
 }
