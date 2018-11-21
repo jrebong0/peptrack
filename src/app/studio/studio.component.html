@@ -9,8 +9,18 @@
                     <form #studioForm="ngForm" (ngSubmit)="onSubmitStudio()">
                         <div class="form-group">
                             <label for="name" class="font-weight-bold">Name</label>
-                            <input type="text" id="name" name="name" class="form-control" ngModel #name="ngModel" required>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                class="form-control" 
+                                ngModel #name="ngModel" 
+                                [ngClass]="showNameExist ? 'exist' : ''" 
+                                required
+                                (change)="showNameExist = false"
+                                >
                             <div class="help-control text-danger" *ngIf="name.invalid &&  (name.dirty || name.touched)">Name is required</div>
+                            <div class="help-control text-danger" *ngIf="showNameExist">Name is already exist</div>
                         </div>
                         <div class="form-group">
                             <label for="tower" class="font-weight-bold">Tower List</label>
