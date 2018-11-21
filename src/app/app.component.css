@@ -1,11 +1,10 @@
 .main-content {
   margin-top: 60px;
   margin-bottom: 78px;
-  min-height: 533px;
+  min-height: 573px;
   position: relative;
 }
 footer {
-  position: relative;
   bottom: 0;
 }
 
