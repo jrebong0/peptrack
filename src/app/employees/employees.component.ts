@@ -19,6 +19,7 @@ export class EmployeesComponent implements OnInit {
   studios: any[];
   roles: Role[];
   selectedEmployee: Employee;
+  showFilters = false;
 
   constructor(
     private modalService: NgbModal,
@@ -94,5 +95,9 @@ export class EmployeesComponent implements OnInit {
   openDeleteModal(content, item) {
     this.selectedEmployee = item;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+  }
+
+  toggleShowFilters() {
+    this.showFilters = !this.showFilters;
   }
 }
