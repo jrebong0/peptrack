@@ -1,12 +1,11 @@
 .main-content {
   margin-top: 60px;
   margin-bottom: 78px;
-  min-height: 388px;
+  min-height: 533px;
   position: relative;
 }
-
-header + .main-content {
-  margin-top: 0;
+footer {
+  position: relative;
+  bottom: 0;
 }
-
 

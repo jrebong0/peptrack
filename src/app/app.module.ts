@@ -31,6 +31,7 @@ import { ExcelUploadComponent } from './excel-upload/excel-upload.component';
 import { ExcelEditorComponent } from './excel-editor/excel-editor.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { TardinessComponent } from './tardiness/tardiness.component';
+import { PerformanceComponent } from './performance/performance.component';
 
 
 
@@ -44,6 +45,7 @@ const appRoutes: Routes = [
   { path: 'towers', component: TowersComponent, canActivate: [AuthGuardService] },
   { path: 'studios', component: StudioComponent, canActivate: [AuthGuardService] },
   { path: 'tardiness', component: TardinessComponent, canActivate: [AuthGuardService] },
+  { path: 'performance', component: PerformanceComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({
@@ -62,7 +64,8 @@ const appRoutes: Routes = [
     EmployeeEditComponent,
     ExcelUploadComponent,
     ExcelEditorComponent,
-    TardinessComponent
+    TardinessComponent,
+    PerformanceComponent
   ],
   imports: [
     BrowserModule,
