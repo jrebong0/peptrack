@@ -5,8 +5,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { Routes, RouterModule } from '@angular/router'
 
-import { AuthGuardService } from 'src/app/services/auth-guard.service';
-
 import { AppComponent } from './app.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeCreateComponent } from './employees/employee-create/employee-create.component';
@@ -60,7 +58,7 @@ const appRoutes: Routes = [
     TowersComponent,
     TowerFilterPipe,
     ModalComponent,
-    EmployeeEditComponent
+    EmployeeEditComponent,
     ExcelUploadComponent,
     ExcelEditorComponent,
     TardinessComponent

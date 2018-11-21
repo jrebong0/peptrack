@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserAccessService} from '../services/user-access.service';
-import {TardinessService} from '../services/tardiness.service';
-import {EmployeeService} from '../services/employee.service';
+import {BehavioralMetricsService} from '../services/behavioralMetrics.service';
 
 @Component({
   selector: 'app-tardiness',
@@ -12,20 +11,18 @@ export class TardinessComponent implements OnInit {
 
     tardinessList = [];
     tardinessHeader = [
-        {headerName: 'Employee', field: 'employee'},
-        {headerName: 'Tardiness', field: 'tardiness'},
-        {headerName: 'Key', field: 'key'}
+        {headerName: 'Employee', field: 'employeeName'},
+        {headerName: 'Srpint', field: 'sprintName'},
+        {headerName: 'Tardiness', field: 'tardiness', editable: true},
     ];
 
   constructor(
       private userAccessService: UserAccessService,
-      private tardinessService: TardinessService,
-      private employeeService: EmployeeService
+      private behavioralMetricsService: BehavioralMetricsService
     ) { }
 
   ngOnInit() {
-      this.employeeService
-    this.tardinessService.getTardinessList().subscribe(list=>{
+    this.behavioralMetricsService.getBehavioralByType('tardiness').subscribe((list:any)=>{
         console.log('getTardinessList', list);
         this.tardinessList = list;
     })
@@ -41,5 +38,6 @@ export class TardinessComponent implements OnInit {
         'userAccessService', this.userAccessService.getUserToken(),
         'tardiness'
     );
+    this.behavioralMetricsService.updateBehavioralByType(event, 'tardiness');
   }
 }
