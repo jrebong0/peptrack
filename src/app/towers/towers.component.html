@@ -13,9 +13,9 @@
       <ul class="tower-names">
         <li *ngFor="let tower of towers">
           <span>{{ tower.name }}</span>
-          <!-- <a class="tower-remove pull-right" title="Delete Tower">
+          <a class="tower-remove pull-right" title="Delete Tower">
             <i class="fa fa-remove"></i>
-          </a> -->
+          </a>
           <a
             class="tower-edit pull-right"
             title="Update Tower"
@@ -23,7 +23,7 @@
             <i class="fa fa-pencil"></i>
           </a>
           <span class="pull-right px-2">
-              <small>
+              <small class="font-italic">
                 Last updated: {{ tower.dateCreated | date : 'mediumDate' }},
                 {{ tower.dateCreated | date : 'h:mm a' }}
               </small>
@@ -31,6 +31,11 @@
         </li>
       </ul>
     </div>
+    <span [hidden]="towers?.length > 0">
+      <p class="text-center font-italic">
+        Add towers by clicking the plus(+) sign.
+      </p>
+    </span>
   </div>
 </div>
 
@@ -60,7 +65,7 @@
               name="towerName"
               class="form-control"
               [ngClass]="towerName.errors?.required &&
-              (towerName.touched || towerName.dirty) ?
+              (towerName.touched || towerName.dirty) || isExisting ?
               'border border-danger' : ''"
               type="text"
               placeholder="e.g. Tower A"
@@ -72,7 +77,15 @@
             *ngIf="towerName.errors?.required &&
               (towerName.touched || towerName.dirty)">
             <small>
-                Tower name is required.
+                {{ errorRequiredMessage }}
+            </small>
+          </span>
+          <span
+            class="text-danger"
+            *ngIf="isExisting && !towerName.errors?.required
+            (towerName.touched || towerName.dirty)">
+            <small>
+              {{ errorMessage }}
             </small>
           </span>
         </div>
@@ -111,7 +124,7 @@
                 name="updateName"
                 class="form-control"
                 [ngClass]="updateName.errors?.required &&
-                (updateName.touched || updateName.dirty) ?
+                (updateName.touched || updateName.dirty) || isExisting ?
                 'border border-danger' : ''"
                 type="text"
                 placeholder="e.g. Tower A"
@@ -130,7 +143,15 @@
               *ngIf="updateName.errors?.required &&
                 (updateName.touched || updateName.dirty)">
               <small>
-                  Tower name is required.
+                  {{ errorRequiredMessage }}
+              </small>
+            </span>
+            <span
+              class="text-danger"
+              *ngIf="isExisting && !updateName.errors?.required
+              (updateName.touched || updateName.dirty)">
+              <small>
+                {{ errorMessage }}
               </small>
             </span>
           </div>
