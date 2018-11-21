@@ -1,4 +1,6 @@
 input.ng-invalid.ng-touched,
-select.ng-invalid.ng-touched {
+select.ng-invalid.ng-touched,
+input.exist {
     border: 1px solid #bd2130;
 }
+

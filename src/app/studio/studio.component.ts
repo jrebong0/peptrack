@@ -17,6 +17,7 @@ export class StudioComponent implements OnInit, OnDestroy {
     studioList: Studio[] = [];
     editMode = false;
     editIndex = null;
+    showNameExist = false;
 
   constructor(
       private towerService: TowerService,
@@ -38,18 +39,20 @@ export class StudioComponent implements OnInit, OnDestroy {
     );
   }
 
-  onSubmitStudio() {
-    if(this.editMode) {
-        // this.studioList.splice(this.editIndex, 1);
-        // this.studioList.unshift(this.studioForm.value);
-        // this.studioService.editStudio(this.studioList[this.editIndex], this.editIndex).;
-        this.studioService.updateStudioList(this.studioForm.value, this.studioList[this.editIndex].key);
-    } else {
-        const studioName = this.studioForm.form;
-        this.studioService.addStudio(this.studioForm.value);
+    onSubmitStudio() {
+        if (this.studioList.some(item=>(item.name === this.studioForm.value.name))) {
+            this.showNameExist = true;
+        } else {
+            if (this.editMode) {
+                // console.log('editmode', this.studioList.some(item=>(item.name === this.studioForm.value.name)));
+                this.studioService.updateStudioList(this.studioForm.value, this.studioList[this.editIndex].key);
+            } else {
+                const studioName = this.studioForm.form;
+                this.studioService.addStudio(this.studioForm.value);
+            }
+            this.onCancel();
+        }
     }
-    this.onCancel();
-  }
 
   checkModeState() {
     return this.editMode;

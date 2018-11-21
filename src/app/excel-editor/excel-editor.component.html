@@ -12,6 +12,7 @@
             [suppressColumnVirtualisation]="true"
             [enableColResize]="true"
             (firstDataRendered)="onFirstDataRendered($event)"
+            (cellValueChanged)="onCellValueChanged($event)"
         >
         </ag-grid-angular>
         <br>
