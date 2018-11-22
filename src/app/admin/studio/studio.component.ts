@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import {Studio} from '../models/studio.model';
-import {NgForm} from '@angular/forms';
-import {TowerService} from '../services/tower.service';
-import {StudioService} from '../services/studio.service';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Studio } from 'src/app/models/studio.model';
+import { StudioService } from 'src/app/services/studio.service';
+import { TowerService } from 'src/app/services/tower.service';
+
+
 
 @Component({
   selector: 'app-studio',

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from '../services/employee.service';
-import { RolesService } from '../services/roles.service';
-import { Role } from '../models/role.model';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
-import { Employee } from '../models/employee.model';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { map } from 'rxjs/operators';
+import { Employee } from 'src/app/models/employee.model';
+import { Role } from 'src/app/models/role.model';
+import { EmployeeService } from 'src/app/services/employee.service';
+import { RolesService } from 'src/app/services/roles.service';
 
 @Component({
   selector: 'app-employees',
