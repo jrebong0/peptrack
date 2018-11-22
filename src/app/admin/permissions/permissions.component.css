@@ -1,7 +1,12 @@
-.list-group-item {
+.form-check-label {
     cursor: pointer;
 }
 
 .form-check-input:checked + .form-check-label {
     background: #28a745;
+    color: #fff;
+}
+
+.toggleAddGroupDialog {
+    cursor: pointer;
 }

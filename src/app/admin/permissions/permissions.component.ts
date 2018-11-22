@@ -27,6 +27,10 @@ export class PermissionsComponent implements OnInit {
     );
   }
 
+  openAddGroupDialog() {
+    alert('This is a test');
+  }
+
   chunk (arr, len) {
     let chunks = [],
         i = 0,
