@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UserAccessService} from '../services/user-access.service';
-import {BehavioralMetricsService} from '../services/behavioralMetrics.service';
+import { BehavioralMetricsService } from 'src/app/services/behavioralMetrics.service';
+import { UserAccessService } from 'src/app/services/user-access.service';
+
 
 @Component({
   selector: 'app-tardiness',

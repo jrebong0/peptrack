@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h2>New Employee</h2>
+  <h2>Edit Employee</h2>
 
   <form
     #f="ngForm"
@@ -11,7 +11,7 @@
         name="firstName"
         id="firstName"
         class="form-control"
-        ngModel
+        [ngModel]="employee.firstName"
         required>
     </div>
     <div class="form-group">
@@ -21,7 +21,7 @@
         name="lastName"
         id="lastName"
         class="form-control"
-        ngModel
+        [ngModel]="employee.lastName"
         required>
     </div>
     <div class="form-group">
@@ -31,7 +31,7 @@
         name="email"
         id="email"
         class="form-control"
-        ngModel
+        [ngModel]="employee.email"
         required>
     </div>
     <div class="form-group">
@@ -41,18 +41,18 @@
         name="password"
         id="password"
         class="form-control"
-        ngModel
+        [ngModel]="employee.password"
         required>
     </div>
     <div class="form-group">
       <label for="role" class="form-label">Role</label>
-      <select name="role" id="role" class="form-control" ngModel>
+      <select *ngIf="roles" name="role" id="role" class="form-control" [ngModel]="employee.role.id">
         <option *ngFor="let item of roles" [value]="item.id">{{item.name}}</option>
       </select>
     </div>
     <div class="form-group">
       <label for="securityGroup" class="form-label">Security Group</label>
-      <select name="securityGroup" id="securityGroup" class="form-control" ngModel>
+      <select *ngIf="securityGroups" name="securityGroup" id="securityGroup" class="form-control" [ngModel]="employee.securityGroup.id">
         <option *ngFor="let item of securityGroups" [value]="item.id">{{item.name}}</option>
       </select>
     </div>
@@ -65,7 +65,7 @@
               name="status"
               id="optionsRadios1"
               value="Active"
-              ngModel
+              [ngModel]="employee.status"
               checked>
           Active
         </label>
@@ -76,7 +76,7 @@
                   class="form-check-input"
                   name="status"
                   id="optionsRadios2"
-                  ngModel
+                  [ngModel]="employee.status"
                   value="Inactive">
           Inactive
         </label>
@@ -86,6 +86,13 @@
       <input type="submit" class="btn btn-primary" value="Save">
       <input type="reset" class="btn btn-warning ml-2" value="Clear">
       <a routerLink="/employees" class="btn btn-danger ml-2">Cancel</a>
+      <ngb-alert
+        *ngIf="editSuccessAlert"
+        class="editSuccessAlert mt-3"
+        type="success"
+        (close)="editSuccessAlert=!editSuccessAlert">
+        Record successfully saved!
+      </ngb-alert>
     </div>
   </form>
 </div>
