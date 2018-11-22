@@ -4,11 +4,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AgGridModule } from 'ag-grid-angular';
-import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { ReferenceService } from 'src/app/services/reference.service';
 import { environment } from '../environments/environment';
 import { EmployeeCreateComponent } from './admin/employees/employee-create/employee-create.component';
@@ -51,7 +49,6 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-    // RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
