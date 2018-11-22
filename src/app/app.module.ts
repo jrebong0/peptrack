@@ -1,37 +1,33 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { Routes, RouterModule } from '@angular/router'
-
-import { AuthGuardService } from 'src/app/services/auth-guard.service';
-
-import { AppComponent } from './app.component';
-import { EmployeesComponent } from './employees/employees.component';
-import { EmployeeCreateComponent } from './employees/employee-create/employee-create.component';
-import { EmployeeEditComponent } from './employees/employee-edit/employee-edit.component';
-import { LoginComponent } from './login/login.component';
-
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { HomeComponent } from './home/home.component';
-import { StudioComponent } from './studio/studio.component';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { environment } from '../environments/environment';
-import { TowersComponent } from './towers/towers.component';
-
-import { EmployeeService } from './services/employee.service';
-import { ReferenceService } from 'src/app/services/reference.service';
-import { ModalComponent } from './components/modal/modal.component';
-import { TowerFilterPipe } from './studio/studio.pipe';
-import { ExcelUploadComponent } from './excel-upload/excel-upload.component';
-import { ExcelEditorComponent } from './excel-editor/excel-editor.component';
 import { AgGridModule } from 'ag-grid-angular';
-import { TardinessComponent } from './tardiness/tardiness.component';
+import { AuthGuardService } from 'src/app/services/auth-guard.service';
+import { ReferenceService } from 'src/app/services/reference.service';
+import { environment } from '../environments/environment';
+import { EmployeeCreateComponent } from './admin/employees/employee-create/employee-create.component';
+import { EmployeeEditComponent } from './admin/employees/employee-edit/employee-edit.component';
+import { EmployeesComponent } from './admin/employees/employees.component';
+import { StudioComponent } from './admin/studio/studio.component';
+import { TowerFilterPipe } from './admin/studio/studio.pipe';
+import { TowersComponent } from './admin/towers/towers.component';
+import { AppComponent } from './app.component';
+import { ExcelEditorComponent } from './common/excel-editor/excel-editor.component';
+import { ExcelUploadComponent } from './common/excel-upload/excel-upload.component';
+import { FooterComponent } from './common/footer/footer.component';
+import { HeaderComponent } from './common/header/header.component';
+import { ModalComponent } from './common/modal/modal.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { TardinessComponent } from './performance/behavioral/tardiness.component';
 import { PerformanceComponent } from './performance/performance.component';
+import { EmployeeService } from './services/employee.service';
 
 
 
