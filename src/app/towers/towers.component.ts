@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { Tower } from 'src/app/models/tower.model';
-import { TowerService } from 'src/app/services/tower.service';
-
+import { NgForm } from '@angular/forms';
+import { Tower } from '../models/tower.model';
+import { TowerService } from '../services/tower.service';
 
 @Component({
   selector: 'app-towers',
