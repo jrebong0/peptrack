@@ -30,21 +30,6 @@ import { PerformanceComponent } from './performance/performance.component';
 import { EmployeeService } from './services/employee.service';
 import { AppRoutingModule } from './app-routing.module';
 
-
-
-// const appRoutes: Routes = [
-//   { path: '', redirectTo: 'home', pathMatch: 'full' },
-//   { path: 'login', component: LoginComponent },
-//   { path: 'employees', component: EmployeesComponent, canActivate: [AuthGuardService] },
-//   { path: 'employees/create', component: EmployeeCreateComponent, canActivate: [AuthGuardService] },
-//   { path: 'employees/edit/:id', component: EmployeeEditComponent, canActivate: [AuthGuardService] },
-//   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
-//   { path: 'towers', component: TowersComponent, canActivate: [AuthGuardService] },
-//   { path: 'studios', component: StudioComponent, canActivate: [AuthGuardService] },
-//   { path: 'tardiness', component: TardinessComponent, canActivate: [AuthGuardService] },
-//   { path: 'performance', component: PerformanceComponent, canActivate: [AuthGuardService] }
-// ];
-
 @NgModule({
   declarations: [
     AppComponent,
