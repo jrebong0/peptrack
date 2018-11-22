@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <h2>Permissions</h2>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="rounded">
+        <h5 class="rounded-top bg-dark mb-0 p-2 text-light">Roles</h5>
+        <ul class="list-group">
+          <li class="list-group-item rounded-0 link"
+            *ngFor="let item of securityGroups">
+            <a>
+              {{ item.name }}
+            </a>
+          </li>
+        </ul>
+        <a class="rounded-bottom p-1 d-block bg-primary text-light text-center" href="#">
+          <i class="fa fa-plus mr-1"></i>
+          Add
+        </a>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <div class="rounded border pt-3 pb-3">
+        <div class="row">
+          <div
+            *ngFor="let chunk of permissionList;"
+            class="col-3">
+            <div
+              *ngFor="let item of chunk"
+              class="form-check mb-2">
+              <input
+                class="form-check-input sr-only"
+                type="checkbox"
+                [value]="item"
+                [id]="item">
+              <label class="form-check-label p-2 border rounded d-block" [for]="item">
+                {{ item }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

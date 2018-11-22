@@ -1,0 +1,7 @@
+.list-group-item {
+    cursor: pointer;
+}
+
+.form-check-input:checked + .form-check-label {
+    background: #28a745;
+}
