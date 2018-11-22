@@ -1,13 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { EmployeeService } from '../services/employee.service';
+import { RolesService } from '../services/roles.service';
+import { Role } from '../models/role.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { Employee } from '../models/employee.model';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Role } from 'src/app/models/role.model';
-import { Employee } from 'src/app/models/employee.model';
-import { EmployeeService } from 'src/app/services/employee.service';
-import { RolesService } from 'src/app/services/roles.service';
 
 @Component({
   selector: 'app-employees',
@@ -15,7 +14,6 @@ import { RolesService } from 'src/app/services/roles.service';
   styleUrls: ['./employees.component.css']
 })
 export class EmployeesComponent implements OnInit {
-  @ViewChild('filtersForm') filtersForm: NgForm;
   employees: any[];
   towers: {}[];
   studios: any[];
@@ -71,7 +69,7 @@ export class EmployeesComponent implements OnInit {
     this.employeeService.getEmployees().subscribe(
       (list: any[]) => {
         this.employees = list;
-        // console.log('employees', this.employees);
+        console.log('employees', this.employees);
       },
       (error) => console.log('employee service error', error)
     );
@@ -101,18 +99,5 @@ export class EmployeesComponent implements OnInit {
 
   toggleShowFilters() {
     this.showFilters = !this.showFilters;
-  }
-
-  filterBySearchKey(data) {
-    // data.value.searchKey
-    this.employeeService.getEmployees({
-      searchKey: data.value.searchKey,
-      role: data.value.roleFilter
-    }).subscribe(
-      (list: any[]) => {
-        this.employees = list;
-      },
-      (error) => console.log('employee service error', error)
-    );
   }
 }
