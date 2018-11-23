@@ -11,9 +11,11 @@ import { EmployeeEditComponent } from './employees/employee-edit/employee-edit.c
 import { EmployeeService } from '../services/employee.service';
 import { ReferenceService } from '../services/reference.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgGridModule } from 'ag-grid-angular';
 import { PermissionsComponent } from './permissions/permissions.component';
+import { AddTowerDialogComponent } from './towers/add-tower-dialog/add-tower-dialog.component';
+import { UpdateTowerDialogComponent } from './towers/update-tower-dialog/update-tower-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,18 +26,25 @@ import { PermissionsComponent } from './permissions/permissions.component';
     EmployeesComponent,
     EmployeeCreateComponent,
     EmployeeEditComponent,
-    PermissionsComponent
+    PermissionsComponent,
+    AddTowerDialogComponent,
+    UpdateTowerDialogComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModalModule,
     NgbModule,
     NgbModule.forRoot(),
     AgGridModule.withComponents([]),
   ],
   providers: [ EmployeeService, ReferenceService ],
+  entryComponents: [
+    AddTowerDialogComponent,
+    UpdateTowerDialogComponent
+],
 })
 export class AdminModule { }
 
