@@ -1,6 +1,7 @@
 export class SecurityGroup {
     id?: string; // Firebase key
     name: string;
+    permissions?: string;
     dateCreated?: Date;
     sortOrder?: number = 1;
 

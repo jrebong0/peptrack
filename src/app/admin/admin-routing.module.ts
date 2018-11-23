@@ -25,6 +25,7 @@ const routes: Routes = [
       // {path: 'employees/edit/:id', component: EmployeeEditComponent, canActivate: [AuthGuardService]},
       // {path: "**", redirectTo: "admin-company-list"}
       {path: 'permissions', component: PermissionsComponent},
+      {path: 'permissions/:id', component: PermissionsComponent},
       {path: 'towers', component: TowersComponent},
       {path: 'studios', component: StudioComponent},
       {path: 'employees', component: EmployeesComponent},
