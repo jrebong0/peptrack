@@ -86,6 +86,13 @@
       <input type="submit" class="btn btn-primary" value="Save">
       <input type="reset" class="btn btn-warning ml-2" value="Clear">
       <a routerLink="/employees" class="btn btn-danger ml-2">Cancel</a>
+      <ngb-alert
+        *ngIf="editSuccessAlert"
+        class="editSuccessAlert mt-3"
+        type="success"
+        (close)="editSuccessAlert=!editSuccessAlert">
+        Record successfully saved!
+      </ngb-alert>
     </div>
   </form>
 </div>

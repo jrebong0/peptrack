@@ -24,14 +24,35 @@ export class EmployeeService {
    * Return list of employees
    * @returns Observable object
    */
-  getEmployees() {
+  getEmployees(filters?: {searchKey: string, role?: string }) {
+    
     return this.employeesCollection.snapshotChanges().pipe(
       map(items => {
-        return items.map( item => {
+        let records = items.map( item => {
           const id = item.payload.doc.id;
           const data = item.payload.doc.data();
           return {id, ...data};
         });
+
+        if(filters) {
+          let filteredRecords = records;
+
+          // @todo: iterate thru the filters field instead of nested conditions
+          if(filters.searchKey) {
+            filteredRecords = filteredRecords.filter(item => {
+              const context = item.firstName + '' + item.lastName + '' + item.email;
+              return context.indexOf(filters.searchKey) >= 0;
+            });
+          }
+          
+          if(filters.role) {
+            filteredRecords = filteredRecords.filter(item => item.role.id == filters.role);
+          }
+
+          return filteredRecords;
+        }
+
+        return records; 
       })
     );
   }
@@ -78,7 +99,7 @@ export class EmployeeService {
     data.studio = studioRef;
     data.dateModified = new Date();
 
-    this.db.doc('/employees/' + data.id).update(data);
+    return this.db.doc('/employees/' + data.id).update(data);
   }
 
   deleteEmployee(data) {
