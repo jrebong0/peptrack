@@ -1,0 +1,40 @@
+.project-container a {
+    cursor: pointer;
+}
+.table-header a:hover {
+    color: #0066ff;
+}
+.table-header {
+    padding: 5px;
+    background-color: #003363;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: white;
+    text-align: center;
+}
+.table-title {
+    font-size: 20px;
+    padding: 0 10px;
+}
+.project-names a {
+    text-align: right;
+    padding: 0 5px;
+}
+.project-names {
+    width: 100%;
+    padding: 0;
+    max-height: 537px;
+    overflow-y: auto;
+}
+.project-remove {
+    color: red!important;
+}
+.project-edit {
+    color: green!important;
+}
+.table thead {
+    color: #003363;
+}
+.table tbody small {
+    color: #bbb;
+}

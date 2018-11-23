@@ -1,7 +1,6 @@
-export interface Tower {
+export interface Engagement {
     key?: string;
-    name: any;
+    name: string;
     dateCreated: string;
     createdBy: any;
-    type: string;
 }
