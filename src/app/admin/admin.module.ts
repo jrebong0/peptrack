@@ -13,6 +13,7 @@ import { ReferenceService } from '../services/reference.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgGridModule } from 'ag-grid-angular';
+import { PermissionsComponent } from './permissions/permissions.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AgGridModule } from 'ag-grid-angular';
     StudioComponent,
     EmployeesComponent,
     EmployeeCreateComponent,
-    EmployeeEditComponent
+    EmployeeEditComponent,
+    PermissionsComponent
   ],
   imports: [
     CommonModule,

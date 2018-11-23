@@ -1,8 +1,8 @@
 export class SecurityGroup {
     id?: string; // Firebase key
     name: string;
-    dateCreated: Date;
-    sortOrder: number = 1;
+    dateCreated?: Date;
+    sortOrder?: number = 1;
 
     constructor(
         id: string = '',
