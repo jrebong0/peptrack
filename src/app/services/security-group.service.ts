@@ -10,7 +10,14 @@ export class SecurityGroupService {
   private securityGroupCollection: AngularFirestoreCollection<SecurityGroup>;
 
   constructor(private db: AngularFirestore) {
-    this.securityGroupCollection = db.collection<SecurityGroup>('securityGroups');
+    this.securityGroupCollection = db.collection<SecurityGroup>(
+      'securityGroups',
+      ref => {
+        return ref
+          .orderBy('sortOrder', 'asc')
+          .orderBy('name', 'asc');
+      }
+    );
   }
 
   getSecurityGroups() {

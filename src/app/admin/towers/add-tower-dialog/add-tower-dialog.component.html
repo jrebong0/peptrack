@@ -1,0 +1,54 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add Tower</h4>
+    <button type="button" class="close" aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')" title="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form (ngSubmit)="onSubmitAddTower(addTowerForm)" #addTowerForm="ngForm">
+
+    <div class="modal-body">
+        <div class="form-group">
+          <strong>
+            <label for="towerName">Tower Name<span class="text-danger">*</span>
+            </label>
+          </strong>
+          <div class="input-group">
+            <input
+              ngModel
+              id="towerName"
+              name="towerName"
+              class="form-control"
+              [ngClass]="towerName.errors?.required &&
+              (towerName.touched || towerName.dirty) || isExisting ?
+              'border border-danger' : ''"
+              type="text"
+              placeholder="e.g. Tower A"
+              #towerName="ngModel"
+              required>
+          </div>
+          <span
+            class="text-danger"
+            *ngIf="towerName.errors?.required &&
+              (towerName.touched || towerName.dirty)">
+            <small>
+                {{ errorRequiredMessage }}
+            </small>
+          </span>
+          <span
+            class="text-danger"
+            *ngIf="isExisting && !towerName.errors?.required
+            (towerName.touched || towerName.dirty)">
+            <small>
+              {{ errorMessage }}
+            </small>
+          </span>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary"
+        title="Add" [disabled]="towerName.errors?.required">
+        Add
+      </button>
+    </div>
+  </form>

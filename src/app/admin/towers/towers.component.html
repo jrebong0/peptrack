@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="tower-container">
+    <div class="tower-list row">
+      <div class="tower-header col-md-12">
+        <span class="tower-title">Towers</span>
+        <a
+          class="tower-add"
+          title="Add Tower"
+          (click)="open(addTower)">
+          <i class="fa fa-plus"></i>
+        </a>
+      </div>
+      <ul class="tower-names">
+        <li *ngFor="let tower of towers">
+          <span>{{ tower.name }}</span>
+          <a class="tower-remove pull-right" title="Delete Tower">
+            <i class="fa fa-remove"></i>
+          </a>
+          <a
+            class="tower-edit pull-right"
+            title="Update Tower"
+            (click)="update(tower)">
+            <i class="fa fa-pencil"></i>
+          </a>
+          <span class="pull-right px-2">
+              <small class="font-italic">
+                Last updated: {{ tower.dateCreated | date : 'mediumDate' }},
+                {{ tower.dateCreated | date : 'h:mm a' }}
+              </small>
+            </span>
+        </li>
+      </ul>
+    </div>
+    <span [hidden]="towers?.length > 0">
+      <p class="text-center font-italic">
+        Add towers by clicking the plus(+) sign.
+      </p>
+    </span>
+  </div>
+</div>
+

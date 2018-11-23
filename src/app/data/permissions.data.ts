@@ -1,16 +1,21 @@
-[
+export var permissionList: string[] = [
     'canViewEmployee',
     'canAddEmployee',
     'canEditEmployee',
     'canDeleteEmployee',
 
-    'canViewTower',
-    'canAddTower',
-    'canEditTower',
-    'canDeleteTower',
+    'canViewEngagement',
+    'canAddEngagement',
+    'canEditEngagement',
+    'canDeleteEngagement',
 
-    'canViewStudio',
-    'canAddStudio',
-    'canEditStudio',
-    'canDeleteStudio'
-]
+    'canViewProject',
+    'canAddProject',
+    'canEditProject',
+    'canDeleteProject',
+
+    'canViewTeam',
+    'canAddTeam',
+    'canEditTeam',
+    'canDeleteTeam'
+];
