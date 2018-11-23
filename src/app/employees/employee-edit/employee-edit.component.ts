@@ -21,7 +21,6 @@ export class EmployeeEditComponent implements OnInit {
   securityGroups: SecurityGroup[] = [];
   employee: Employee;
   employeeId: string;
-  editSuccessAlert = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -52,6 +51,5 @@ export class EmployeeEditComponent implements OnInit {
   submit(data) {
     data.value.id = this.employee.id;
     this.employeeService.editEmployee(data.value);
-    this.editSuccessAlert = true;
   }
 }

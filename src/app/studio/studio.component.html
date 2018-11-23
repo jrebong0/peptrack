@@ -42,7 +42,7 @@
             <div class="card border-info">
                 <div class="card-body">
                     <h2>Studio List</h2>
-                    <div class="card border-info mb-2" *ngFor="let studio of studioList; let i = index">
+                    <div class="card border-info" *ngFor="let studio of studioList; let i = index">
                         <div class="card-body">
                             <h1 for="">{{studio?.name}}</h1>
                             <p for="">{{studio?.tower | towerFilter: towerList}}</p>
