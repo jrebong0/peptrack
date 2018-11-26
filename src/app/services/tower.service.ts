@@ -48,6 +48,6 @@ export class TowerService {
                 'employee/'.concat(localStorage.getItem('currentUser'))),
             type: 'admin'
           };
-        this.db.collection('tower').add(this.tower);
+        return this.db.collection('tower').add(this.tower);
     }
 }

@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Tower } from 'src/app/models/tower.model';
 import { TowerService } from 'src/app/services/tower.service';
+import { AddTowerDialogComponent } from './add-tower-dialog/add-tower-dialog.component';
+import { UpdateTowerDialogComponent } from './update-tower-dialog/update-tower-dialog.component';
 
 
 @Component({
@@ -12,17 +14,18 @@ import { TowerService } from 'src/app/services/tower.service';
   providers: [ TowerService ]
 })
 export class TowersComponent implements OnInit {
-  updateTowerData: Tower;
+
   towers: Tower[];
-  isExisting: boolean = false;
-  errorMessage: string = "";
-  errorRequiredMessage: string = "Tower name is requried.";
   activeModal: NgbModalRef;
 
   constructor(private modalService: NgbModal,
     private towerService: TowerService) { }
 
   ngOnInit() {
+    this.getTowerList();
+  }
+
+  getTowerList() {
     this.towerService.getTowerList().subscribe(
       (towerList: any) => {
         this.towers = towerList;
@@ -30,42 +33,36 @@ export class TowersComponent implements OnInit {
     );
   }
 
-  onSubmitAddTower(form: NgForm) {
-    if(this.towers.some(
-        tower => tower.name === form.value.towerName
-      )) {
-      this.isExisting = true;
-      this.errorMessage = "Tower name already exist.";
-    }
-    else {
-      this.isExisting = false
-      this.towerService.addTower(form);
-      this.activeModal.close();
-    }
-  }
+  open() {
 
-  onSubmitUpdateTower(form: NgForm) {
-    if(this.towers.some(
-        tower => tower.name === form.value.updateName
-      )) {
-      this.isExisting = true;
-      this.errorMessage = "Tower name already exist.";
-    }
-    else {
-      this.isExisting = false
-      this.towerService.updateTower(form);
-      this.activeModal.close();
-    }
-  }
-
-  open(modal) {
-    this.activeModal = this.modalService.open(modal, {
+    this.activeModal = this.modalService.open(AddTowerDialogComponent, {
       ariaLabelledBy: 'modal-basic-title'
+    });
+      
+    this.activeModal.componentInstance.towers = this.towers;
+
+    this.activeModal.result.then(result => {
+      this.getTowerList();
+    }, reason =>{
+      console.log(reason);      
     });
   }
 
-  fillUpdateForm(content: any, towerUpdate: Tower) {
-    this.open(content);
-    this.updateTowerData = Object.assign({}, towerUpdate);
+  update(towerUpdate: Tower) {
+
+    this.activeModal = this.modalService.open(UpdateTowerDialogComponent, {
+      ariaLabelledBy: 'modal-basic-title'
+    });
+    
+    this.activeModal.componentInstance.towers = this.towers;
+    this.activeModal.componentInstance.updateTowerData = Object.assign({}, towerUpdate);
+
+    this.activeModal.result.then(result => {
+      this.getTowerList();
+    }, reason =>{
+      console.log(reason);      
+    })
+
+     
   }
 }

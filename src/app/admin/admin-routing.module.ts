@@ -1,21 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { TowersComponent } from './towers/towers.component';
-import { AuthGuardService } from '../services/auth-guard.service';
 import { StudioComponent } from './studio/studio.component';
 import { AdminComponent } from './admin.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeCreateComponent } from './employees/employee-create/employee-create.component';
 import { EmployeeEditComponent } from './employees/employee-edit/employee-edit.component';
 import { PermissionsComponent } from './permissions/permissions.component';
+import { ProjectsComponent } from './projects/projects.component';
+import { EngagementComponent } from './engagement/engagement.component';
 
 
 const routes: Routes = [
   {
-    path: "", 
+    path: "",
     component: AdminComponent,
-    children: [            
+    children: [
       // {path: 'towers', component: TowersComponent, canActivate: [AuthGuardService]},
       // {path: 'studios', component: StudioComponent, canActivate: [AuthGuardService]},
       // {path: 'tardiness', component: TardinessComponent, canActivate: [AuthGuardService]},
@@ -26,7 +24,8 @@ const routes: Routes = [
       // {path: "**", redirectTo: "admin-company-list"}
       {path: 'permissions', component: PermissionsComponent},
       {path: 'permissions/:id', component: PermissionsComponent},
-      {path: 'towers', component: TowersComponent},
+      {path: 'projects', component: ProjectsComponent},
+      {path: 'engagements', component: EngagementComponent},
       {path: 'studios', component: StudioComponent},
       {path: 'employees', component: EmployeesComponent},
       {path: 'employees/create', component: EmployeeCreateComponent},

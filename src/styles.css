@@ -30,3 +30,11 @@ ul, ol {
 ::-webkit-scrollbar-thumb:hover {
     background: #a8c7dc;
 }
+
+/* Table */
+.table thead {
+    color: #003363!important;
+}
+.table tbody small {
+    color: #bbb;
+}
