@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Tower } from 'src/app/models/tower.model';
 import { TowerService } from 'src/app/services/tower.service';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Tower } from 'src/app/models/sprint.model';
 
 @Component({
   selector: 'app-update-tower-dialog',

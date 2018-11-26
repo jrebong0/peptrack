@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ReferenceService } from '../services/reference.service';
 import { map } from 'rxjs/operators';
-import { Tower } from '../models/tower.model';
 import { NgForm } from '@angular/forms';
+import { Tower } from '../models/sprint.model';
 
 @Injectable({
     providedIn: 'root'
