@@ -1,6 +1,5 @@
 import { SecurityGroup } from "./security.group.model";
 import { Role } from "./role.model";
-import { Studio } from "./studio.model";
 
 export class Employee {
     id?: string;
@@ -9,13 +8,12 @@ export class Employee {
     firstName: string;
     lastName: string;
     password: string;
-    deleted: boolean = false;
+    deleted: boolean;
     dateCreated: Date;
     dateModified: Date;
     status?: string;
     role: Role;
     securityGroup: SecurityGroup;
-    currentStudio: Studio;
 
     constructor(
         id: string = '',
