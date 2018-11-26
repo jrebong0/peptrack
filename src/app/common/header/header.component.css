@@ -1,17 +1,60 @@
-.header {
-}
 .header-image {
   width: 150px;
 }
-.btn.btn-danger {
-  color: white;
+.navbar {
+  display: block!important;
 }
-.logoutButton button {
+.hamburger {
+  font-size: 30px;
+  cursor: pointer;
+  padding: 15px;
+  right: 0;
+}
+.hamburger i {
   color: #003363;
-  border: none;
-  background: transparent;
+}
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #FFF;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+  box-shadow: 2px 8px 16px #333;
+}
+.sidenav a {
+  padding: 10px 10px 10px 35px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #003363;
+  display: block;
+  transition: 0.3s;
   cursor: pointer;
 }
-.logoutButton button:hover {
-  border-bottom: thin solid #003363;
+.sidenav a:hover {
+  color: #fff;
+  background-color: #003363;
+}
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+.sidenav .closebtn:hover {
+  background-color: transparent!important;
+  color: #003363;
+}
+.sidenav hr {
+  border: thin solid #003363;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }

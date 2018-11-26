@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HeaderItem } from 'src/app/models/components/header/header-item.model';
 import { UserAccessService } from 'src/app/services/user-access.service';
 import { Router } from '@angular/router';
@@ -9,25 +9,38 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  @ViewChild('mySidenav') sideNav: ElementRef;
+
   headerItems: HeaderItem[] = [
   {
-    text: 'Employees',
+    text: 'Consultants',
     url: "/employees",
+    icon: "fa fa-user",
     isActive: false,
     disabled: false
   },
   {
-    text: 'Towers',
-    url: "/towers",
+    text: 'Engagements',
+    url: "/admin/engagements",
+    icon: "fa fa-briefcase",
     isActive: false,
     disabled: false
   },
   {
-    text: 'Studios',
-    url: "/studios",
+    text: 'Projects',
+    url: "/admin/projects",
+    icon: "fa fa-cogs",
     isActive: false,
     disabled: false
-  }];
+  },
+  {
+    text: 'Teams',
+    url: "/admin/teams",
+    icon: "fa fa-users",
+    isActive: false,
+    disabled: false
+  }
+];
 
   constructor(
     private userAccessServ: UserAccessService,
@@ -38,8 +51,17 @@ export class HeaderComponent implements OnInit {
   }
 
   onUserLogout() {
+    this.closeSideNav();
     this.userAccessServ.logout();
     this.router.navigateByUrl("/login");
+  }
+
+  openSideNav() {
+    this.sideNav.nativeElement.style.width = "300px";
+  }
+
+  closeSideNav() {
+    this.sideNav.nativeElement.style.width = "0px";
   }
 
 }
