@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SecurityGroupService } from 'src/app/services/security-group.service';
 import { SecurityGroup } from 'src/app/models/security.group.model';
 import * as data from 'src/app/data/permissions.data';
+import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-permissions',
@@ -9,20 +11,32 @@ import * as data from 'src/app/data/permissions.data';
   styleUrls: ['./permissions.component.css']
 })
 export class PermissionsComponent implements OnInit {
+  @ViewChild('permissionsForm') permissionsForm: NgForm;
   securityGroups: SecurityGroup[];
-  permissionList: string[];
+  authorizationMatrix: {};
+  accessRecords: {};
+  accessSpecial: {};
+  securityGroup: SecurityGroup;
+  objKeys = Object.keys;
 
-  constructor(private securityGroupsService: SecurityGroupService) {
-    }
+  constructor(
+    private securityGroupsService: SecurityGroupService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-    this.permissionList = this.chunk(data.permissionList, 10);
+    this.accessRecords = data.authorizationMatrix.records;
+    this.accessSpecial = data.authorizationMatrix.special;
 
     this.securityGroupsService.getSecurityGroups().subscribe(
-      items => {
+      async items => {
         this.securityGroups = items;
-        console.log(items);
-        
+
+        this.route.params.subscribe(
+          (params) => {
+            this.securityGroup = items.find(x => x.id == params['id']);
+          }
+        );
       }
     );
   }
@@ -41,5 +55,12 @@ export class PermissionsComponent implements OnInit {
     }
 
     return chunks;
+  }
+
+  hasPermission(key: string) {
+    if(this.securityGroup && this.securityGroup.permissions) {
+      return this.securityGroup.permissions.indexOf(key) >= 0 ? true : false;
+    }
+    return false;
   }
 }

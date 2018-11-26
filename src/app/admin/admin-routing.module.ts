@@ -23,6 +23,7 @@ const routes: Routes = [
       // {path: 'employees/edit/:id', component: EmployeeEditComponent, canActivate: [AuthGuardService]},
       // {path: "**", redirectTo: "admin-company-list"}
       {path: 'permissions', component: PermissionsComponent},
+      {path: 'permissions/:id', component: PermissionsComponent},
       {path: 'projects', component: ProjectsComponent},
       {path: 'engagements', component: EngagementComponent},
       {path: 'studios', component: StudioComponent},
