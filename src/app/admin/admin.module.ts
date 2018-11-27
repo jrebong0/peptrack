@@ -19,6 +19,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { EngagementComponent } from './engagement/engagement.component';
 import { AddTeamComponent } from './teams/add-team/add-team.component';
 import { UpdateTeamComponent } from './teams/update-team/update-team.component';
+import { RolesComponent } from './roles/roles.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -33,7 +34,8 @@ import { UpdateTeamComponent } from './teams/update-team/update-team.component';
     AddTowerDialogComponent,
     UpdateTowerDialogComponent,
     AddTeamComponent,
-    UpdateTeamComponent
+    UpdateTeamComponent,
+    RolesComponent
   ],
   imports: [
     CommonModule,

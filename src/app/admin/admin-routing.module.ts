@@ -7,6 +7,7 @@ import { EmployeeEditComponent } from './employees/employee-edit/employee-edit.c
 import { PermissionsComponent } from './permissions/permissions.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { EngagementComponent } from './engagement/engagement.component';
+import {RolesComponent} from './roles/roles.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
       {path: 'employees', component: EmployeesComponent},
       {path: 'employees/create', component: EmployeeCreateComponent},
       {path: 'employees/edit/:id', component: EmployeeEditComponent},
+      {path: 'roles', component: RolesComponent},
       {path: "**", redirectTo: "employees"}
     ]
   }
