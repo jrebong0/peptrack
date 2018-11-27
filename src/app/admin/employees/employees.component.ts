@@ -18,7 +18,7 @@ export class EmployeesComponent implements OnInit {
   @ViewChild('filtersForm') filtersForm: NgForm;
   employees: any[];
   towers: {}[];
-  studios: any[];
+  teams: any[];
   roles: Role[];
   selectedEmployee: Employee;
   showFilters = false;
@@ -28,7 +28,7 @@ export class EmployeesComponent implements OnInit {
     private router: Router,
     private employeeService: EmployeeService,
     private rolesService: RolesService,
-    private db: AngularFirestore // used for getting studios (temp until StudioService is refactored)
+    private db: AngularFirestore // used for getting studios (temp until TeamsService is refactored)
   ) { }
 
   ngOnInit() {
@@ -42,9 +42,9 @@ export class EmployeesComponent implements OnInit {
       }
     );
 
-    // retrieve studios
-    // @todo: temporary until StudiosSevice is refactored
-    this.db.collection<any>('studio').snapshotChanges().pipe(
+    // retrieve teams
+    // @todo: temporary until TeamsSevice is refactored
+    this.db.collection<any>('teams').snapshotChanges().pipe(
       map(items => {
         return items.map( item => {
           const id = item.payload.doc.id;
@@ -54,10 +54,10 @@ export class EmployeesComponent implements OnInit {
       })
     ).subscribe(
       (list: any[]) => {
-        this.studios = list;
-        console.log('studios', this.studios);
+        this.teams = list;
+        console.log('teams', this.teams);
       },
-      (error) => console.log('studio service error', error)
+      (error) => console.log('team service error', error)
     );
 
     // retrieve towers
@@ -81,8 +81,8 @@ export class EmployeesComponent implements OnInit {
     return this.roles.find(x => x.id == id).name;
   }
 
-  getStudio(id: string) {
-    return this.studios.find(x => x.id == id).name;
+  getTeam(id: string) {
+    return this.teams.find(x => x.id == id).name;
   }
 
   editEmployee(data: Employee) {
