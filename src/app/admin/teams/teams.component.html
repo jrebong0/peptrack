@@ -21,8 +21,8 @@
                     <td class="col-2">{{team?.tower | towerFilter: towerList}}</td>
                     <td class="col-6">
                         <div *ngIf="team.employees">
-                            <span *ngFor="let employee of team.employees; let y = index">
-                                {{y > 0 ? ',' : ''}}{{employee.employee.firstName.concat(' ', employee.employee.lastName)}}
+                            <span *ngFor="let member of team.employees; let y = index">
+                                {{member.employee.firstName.concat(' ', member.employee.lastName, '[', member.skill.name, ']', (y < (team.employees.length -1) ? ', ' : ''))}}
                             </span> 
                         </div>
                     </td>

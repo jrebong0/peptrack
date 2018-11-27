@@ -7,6 +7,7 @@ import {Role} from '../models/role.model';
 import {EmployeeService} from './employee.service';
 import {combineLatest} from 'rxjs';
 import {RolesService} from './roles.service';
+import {UserAccessService} from './user-access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ import {RolesService} from './roles.service';
 export class TeamsService {
 
     constructor(private db: AngularFirestore,
+        private userAccessService: UserAccessService,
         private refService: ReferenceService,
         private employeeService: EmployeeService,
         private rolesService: RolesService
@@ -77,10 +79,13 @@ export class TeamsService {
     updateTeam(editItem: {name: string, tower: string, members: [{employee: Employee, skill: Role}]}, key: string) {
         let newTowerRef = this.refService.getReferencePath(editItem.tower);
         let formattedMembers = this.formatMembersData(editItem.members);
+        let userLoginRef = this.db.collection('employees').doc(this.userAccessService.hasUserLoggedIn()).ref;
         let updatedData = {
             name: editItem.name,
             tower: newTowerRef,
-            employees: formattedMembers
+            employees: formattedMembers,
+            updatedBy: userLoginRef,
+            dateUpdated: new Date()
         };
         return this.db.collection('teams').doc(key).update(updatedData);
     }
@@ -88,11 +93,14 @@ export class TeamsService {
     addTeam(item: {name: string, tower: string, members: [{employee: Employee, skill: Role}]}) {
         let newTowerRef = this.refService.getReferencePath(item.tower);
         let formattedMembers = this.formatMembersData(item.members);
+        let userLoginRef = this.db.collection('employees').doc(this.userAccessService.hasUserLoggedIn()).ref;
         let addData = {
             name: item.name,
             tower: newTowerRef,
             employees: formattedMembers,
-            type: 'admin'
+            type: 'admin',
+            createdBy: userLoginRef,
+            dateCreated: new Date()
         };
         return this.db.collection('teams').add(addData);
     }
