@@ -17,6 +17,12 @@ import { AddTowerDialogComponent } from './towers/add-tower-dialog/add-tower-dia
 import { UpdateTowerDialogComponent } from './towers/update-tower-dialog/update-tower-dialog.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { EngagementComponent } from './engagement/engagement.component';
+import { AddProjectComponent } from './projects/add-project/add-project.component';
+import { EditProjectComponent } from './projects/edit-project/edit-project.component';
+import { DeleteProjectComponent } from './projects/delete-project/delete-project.component';
+import { AddEngagementComponent } from './engagement/add-engagement/add-engagement.component';
+import { EditEngagementComponent } from './engagement/edit-engagement/edit-engagement.component';
+import { DeleteEngagementComponent } from './engagement/delete-engagement/delete-engagement.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +36,13 @@ import { EngagementComponent } from './engagement/engagement.component';
     EmployeeEditComponent,
     PermissionsComponent,
     AddTowerDialogComponent,
-    UpdateTowerDialogComponent
+    UpdateTowerDialogComponent,
+    AddProjectComponent,
+    EditProjectComponent,
+    DeleteProjectComponent,
+    AddEngagementComponent,
+    EditEngagementComponent,
+    DeleteEngagementComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +50,6 @@ import { EngagementComponent } from './engagement/engagement.component';
     FormsModule,
     ReactiveFormsModule,
     NgbModalModule,
-    NgbModule,
     NgbModule.forRoot(),
     AgGridModule.withComponents([]),
   ],

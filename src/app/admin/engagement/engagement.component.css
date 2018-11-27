@@ -34,6 +34,7 @@
 }
 .table thead {
     color: #003363;
+    background-color: #a8c7dc;
 }
 .table tbody small {
     color: #bbb;

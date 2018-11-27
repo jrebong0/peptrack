@@ -7,7 +7,7 @@
           <a
             class="project-add"
             title="Add Project"
-            (click)="open(addProject)">
+            (click)="open()">
             <i class="fa fa-plus"></i>
           </a>
         </span>
@@ -32,13 +32,13 @@
               <a
                 class="project-remove pull-right px-1"
                 title="Delete Project"
-                (click)="confirmProjectDelete(deleteProject, project)">
+                (click)="delete(project)">
                 <i class="fa fa-trash"></i>
               </a>
               <a
                 class="project-edit pull-right px-2"
-                title="Update Project"
-                (click)="fillUpdateForm(updateProject, project)">
+                title="Edit Project"
+                (click)="update(project)">
                 <i class="fa fa-pencil"></i>
               </a>
             </td>
@@ -53,210 +53,3 @@
     </span>
   </div>
 </div>
-
-<ng-template #addProject let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Add Project</h4>
-    <button type="button" class="close" aria-label="Close"
-      (click)="modal.dismiss('Cross click')" title="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <form
-    (ngSubmit)="onSubmitAddProject(addProjectForm)"
-    #addProjectForm="ngForm">
-    <div class="modal-body">
-        <div class="form-group">
-          <strong>
-            <label for="projectName">
-              Project Name
-              <span class="text-danger">*</span>
-            </label>
-          </strong>
-          <div class="input-group">
-            <input
-              ngModel
-              id="projectName"
-              name="projectName"
-              class="form-control"
-              [ngClass]="projectName.errors?.required &&
-              (projectName.touched || projectName.dirty) || isExisting ?
-              'border border-danger' : ''"
-              type="text"
-              placeholder="e.g. Project A"
-              #projectName="ngModel"
-              required>
-          </div>
-          <br>
-          <strong>
-            <label for="engagementName">
-              Engagement
-              <span class="text-danger">*</span>
-            </label>
-          </strong>
-          <div class="input-group">
-            <select
-              ngModel
-              class="form-control"
-              [ngClass]="engagementName.errors?.required &&
-              (engagementName.touched || engagementName.dirty) ?
-              'border border-danger' : ''"
-              name="engagementName"
-              id="engagementName"
-              #engagementName="ngModel"
-              required>
-              <option
-                *ngFor="let engagement of engagements"
-                value="{{ engagement.key }}">
-                {{ engagement.name }}
-              </option>
-            </select>
-          </div>
-          <span
-            class="text-danger"
-            *ngIf="projectName.errors?.required &&
-              (projectName.touched || projectName.dirty)">
-            <small>
-                {{ errorRequiredMessage }}
-            </small>
-          </span>
-          <span
-            class="text-danger"
-            *ngIf="isExisting && !projectName.errors?.required
-            (projectName.touched || projectName.dirty)">
-            <small>
-              {{ errorMessage }}
-            </small>
-          </span>
-        </div>
-    </div>
-    <div class="modal-footer">
-      <button type="submit" class="btn btn-primary"
-        title="Add" [disabled]="projectName.errors?.required">
-        Add
-      </button>
-    </div>
-  </form>
-</ng-template>
-
-<ng-template #updateProject let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Update Project</h4>
-    <button type="button" class="close" aria-label="Close"
-      (click)="modal.dismiss('Cross click')" title="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <form
-    (ngSubmit)="onSubmitUpdateProject(updateProjectForm)"
-    #updateProjectForm="ngForm">
-    <div class="modal-body">
-        <div class="form-group">
-          <strong>
-            <label for="projectName">
-              Project Name
-              <span class="text-danger">*</span>
-            </label>
-          </strong>
-          <div class="input-group">
-            <input
-              id="updateName"
-              name="updateName"
-              class="form-control"
-              [ngClass]="updateName.errors?.required &&
-              (updateName.touched || updateName.dirty) || isExisting ?
-              'border border-danger' : ''"
-              type="text"
-              placeholder="e.g. Project A"
-              #updateName="ngModel"
-              required
-              [(ngModel)]="updateProjectData.name">
-              <input
-                id="key"
-                name="key"
-                type="hidden"
-                [(ngModel)]="updateProjectData.key"
-                #key="ngModel">
-          </div>
-          <br>
-          <strong>
-            <label for="engagementName">
-              Engagement
-              <span class="text-danger">*</span>
-            </label>
-          </strong>
-          <div class="input-group">
-            <select
-              ngModel
-              class="form-control"
-              [ngClass]="updateEngagementName.errors?.required &&
-              (updateEngagementName.touched || updateEngagementName.dirty) ?
-              'border border-danger' : ''"
-              name="engagementName"
-              id="engagementName"
-              #updateEngagementName="ngModel"
-              required>
-              <option
-                *ngFor="let engagement of engagements"
-                value="{{ engagement.key }}">
-                {{ engagement.name }}
-              </option>
-            </select>
-          </div>
-          <span
-            class="text-danger"
-            *ngIf="updateName.errors?.required &&
-              (updateName.touched || updateName.dirty)">
-            <small>
-                {{ errorRequiredMessage }}
-            </small>
-          </span>
-          <span
-            class="text-danger"
-            *ngIf="isExisting && !updateName.errors?.required
-            (updateName.touched || updateName.dirty)">
-            <small>
-              {{ errorMessage }}
-            </small>
-          </span>
-        </div>
-    </div>
-    <div class="modal-footer">
-      <button type="submit" class="btn btn-success"
-        title="Update" [disabled]="updateName.errors?.required">
-        Update
-      </button>
-    </div>
-  </form>
-</ng-template>
-
-<ng-template #deleteProject let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Delete Project</h4>
-    <button type="button" class="close" aria-label="Close"
-      (click)="modal.dismiss('Cross click')" title="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>
-      Are you sure you want to delete
-      <b>{{ projectToDelete.name }}</b>
-      ?
-    </p>
-  </div>
-  <div class="modal-footer">
-    <button
-      class="btn btn-default"
-      title="Cancel"
-      (click)="modal.dismiss('Cancel click')">
-      Cancel
-    </button>
-    <button
-      class="btn btn-danger"
-      title="Delete"
-      (click)="onConfirmDelete(projectToDelete.key)">
-      Delete
-    </button>
-  </div>
-</ng-template>
