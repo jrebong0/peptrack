@@ -10,9 +10,8 @@ const appRoutes: Routes = [
     {path: '', redirectTo: 'home', pathMatch: 'full'},
     {path: 'login', component: LoginComponent},
     {path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
-    {path: 'tardiness', component: TardinessComponent},
     {path: 'home', component: HomeComponent},
-    {path: 'performance', component: PerformanceComponent, canActivate: [AuthGuardService]}
+    { path: 'performance', loadChildren: './performance/performance.module#PerformanceModule', canActivate: [AuthGuardService]}
 ];
 
 @NgModule({

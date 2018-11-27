@@ -19,6 +19,7 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TardinessComponent } from './performance/behavioral/tardiness.component';
 import { PerformanceComponent } from './performance/performance.component';
+import { CommonAppModule } from 'src/app/common/common.module';
 
 @NgModule({
   declarations: [
@@ -26,14 +27,9 @@ import { PerformanceComponent } from './performance/performance.component';
     LoginComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent,
-    ModalComponent,
-    TardinessComponent,
-    PerformanceComponent,
-    ExcelUploadComponent,
-    ExcelEditorComponent
   ],
   imports: [
+    CommonAppModule,
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
