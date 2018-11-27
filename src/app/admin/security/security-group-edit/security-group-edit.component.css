@@ -1,0 +1,25 @@
+.form-control-lg[contenteditable=true] {
+    font-size: 2em;
+    font-weight: bold;
+    height: auto;
+}
+
+table td {
+    height: 60px;
+    vertical-align: middle;
+}
+
+input[type=checkbox] + label {
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.fa-circle {
+    color: #bfc3c7;
+    font-size: 0.5em;
+}
+
+.fa-check-square {
+    color: #28a745;
+    font-size: 1.5em;
+}

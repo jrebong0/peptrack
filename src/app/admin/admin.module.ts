@@ -12,11 +12,14 @@ import { ReferenceService } from '../services/reference.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgGridModule } from 'ag-grid-angular';
-import { PermissionsComponent } from './permissions/permissions.component';
 import { AddTowerDialogComponent } from './towers/add-tower-dialog/add-tower-dialog.component';
 import { UpdateTowerDialogComponent } from './towers/update-tower-dialog/update-tower-dialog.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { EngagementComponent } from './engagement/engagement.component';
+import { SecurityComponent } from './security/security.component';
+import { SecurityGroupAddComponent } from './security/security-group-add/security-group-add.component';
+import { SecurityGroupDeleteComponent } from './security/security-group-delete/security-group-delete.component';
+import { SecurityGroupEditComponent } from './security/security-group-edit/security-group-edit.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -27,9 +30,12 @@ import { EngagementComponent } from './engagement/engagement.component';
     EmployeesComponent,
     EmployeeCreateComponent,
     EmployeeEditComponent,
-    PermissionsComponent,
     AddTowerDialogComponent,
-    UpdateTowerDialogComponent
+    UpdateTowerDialogComponent,
+    SecurityComponent,
+    SecurityGroupAddComponent,
+    SecurityGroupDeleteComponent,
+    SecurityGroupEditComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +50,9 @@ import { EngagementComponent } from './engagement/engagement.component';
   providers: [ EmployeeService, ReferenceService ],
   entryComponents: [
     AddTowerDialogComponent,
-    UpdateTowerDialogComponent
+    UpdateTowerDialogComponent,
+    SecurityGroupAddComponent,
+    SecurityGroupDeleteComponent
 ],
 })
 export class AdminModule { }

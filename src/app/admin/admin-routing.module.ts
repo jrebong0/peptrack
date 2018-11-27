@@ -4,9 +4,9 @@ import { AdminComponent } from './admin.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeCreateComponent } from './employees/employee-create/employee-create.component';
 import { EmployeeEditComponent } from './employees/employee-edit/employee-edit.component';
-import { PermissionsComponent } from './permissions/permissions.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { EngagementComponent } from './engagement/engagement.component';
+import { SecurityComponent } from './security/security.component';
 
 
 const routes: Routes = [
@@ -22,8 +22,8 @@ const routes: Routes = [
       // {path: 'employees/create', component: EmployeeCreateComponent, canActivate: [AuthGuardService]},
       // {path: 'employees/edit/:id', component: EmployeeEditComponent, canActivate: [AuthGuardService]},
       // {path: "**", redirectTo: "admin-company-list"}
-      {path: 'permissions', component: PermissionsComponent},
-      {path: 'permissions/:id', component: PermissionsComponent},
+      {path: 'security', component: SecurityComponent},
+      {path: 'security/:id/permissions', component: SecurityComponent},
       {path: 'projects', component: ProjectsComponent},
       {path: 'engagements', component: EngagementComponent},
       {path: 'studios', component: StudioComponent},

@@ -1,0 +1,21 @@
+.list-group li {
+    position: relative;
+}
+
+.list-group li:hover .btnDelete {
+    display: inline-block;
+}
+
+.list-group-item + .btnDelete {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 9;
+    margin: .75rem 1.25rem;
+    cursor: pointer;
+    display: none;
+}
+
+.list-group-item.active + .btnDelete i.fa {
+    color: #fff !important;
+}

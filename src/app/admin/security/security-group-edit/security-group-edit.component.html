@@ -1,0 +1,155 @@
+<div class="input-group mb-4">
+  <div class="form-control-lg"
+    (focus)="inputFocused = true"
+    (blur)="inputFocused = false; null"
+    contenteditable="true">
+    {{securityGroup.name}}</div>
+    <div class="input-group-append" [class.sr-only]="!inputFocused">
+      <button class="btn btn-outline-secondary" type="button">Save</button>
+    </div>
+</div>
+
+<form [formGroup]="permissionsFormGroup" (submit)="submit()">
+
+  <h6 class="bg-primary rounded-top text-light p-2 mb-0">Records</h6>
+
+  <div class="table-responsive-sm mb-4">
+    <table class="table table-striped">
+      <thead>
+        <tr class="text-center">
+          <th width="30%"></th>
+          <th width="17.5%">View</th>
+          <th width="17.5%">Add</th>
+          <th width="17.5%">Edit</th>
+          <th width="17.5%">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr formGroupName="employee">
+          <td>Employees</td>
+          <td class="text-center" *ngFor="let item of permissionMatrix.records.employee; let i = index">
+            <input #checkbox type="checkbox" [formControlName]="item" id="{{item}}" class="sr-only">
+            <label for="{{item}}">
+              <i
+                aria-hidden="true"
+                class="fa fa-check-square"
+                [class.fa-check-square]="checkbox.checked"
+                [class.fa-circle]="!checkbox.checked"></i>
+              <span class="sr-only">{{item}}</span>
+            </label>
+          </td>
+        </tr>
+        <tr formGroupName="engagement">
+          <td>Engagements</td>
+          <td class="text-center" *ngFor="let item of permissionMatrix.records.engagement; let i = index">
+            <input #checkbox type="checkbox" [formControlName]="item" id="{{item}}" class="sr-only">
+            <label for="{{item}}">
+              <i
+                aria-hidden="true"
+                class="fa fa-check-square"
+                [class.fa-check-square]="checkbox.checked"
+                [class.fa-circle]="!checkbox.checked"></i>
+              <span class="sr-only">{{item}}</span>
+            </label>
+          </td>
+        </tr>
+        <tr formGroupName="project">
+          <td>Projects</td>
+          <td class="text-center" *ngFor="let item of permissionMatrix.records.project; let i = index">
+            <input #checkbox type="checkbox" [formControlName]="item" id="{{item}}" class="sr-only">
+            <label for="{{item}}">
+              <i
+                aria-hidden="true"
+                class="fa fa-check-square"
+                [class.fa-check-square]="checkbox.checked"
+                [class.fa-circle]="!checkbox.checked"></i>
+              <span class="sr-only">{{item}}</span>
+            </label>
+          </td>
+        </tr>
+        <tr formGroupName="team">
+          <td>Teams</td>
+          <td class="text-center" *ngFor="let item of permissionMatrix.records.team; let i = index">
+            <input #checkbox type="checkbox" [formControlName]="item" id="{{item}}" class="sr-only">
+            <label for="{{item}}">
+              <i
+                aria-hidden="true"
+                class="fa fa-check-square"
+                [class.fa-check-square]="checkbox.checked"
+                [class.fa-circle]="!checkbox.checked"></i>
+              <span class="sr-only">{{item}}</span>
+            </label>
+          </td>
+        </tr>
+        <tr formGroupName="performance">
+          <td>Performance</td>
+          <td class="text-center" *ngFor="let item of permissionMatrix.records.performance; let i = index">
+            <input #checkbox type="checkbox" [formControlName]="item" id="{{item}}" class="sr-only">
+            <label for="{{item}}">
+              <i
+                aria-hidden="true"
+                class="fa fa-check-square"
+                [class.fa-check-square]="checkbox.checked"
+                [class.fa-circle]="!checkbox.checked"></i>
+              <span class="sr-only">{{item}}</span>
+            </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h6 class="bg-primary rounded-top text-light p-2 mb-0">Specials</h6>
+
+  <div class="table-responsive-sm mb-4">
+    <table class="table table-striped">
+      <tbody formGroupName="special">
+        <tr *ngFor="let item of permissionMatrix.specials; let i = index">
+          <td width="30%">{{transform(item)}}</td>
+          <td width="17.5%" class="text-center">
+            <input #checkbox type="checkbox" [formControlName]="item" id="{{item}}" class="sr-only">
+            <label for="{{item}}">
+              <i
+                aria-hidden="true"
+                class="fa fa-check-square"
+                [class.fa-check-square]="checkbox.checked"
+                [class.fa-circle]="!checkbox.checked"></i>
+              <span class="sr-only">{{item}}</span>
+            </label>
+          </td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h6 class="bg-primary rounded-top text-light p-2 mb-0">Pages</h6>
+
+  <div class="table-responsive-sm mb-4">
+    <table class="table table-striped">
+      <tbody formGroupName="page">
+        <tr *ngFor="let item of permissionMatrix.pages;">
+          <td width="30%">{{item}}</td>
+          <td width="17.5%" class="text-center">
+            <input #checkbox type="checkbox" [formControlName]="item" id="{{item}}" class="sr-only">
+            <label for="{{item}}">
+              <i
+                aria-hidden="true"
+                class="fa fa-check-square"
+                [class.fa-check-square]="checkbox.checked"
+                [class.fa-circle]="!checkbox.checked"></i>
+              <span class="sr-only">{{item}}</span>
+            </label>
+          </td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="clearfix">
+    <div class="pull-right">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>

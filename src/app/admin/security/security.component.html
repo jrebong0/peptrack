@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <h2>Security</h2>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="rounded">
+        <h5 class="rounded-top bg-dark mb-0 p-2 text-light clearfix">
+          Roles
+          <a class="toggleAddGroupDialog text-light pull-right" (click)="openAddGroupDialog()">
+            <i class="fa fa-plus mr-1" aria-hidden="true"></i>
+            <span class="sr-only">Add</span>
+          </a>
+        </h5>
+        <ul class="list-group">
+          <li
+            *ngFor="let item of securityGroups">
+            <a routerLinkActive="active"
+              [routerLink]="['/admin', 'security', item.id, 'permissions']"
+              class="list-group-item rounded-0">
+              <i class="fa fa-users mr-2" aria-hidden="true"></i>
+              {{ item.name }}
+            </a>
+            <a class="btnDelete" (click)="openDeleteGroupDialog(item)">
+              <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+              <span class="sr-only">Delete</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <app-security-group-edit></app-security-group-edit>
+    </div>
+  </div>
+</div>
