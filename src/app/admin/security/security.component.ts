@@ -24,7 +24,10 @@ export class SecurityComponent implements OnInit {
   ngOnInit() {
     this.securityGroupsService.getSecurityGroups().subscribe(
       items => {
-        this.securityGroups = items;
+        this.securityGroups = items.map(item => {
+          let group = new SecurityGroup();
+          return {...group, ...item};
+        });
       }
     );
     

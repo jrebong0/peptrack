@@ -1,13 +1,30 @@
-<div class="input-group mb-4">
-  <div class="form-control-lg"
+<div
+  *ngIf="!securityGroup.staticName"
+  class="input-group mb-4">
+  <div
+    #securityGroupName
+    class="form-control-lg border-primary rounded-left"
+    contenteditable="true"
     (focus)="inputFocused = true"
-    (blur)="inputFocused = false; null"
-    contenteditable="true">
-    {{securityGroup.name}}</div>
-    <div class="input-group-append" [class.sr-only]="!inputFocused">
-      <button class="btn btn-outline-secondary" type="button">Save</button>
-    </div>
+    [class.border]="inputFocused">
+    {{securityGroup.name}}
+  </div>
+  <div class="input-group-append" [class.sr-only]="!inputFocused">
+    <button
+      class="btn btn-primary"
+      type="button"
+      (click)="editName(securityGroupName)">Save</button>
+    <button
+      class="btn btn-outline-secondary"
+      type="button"
+      (click)="inputFocused = false">Cancel</button>
+  </div>
 </div>
+<h3
+  *ngIf="securityGroup.staticName"
+  class="mb-4">
+  {{securityGroup.name}}
+</h3>
 
 <form [formGroup]="permissionsFormGroup" (submit)="submit()">
 

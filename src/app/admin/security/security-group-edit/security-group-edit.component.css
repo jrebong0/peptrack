@@ -1,7 +1,12 @@
 .form-control-lg[contenteditable=true] {
-    font-size: 2em;
-    font-weight: bold;
+    font-size: 1.75rem;
+    font-weight: 600;
     height: auto;
+    outline: none;
+}
+
+h3 {
+    padding: .5rem 1rem;
 }
 
 table td {

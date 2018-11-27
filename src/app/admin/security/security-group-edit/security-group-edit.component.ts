@@ -14,6 +14,7 @@ export class SecurityGroupEditComponent implements OnInit {
   securityGroup: SecurityGroup = new SecurityGroup();
   permissionsFormGroup: FormGroup  = new FormGroup({});
   permissionMatrix = {};
+  inputFocused = false;
 
 
   constructor(
@@ -31,7 +32,7 @@ export class SecurityGroupEditComponent implements OnInit {
         this.securityGroupService.getById(params.id)
           .subscribe(
             async item => {
-              this.securityGroup = item
+              this.securityGroup = { ...new SecurityGroup(), ...item};
               this.buildFormControls(item.permissions);
             }
           );
@@ -141,5 +142,14 @@ export class SecurityGroupEditComponent implements OnInit {
       });
     });
     return permissionsArray.join(',');
+  }
+
+  editName(element) {
+    const data = {
+      id: this.securityGroup.id,
+      name: element.innerHTML.trim()
+    };
+    this.securityGroupService.editSecurityGroup(data);
+    this.inputFocused = false;
   }
 }

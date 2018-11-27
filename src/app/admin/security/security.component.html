@@ -20,7 +20,7 @@
               <i class="fa fa-users mr-2" aria-hidden="true"></i>
               {{ item.name }}
             </a>
-            <a class="btnDelete" (click)="openDeleteGroupDialog(item)">
+            <a *ngIf="!item.vital" class="btnDelete" (click)="openDeleteGroupDialog(item)">
               <i class="fa fa-trash text-danger" aria-hidden="true"></i>
               <span class="sr-only">Delete</span>
             </a>
