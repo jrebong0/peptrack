@@ -39,6 +39,11 @@ export class SecurityGroupEditComponent implements OnInit {
     );
   }
 
+  /**
+   * Build Form Controls
+   * @param permissions string
+   * @todo refactor method
+   */
   buildFormControls(permissions: string) {
     const employeeControls = this.formBuilder.group({});
     data.permissionMatrix.records.employee.map(item => {
