@@ -20,6 +20,7 @@ import { SecurityComponent } from './security/security.component';
 import { SecurityGroupAddComponent } from './security/security-group-add/security-group-add.component';
 import { SecurityGroupDeleteComponent } from './security/security-group-delete/security-group-delete.component';
 import { SecurityGroupEditComponent } from './security/security-group-edit/security-group-edit.component';
+
 @NgModule({
   declarations: [
     AdminComponent,
