@@ -4,11 +4,12 @@ import {Employee} from 'src/app/models/employee.model';
 import {Team} from 'src/app/models/team.model';
 import {EmployeeService} from 'src/app/services/employee.service';
 import {TeamsService} from 'src/app/services/teams.service';
-import {TowerService} from 'src/app/services/tower.service';
 import {AddTeamComponent} from './add-team/add-team.component';
 import {UpdateTeamComponent} from './update-team/update-team.component';
 import {SkillsService} from 'src/app/services/skills.service';
 import {Skill} from 'src/app/models/skill.model';
+import {ProjectService} from 'src/app/services/project.service';
+import {Project} from 'src/app/models/project.model';
 
 @Component({
     selector: 'app-teams',
@@ -20,11 +21,11 @@ export class TeamsComponent implements OnInit, OnDestroy {
     employeeList: Employee[] = [];
     skillList: Skill[] = [];
     teamList: Team[] = [];
-    towerList: any[] = [];
+    projectList: any[] = [];
     disableDelete = true;
 
     constructor(
-        private towerService: TowerService,
+        private projectService: ProjectService,
         private teamsService: TeamsService,
         private skillsService: SkillsService,
         private employeeService: EmployeeService,
@@ -32,10 +33,10 @@ export class TeamsComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
-        this.towerService.getTowerList().subscribe(
+        this.projectService.getProjectList().subscribe(
             (list: any[]) => {
-                this.towerList = list;
-                console.log('towerList', this.towerList);
+                this.projectList = list;
+                console.log('projectList', this.projectList);
             },
             (error) => console.log('getTowerList response', error),
         );
@@ -67,7 +68,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
         this.activeModal = this.modalService.open(AddTeamComponent);
         this.activeModal.componentInstance.employeeList = this.employeeList;
         this.activeModal.componentInstance.skillList = this.skillList;
-        this.activeModal.componentInstance.towerList = this.towerList;
+        this.activeModal.componentInstance.projectList = this.projectList;
         this.activeModal.componentInstance.teamList = this.teamList;
     }
 
@@ -75,7 +76,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
         this.activeModal = this.modalService.open(UpdateTeamComponent);
         this.activeModal.componentInstance.employeeList = this.employeeList;
         this.activeModal.componentInstance.skillList = this.skillList;
-        this.activeModal.componentInstance.towerList = this.towerList;
+        this.activeModal.componentInstance.projectList = this.projectList;
         this.activeModal.componentInstance.teamList = this.teamList;
         this.activeModal.componentInstance.editIndex = index;
     }

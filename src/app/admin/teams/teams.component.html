@@ -18,7 +18,7 @@
             <tbody>
                 <tr *ngFor="let team of teamList; let i = index" class="d-flex">
                     <td class="col-3">{{team?.name}}</td>
-                    <td class="col-2">{{team?.tower | towerFilter: towerList}}</td>
+                    <td class="col-2">{{team?.project | projectFilter: projectList}}</td>
                     <td class="col-6">
                         <div *ngIf="team.employees">
                             <span *ngFor="let member of team.employees; let y = index">

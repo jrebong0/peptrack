@@ -14,10 +14,10 @@
                 <div class="help-control text-danger" *ngIf="showNameExist">Name is already exist</div>
             </div>
             <div class="form-group">
-                    <label for="tower">Tower</label>
-                    <select name="tower" id="tower" class="form-control" formControlName="tower">
-                        <option disabled selected value> -- select a tower -- </option>
-                        <option [value]="tower.key" *ngFor="let tower of towerList">{{tower?.name | uppercase}}</option>
+                    <label for="project">Project</label>
+                    <select name="project" id="project" class="form-control" formControlName="project">
+                        <option disabled selected value> -- select a project -- </option>
+                        <option [value]="project.key" *ngFor="let project of projectList">{{project?.name | uppercase}}</option>
                     </select>
                 </div>
             </div>
