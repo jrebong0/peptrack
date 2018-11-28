@@ -1,3 +1,4 @@
+
 import { RouterModule, Routes } from '@angular/router';
 import { TeamsComponent } from './teams/teams.component';
 import { AdminComponent } from './admin.component';
@@ -42,7 +43,6 @@ const routes: Routes = [
       {path: 'engagements/add-engagement', component: AddEngagementComponent},
       {path: 'engagements/edit-engagement', component: EditEngagementComponent},
       {path: 'engagements/delete-engagement', component: DeleteEngagementComponent},
-      {path: 'studios', component: StudioComponent},
       {path: 'teams', component: TeamsComponent},
       {path: 'employees', component: EmployeesComponent},
       {path: 'employees/create', component: EmployeeCreateComponent},

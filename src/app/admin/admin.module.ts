@@ -51,7 +51,7 @@ import { RolesComponent } from './roles/roles.component';
     DeleteProjectComponent,
     AddEngagementComponent,
     EditEngagementComponent,
-    DeleteEngagementComponent
+    DeleteEngagementComponent,
     SecurityComponent,
     SecurityGroupAddComponent,
     SecurityGroupDeleteComponent,
