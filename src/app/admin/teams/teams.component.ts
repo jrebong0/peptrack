@@ -1,14 +1,14 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {NgbModal, NgbModalRef, NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
 import {Employee} from 'src/app/models/employee.model';
-import {Role} from 'src/app/models/role.model';
 import {Team} from 'src/app/models/team.model';
 import {EmployeeService} from 'src/app/services/employee.service';
-import {RolesService} from 'src/app/services/roles.service';
 import {TeamsService} from 'src/app/services/teams.service';
 import {TowerService} from 'src/app/services/tower.service';
 import {AddTeamComponent} from './add-team/add-team.component';
 import {UpdateTeamComponent} from './update-team/update-team.component';
+import {SkillsService} from 'src/app/services/skills.service';
+import {Skill} from 'src/app/models/skill.model';
 
 @Component({
     selector: 'app-teams',
@@ -16,11 +16,9 @@ import {UpdateTeamComponent} from './update-team/update-team.component';
     styleUrls: ['./teams.component.css']
 })
 export class TeamsComponent implements OnInit, OnDestroy {
-    @ViewChild('teamContent') teamContent;
-    @ViewChild('instance') instance: NgbTypeahead;
     activeModal: NgbModalRef;
     employeeList: Employee[] = [];
-    roleList: Role[] = [];
+    skillList: Skill[] = [];
     teamList: Team[] = [];
     towerList: any[] = [];
     disableDelete = true;
@@ -28,7 +26,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
     constructor(
         private towerService: TowerService,
         private teamsService: TeamsService,
-        private rolesService: RolesService,
+        private skillsService: SkillsService,
         private employeeService: EmployeeService,
         private modalService: NgbModal
     ) {}
@@ -54,10 +52,10 @@ export class TeamsComponent implements OnInit, OnDestroy {
                 this.employeeList = list;
             }
         );
-        this.rolesService.getRoles().subscribe(
-            (list: Role[]) => {
-                console.log('Role list', list);
-                this.roleList = list;
+        this.skillsService.getSkills().subscribe(
+            (list: Skill[]) => {
+                console.log('Skill list', list);
+                this.skillList = list;
             }
         );
     }
@@ -68,7 +66,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
     onAddTeam() {
         this.activeModal = this.modalService.open(AddTeamComponent);
         this.activeModal.componentInstance.employeeList = this.employeeList;
-        this.activeModal.componentInstance.roleList = this.roleList;
+        this.activeModal.componentInstance.skillList = this.skillList;
         this.activeModal.componentInstance.towerList = this.towerList;
         this.activeModal.componentInstance.teamList = this.teamList;
     }
@@ -76,7 +74,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
     onEditTeam(index: number) {
         this.activeModal = this.modalService.open(UpdateTeamComponent);
         this.activeModal.componentInstance.employeeList = this.employeeList;
-        this.activeModal.componentInstance.roleList = this.roleList;
+        this.activeModal.componentInstance.skillList = this.skillList;
         this.activeModal.componentInstance.towerList = this.towerList;
         this.activeModal.componentInstance.teamList = this.teamList;
         this.activeModal.componentInstance.editIndex = index;
