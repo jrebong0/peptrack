@@ -3,7 +3,7 @@
 
   <div class="clearfix mb-3">
     <div class="float-sm-right">
-        <a routerLink="/employees/create" class="btn btn-primary ml-1 disabled">
+        <a routerLink="/admin/employees" class="btn btn-primary ml-1 disabled">
           <i class="fa fa-upload"></i> Upload CSV
         </a>
     </div>
@@ -15,7 +15,7 @@
         <tr>
           <th>Fullname</th>
           <th>Email</th>
-          <th>Role</th>
+          <th>Skill</th>
           <th class="text-center">
             <a
               (click)="toggleShowFilters()"
@@ -24,7 +24,7 @@
               <span class="sr-only">Search Employee</span>
             </a>
             <a
-              routerLink="/employees/create"
+              routerLink="/admin/employees/create"
               class="btn btn-sm fa fa-plus text-white"
               title="Add Employee">
               <span class="sr-only">Add Employee</span>
@@ -69,9 +69,9 @@
                           placeholder="Name or Email">
                     </div>
                     <div class="form-group ml-2">
-                      <label for="roleFilter" class="form-label sr-only">Select Role</label>
+                      <label for="roleFilter" class="form-label sr-only">Select Skill</label>
                       <select name="roleFilter" id="roleFilter" ngModel class="form-control form-control-sm">
-                        <option value="" selected="selected">Select Role</option>
+                        <option value="" selected="selected">Select Skill</option>
                         <option *ngFor="let item of roles" [value]="item.id">{{item.name}}</option>
                       </select>
                     </div>
