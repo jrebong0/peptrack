@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Delete Engagement</h4>
+  <button type="button" class="close" aria-label="Close"
+    (click)="dismiss()" title="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p>
+    Are you sure you want to delete
+    <b>{{ engagementToDelete.name }}</b>
+    ?
+  </p>
+</div>
+<div class="modal-footer">
+  <button
+    class="btn btn-default"
+    title="Cancel"
+    (click)="dismiss()">
+    Cancel
+  </button>
+  <button
+    class="btn btn-danger"
+    title="Delete"
+    (click)="onConfirmDelete(engagementToDelete.key)">
+    Delete
+  </button>
+</div>

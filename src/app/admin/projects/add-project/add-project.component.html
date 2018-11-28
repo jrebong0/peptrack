@@ -1,0 +1,82 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Add Project</h4>
+  <button type="button" class="close" aria-label="Close"
+    (click)="dismiss()" title="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form
+  (ngSubmit)="onSubmitAddProject(addProjectForm)"
+  #addProjectForm="ngForm">
+  <div class="modal-body">
+      <div class="form-group">
+        <strong>
+          <label for="projectName">
+            Project Name
+            <span class="text-danger">*</span>
+          </label>
+        </strong>
+        <div class="input-group">
+          <input
+            ngModel
+            id="projectName"
+            name="projectName"
+            class="form-control"
+            [ngClass]="projectName.errors?.required &&
+            (projectName.touched || projectName.dirty) || isExisting ?
+            'border border-danger' : ''"
+            type="text"
+            placeholder="e.g. Project A"
+            #projectName="ngModel"
+            required>
+        </div>
+        <br>
+        <strong>
+          <label for="engagementName">
+            Engagement
+            <span class="text-danger">*</span>
+          </label>
+        </strong>
+        <div class="input-group">
+          <select
+            ngModel
+            class="form-control"
+            [ngClass]="engagementName.errors?.required &&
+            (engagementName.touched || engagementName.dirty) ?
+            'border border-danger' : ''"
+            name="engagementName"
+            id="engagementName"
+            #engagementName="ngModel"
+            required>
+            <option
+              *ngFor="let engagement of engagements"
+              value="{{ engagement.key }}">
+              {{ engagement.name }}
+            </option>
+          </select>
+        </div>
+        <span
+          class="text-danger"
+          *ngIf="projectName.errors?.required &&
+            (projectName.touched || projectName.dirty)">
+          <small>
+              {{ errorRequiredMessage }}
+          </small>
+        </span>
+        <span
+          class="text-danger"
+          *ngIf="isExisting && !projectName.errors?.required
+          (projectName.touched || projectName.dirty)">
+          <small>
+            {{ errorMessage }}
+          </small>
+        </span>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary"
+      title="Add" [disabled]="projectName.errors?.required">
+      Add
+    </button>
+  </div>
+</form>

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ReferenceService } from './reference.service';
-import { map } from 'rxjs/operators';
 import { Project } from '../models/project.model';
 import { NgForm } from '@angular/forms';
+import { combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { EngagementService } from './engagement.service';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +14,8 @@ export class ProjectService {
     project: Project;
 
     constructor(private db: AngularFirestore,
-        private refService: ReferenceService) { }
+        private refService: ReferenceService,
+        private engagementService: EngagementService) { }
 
     getProjectList() {
         return this.db.collection('projects').stateChanges().pipe(
@@ -54,5 +57,26 @@ export class ProjectService {
 
     deleteProject(key: string) {
       this.db.doc('/projects/' + key).delete();
+    }
+
+    getCleanProjects() {
+        return combineLatest([
+            this.getProjectList(),
+            this.engagementService.getEngagementList()
+          ]).pipe(
+            map(([projectList, engagementList]) => {
+              return projectList.map(
+                project => {
+                  const assocEngagement = engagementList.find(engage => (
+                    engage.key === project.engagement.id
+                  ));
+                  let projectData = {
+                    engagement: assocEngagement.name
+                  }
+                  return {...project, ...projectData};
+                }
+              );
+            })
+          )
     }
 }

@@ -1,0 +1,57 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Add Engagement</h4>
+  <button type="button" class="close" aria-label="Close"
+    (click)="dismiss()" title="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form
+  (ngSubmit)="onSubmitAddEngagement(addEngagementForm)"
+  #addEngagementForm="ngForm">
+  <div class="modal-body">
+      <div class="form-group">
+        <strong>
+          <label for="engagementName">
+            Engagement Name
+            <span class="text-danger">*</span>
+          </label>
+        </strong>
+        <div class="input-group">
+          <input
+            ngModel
+            id="engagementName"
+            name="engagementName"
+            class="form-control"
+            [ngClass]="engagementName.errors?.required &&
+            (engagementName.touched || engagementName.dirty) || isExisting ?
+            'border border-danger' : ''"
+            type="text"
+            placeholder="e.g. Engagement A"
+            #engagementName="ngModel"
+            required>
+        </div>
+        <span
+          class="text-danger"
+          *ngIf="engagementName.errors?.required &&
+            (engagementName.touched || engagementName.dirty)">
+          <small>
+              {{ errorRequiredMessage }}
+          </small>
+        </span>
+        <span
+          class="text-danger"
+          *ngIf="isExisting && !engagementName.errors?.required
+          (engagementName.touched || engagementName.dirty)">
+          <small>
+            {{ errorMessage }}
+          </small>
+        </span>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary"
+      title="Add" [disabled]="engagementName.errors?.required">
+      Add
+    </button>
+  </div>
+</form>

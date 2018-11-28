@@ -7,7 +7,7 @@
           <a
             class="engagement-add"
             title="Add Engagement"
-            (click)="open(addEngagement)">
+            (click)="open()">
             <i class="fa fa-plus"></i>
           </a>
         </span>
@@ -31,13 +31,13 @@
               <a
                 class="engagement-remove pull-right px-1"
                 title="Delete Engagement"
-                (click)="confirmEngagementDelete(deleteEngagement, engagement)">
+                (click)="delete(engagement)">
                 <i class="fa fa-trash"></i>
               </a>
               <a
                 class="engagement-edit pull-right px-2"
-                title="Update Engagement"
-                (click)="fillUpdateForm(updateEngagement, engagement)">
+                title="Edit Engagement"
+                (click)="update(engagement)">
                 <i class="fa fa-pencil"></i>
               </a>
             </td>
@@ -52,160 +52,3 @@
     </span>
   </div>
 </div>
-
-<ng-template #addEngagement let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Add Engagement</h4>
-    <button type="button" class="close" aria-label="Close"
-      (click)="modal.dismiss('Cross click')" title="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <form
-    (ngSubmit)="onSubmitAddEngagement(addEngagementForm)"
-    #addEngagementForm="ngForm">
-    <div class="modal-body">
-        <div class="form-group">
-          <strong>
-            <label for="engagementName">
-              Engagement Name
-              <span class="text-danger">*</span>
-            </label>
-          </strong>
-          <div class="input-group">
-            <input
-              ngModel
-              id="engagementName"
-              name="engagementName"
-              class="form-control"
-              [ngClass]="engagementName.errors?.required &&
-              (engagementName.touched || engagementName.dirty) || isExisting ?
-              'border border-danger' : ''"
-              type="text"
-              placeholder="e.g. Engagement A"
-              #engagementName="ngModel"
-              required>
-          </div>
-          <span
-            class="text-danger"
-            *ngIf="engagementName.errors?.required &&
-              (engagementName.touched || engagementName.dirty)">
-            <small>
-                {{ errorRequiredMessage }}
-            </small>
-          </span>
-          <span
-            class="text-danger"
-            *ngIf="isExisting && !engagementName.errors?.required
-            (engagementName.touched || engagementName.dirty)">
-            <small>
-              {{ errorMessage }}
-            </small>
-          </span>
-        </div>
-    </div>
-    <div class="modal-footer">
-      <button type="submit" class="btn btn-primary"
-        title="Add" [disabled]="engagementName.errors?.required">
-        Add
-      </button>
-    </div>
-  </form>
-</ng-template>
-
-<ng-template #updateEngagement let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Update Engagement</h4>
-      <button type="button" class="close" aria-label="Close"
-        (click)="modal.dismiss('Cross click')" title="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <form
-      (ngSubmit)="onSubmitUpdateEngagement(updateEngagementForm)"
-      #updateEngagementForm="ngForm">
-      <div class="modal-body">
-          <div class="form-group">
-            <strong>
-              <label for="engagementName">
-                Engagement Name
-                <span class="text-danger">*</span>
-              </label>
-            </strong>
-            <div class="input-group">
-              <input
-                id="updateName"
-                name="updateName"
-                class="form-control"
-                [ngClass]="updateName.errors?.required &&
-                (updateName.touched || updateName.dirty) || isExisting ?
-                'border border-danger' : ''"
-                type="text"
-                placeholder="e.g. Engagement A"
-                #updateName="ngModel"
-                required
-                [(ngModel)]="updateEngagementData.name">
-                <input
-                  id="key"
-                  name="key"
-                  type="hidden"
-                  [(ngModel)]="updateEngagementData.key"
-                  #key="ngModel">
-            </div>
-            <span
-              class="text-danger"
-              *ngIf="updateName.errors?.required &&
-                (updateName.touched || updateName.dirty)">
-              <small>
-                  {{ errorRequiredMessage }}
-              </small>
-            </span>
-            <span
-              class="text-danger"
-              *ngIf="isExisting && !updateName.errors?.required
-              (updateName.touched || updateName.dirty)">
-              <small>
-                {{ errorMessage }}
-              </small>
-            </span>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-success"
-          title="Update" [disabled]="updateName.errors?.required">
-          Update
-        </button>
-      </div>
-    </form>
-  </ng-template>
-
-  <ng-template #deleteEngagement let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Delete Engagement</h4>
-      <button type="button" class="close" aria-label="Close"
-        (click)="modal.dismiss('Cross click')" title="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <p>
-        Are you sure you want to delete
-        <b>{{ engagementToDelete.name }}</b>
-        ?
-      </p>
-    </div>
-    <div class="modal-footer">
-      <button
-        class="btn btn-default"
-        title="Cancel"
-        (click)="modal.dismiss('Cancel click')">
-        Cancel
-      </button>
-      <button
-        class="btn btn-danger"
-        title="Delete"
-        (click)="onConfirmDelete(engagementToDelete.key)">
-        Delete
-      </button>
-    </div>
-  </ng-template>

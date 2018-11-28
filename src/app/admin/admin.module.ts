@@ -16,6 +16,14 @@ import { AddTowerDialogComponent } from './towers/add-tower-dialog/add-tower-dia
 import { UpdateTowerDialogComponent } from './towers/update-tower-dialog/update-tower-dialog.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { EngagementComponent } from './engagement/engagement.component';
+
+import { AddProjectComponent } from './projects/add-project/add-project.component';
+import { EditProjectComponent } from './projects/edit-project/edit-project.component';
+import { DeleteProjectComponent } from './projects/delete-project/delete-project.component';
+import { AddEngagementComponent } from './engagement/add-engagement/add-engagement.component';
+import { EditEngagementComponent } from './engagement/edit-engagement/edit-engagement.component';
+import { DeleteEngagementComponent } from './engagement/delete-engagement/delete-engagement.component';
+
 import { SecurityComponent } from './security/security.component';
 import { SecurityGroupAddComponent } from './security/security-group-add/security-group-add.component';
 import { SecurityGroupDeleteComponent } from './security/security-group-delete/security-group-delete.component';
@@ -24,6 +32,7 @@ import { SecurityGroupEditComponent } from './security/security-group-edit/secur
 import { AddTeamComponent } from './teams/add-team/add-team.component';
 import { UpdateTeamComponent } from './teams/update-team/update-team.component';
 import { RolesComponent } from './roles/roles.component';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +46,12 @@ import { RolesComponent } from './roles/roles.component';
     EmployeeEditComponent,
     AddTowerDialogComponent,
     UpdateTowerDialogComponent,
+    AddProjectComponent,
+    EditProjectComponent,
+    DeleteProjectComponent,
+    AddEngagementComponent,
+    EditEngagementComponent,
+    DeleteEngagementComponent
     SecurityComponent,
     SecurityGroupAddComponent,
     SecurityGroupDeleteComponent,
@@ -51,7 +66,6 @@ import { RolesComponent } from './roles/roles.component';
     FormsModule,
     ReactiveFormsModule,
     NgbModalModule,
-    NgbModule,
     NgbModule.forRoot(),
     AgGridModule.withComponents([]),
   ],

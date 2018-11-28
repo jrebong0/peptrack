@@ -1,0 +1,63 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Edit Engagement</h4>
+  <button type="button" class="close" aria-label="Close"
+    (click)="dismiss()" title="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form
+  (ngSubmit)="onSubmitUpdateEngagement(updateEngagementForm)"
+  #updateEngagementForm="ngForm">
+  <div class="modal-body">
+      <div class="form-group">
+        <strong>
+          <label for="engagementName">
+            Engagement Name
+            <span class="text-danger">*</span>
+          </label>
+        </strong>
+        <div class="input-group">
+          <input
+            id="updateName"
+            name="updateName"
+            class="form-control"
+            [ngClass]="updateName.errors?.required &&
+            (updateName.touched || updateName.dirty) || isExisting ?
+            'border border-danger' : ''"
+            type="text"
+            placeholder="e.g. Engagement A"
+            #updateName="ngModel"
+            required
+            [(ngModel)]="updateEngagementData.name">
+            <input
+              id="key"
+              name="key"
+              type="hidden"
+              [(ngModel)]="updateEngagementData.key"
+              #key="ngModel">
+        </div>
+        <span
+          class="text-danger"
+          *ngIf="updateName.errors?.required &&
+            (updateName.touched || updateName.dirty)">
+          <small>
+              {{ errorRequiredMessage }}
+          </small>
+        </span>
+        <span
+          class="text-danger"
+          *ngIf="isExisting && !updateName.errors?.required
+          (updateName.touched || updateName.dirty)">
+          <small>
+            {{ errorMessage }}
+          </small>
+        </span>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-success"
+      title="Update" [disabled]="updateName.errors?.required">
+      Save
+    </button>
+  </div>
+</form>

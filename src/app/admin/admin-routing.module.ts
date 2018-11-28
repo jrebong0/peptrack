@@ -6,6 +6,14 @@ import { EmployeeCreateComponent } from './employees/employee-create/employee-cr
 import { EmployeeEditComponent } from './employees/employee-edit/employee-edit.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { EngagementComponent } from './engagement/engagement.component';
+
+import { AddProjectComponent } from './projects/add-project/add-project.component';
+import { EditProjectComponent } from './projects/edit-project/edit-project.component';
+import { DeleteProjectComponent } from './projects/delete-project/delete-project.component';
+import { AddEngagementComponent } from './engagement/add-engagement/add-engagement.component';
+import { EditEngagementComponent } from './engagement/edit-engagement/edit-engagement.component';
+import { DeleteEngagementComponent } from './engagement/delete-engagement/delete-engagement.component';
+
 import { SecurityComponent } from './security/security.component';
 import {RolesComponent} from './roles/roles.component';
 
@@ -27,7 +35,14 @@ const routes: Routes = [
       {path: 'security', component: SecurityComponent},
       {path: 'security/:id/permissions', component: SecurityComponent},
       {path: 'projects', component: ProjectsComponent},
+      {path: 'projects/add-project', component: AddProjectComponent},
+      {path: 'projects/edit-project', component: EditProjectComponent},
+      {path: 'projects/delete-project', component: DeleteProjectComponent},
       {path: 'engagements', component: EngagementComponent},
+      {path: 'engagements/add-engagement', component: AddEngagementComponent},
+      {path: 'engagements/edit-engagement', component: EditEngagementComponent},
+      {path: 'engagements/delete-engagement', component: DeleteEngagementComponent},
+      {path: 'studios', component: StudioComponent},
       {path: 'teams', component: TeamsComponent},
       {path: 'employees', component: EmployeesComponent},
       {path: 'employees/create', component: EmployeeCreateComponent},
