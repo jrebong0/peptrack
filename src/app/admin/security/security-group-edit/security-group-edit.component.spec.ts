@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PermissionsComponent } from './permissions.component';
+import { SecurityGroupEditComponent } from './security-group-edit.component';
 
-describe('PermissionsComponent', () => {
-  let component: PermissionsComponent;
-  let fixture: ComponentFixture<PermissionsComponent>;
+describe('SecurityGroupEditComponent', () => {
+  let component: SecurityGroupEditComponent;
+  let fixture: ComponentFixture<SecurityGroupEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PermissionsComponent ]
+      declarations: [ SecurityGroupEditComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PermissionsComponent);
+    fixture = TestBed.createComponent(SecurityGroupEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
