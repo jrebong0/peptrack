@@ -1,9 +1,9 @@
-import { TowerFilterPipe } from './studio/studio.pipe';
+import { ProjectFilterPipe } from './teams/teams.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
-import { StudioComponent } from './studio/studio.component';
+import { TeamsComponent } from './teams/teams.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeCreateComponent } from './employees/employee-create/employee-create.component';
 import { EmployeeEditComponent } from './employees/employee-edit/employee-edit.component';
@@ -17,20 +17,25 @@ import { AddTowerDialogComponent } from './towers/add-tower-dialog/add-tower-dia
 import { UpdateTowerDialogComponent } from './towers/update-tower-dialog/update-tower-dialog.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { EngagementComponent } from './engagement/engagement.component';
-
+import { AddTeamComponent } from './teams/add-team/add-team.component';
+import { UpdateTeamComponent } from './teams/update-team/update-team.component';
+import { RolesComponent } from './roles/roles.component';
 @NgModule({
   declarations: [
     AdminComponent,
     ProjectsComponent,
     EngagementComponent,
-    TowerFilterPipe,
-    StudioComponent,
+    ProjectFilterPipe,
+    TeamsComponent,
     EmployeesComponent,
     EmployeeCreateComponent,
     EmployeeEditComponent,
     PermissionsComponent,
     AddTowerDialogComponent,
-    UpdateTowerDialogComponent
+    UpdateTowerDialogComponent,
+    AddTeamComponent,
+    UpdateTeamComponent,
+    RolesComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +50,9 @@ import { EngagementComponent } from './engagement/engagement.component';
   providers: [ EmployeeService, ReferenceService ],
   entryComponents: [
     AddTowerDialogComponent,
-    UpdateTowerDialogComponent
+    UpdateTowerDialogComponent,
+    AddTeamComponent,
+    UpdateTeamComponent
 ],
 })
 export class AdminModule { }

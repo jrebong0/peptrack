@@ -1,6 +1,6 @@
 import { SecurityGroup } from "./security.group.model";
 import { Role } from "./role.model";
-import { Studio } from "./studio.model";
+import { Team } from "./team.model";
 
 export class Employee {
     id?: string;
@@ -15,7 +15,7 @@ export class Employee {
     status?: string;
     role: Role;
     securityGroup: SecurityGroup;
-    currentStudio: Studio;
+    currentTeam: Team;
 
     constructor(
         id: string = '',
