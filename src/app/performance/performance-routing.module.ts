@@ -1,5 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
-import { TardinessComponent } from 'src/app/performance/behavioral/tardiness.component';
+// import { TardinessComponent } from 'src/app/performance/behavioral/tardiness.component';
 import { PerformanceComponent } from 'src/app/performance/performance.component';
 
 
@@ -17,7 +17,8 @@ const routes: Routes = [
       // {path: 'employees/create', component: EmployeeCreateComponent, canActivate: [AuthGuardService]},
       // {path: 'employees/edit/:id', component: EmployeeEditComponent, canActivate: [AuthGuardService]},
       // {path: "**", redirectTo: "admin-company-list"}
-      { path: 'tardiness', component: TardinessComponent },
+      // { path: 'tardiness', component: TardinessComponent },
+      { path: 'performance', component: PerformanceComponent},
       { path: "**", redirectTo: "/performance" }
     ]
   }
