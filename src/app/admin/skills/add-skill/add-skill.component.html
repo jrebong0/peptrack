@@ -1,0 +1,27 @@
+<form [formGroup]="skillForm" (ngSubmit)="onSubmitSkill()">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Create Skill</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onCancel()">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" class="form-control" formControlName="name">
+                <div class="help-control text-danger" *ngIf="name.invalid &&  (name.dirty || name.touched)">Name is required</div>
+                <div class="help-control text-danger" *ngIf="showNameExist">Name is already exist</div>
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-secondary" 
+                    data-dismiss="modal" 
+                    (click)="onCancel()" 
+                >Cancel</button>
+                <button type="submit" class="btn btn-primary" [disabled]="skillForm.invalid">Create</button>
+            </div>
+        </div>
+    </div>
+</form>

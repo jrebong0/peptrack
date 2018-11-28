@@ -37,6 +37,8 @@ export class UpdateTeamComponent implements OnInit {
     ngOnInit() {
         this.editTeamData = _.cloneDeep(this.teamList[this.editIndex]);
         let {name, tower, employees} = this.editTeamData;
+        employees = employees ? employees : [];
+        console.log('employees', employees)
         this.teamForm.setValue({
             name: name,
             tower: tower,

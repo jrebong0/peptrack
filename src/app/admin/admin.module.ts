@@ -31,7 +31,9 @@ import { SecurityGroupEditComponent } from './security/security-group-edit/secur
 
 import { AddTeamComponent } from './teams/add-team/add-team.component';
 import { UpdateTeamComponent } from './teams/update-team/update-team.component';
-import { RolesComponent } from './roles/roles.component';
+import { SkillsComponent } from './skills/skills.component';
+import { AddSkillComponent } from './skills/add-skill/add-skill.component';
+import { UpdateSkillComponent } from './skills/update-skill/update-skill.component';
 
 
 @NgModule({
@@ -58,7 +60,9 @@ import { RolesComponent } from './roles/roles.component';
     SecurityGroupEditComponent,
     AddTeamComponent,
     UpdateTeamComponent,
-    RolesComponent
+    SkillsComponent,
+    AddSkillComponent,
+    UpdateSkillComponent
   ],
   imports: [
     CommonModule,
@@ -76,7 +80,9 @@ import { RolesComponent } from './roles/roles.component';
     SecurityGroupAddComponent,
     SecurityGroupDeleteComponent,
     AddTeamComponent,
-    UpdateTeamComponent
+    UpdateTeamComponent,
+    AddSkillComponent,
+    UpdateSkillComponent
 ],
 })
 export class AdminModule { }

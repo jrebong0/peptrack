@@ -5,7 +5,7 @@ export class Team {
     type: string;
     key: string;
     members?: any[];
-    role?: string;
+    skill?: string;
     employees: any[];
 
     constructor(

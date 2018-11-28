@@ -16,7 +16,7 @@ import { EditEngagementComponent } from './engagement/edit-engagement/edit-engag
 import { DeleteEngagementComponent } from './engagement/delete-engagement/delete-engagement.component';
 
 import { SecurityComponent } from './security/security.component';
-import {RolesComponent} from './roles/roles.component';
+import {SkillsComponent} from './skills/skills.component';
 
 
 
@@ -47,7 +47,7 @@ const routes: Routes = [
       {path: 'employees', component: EmployeesComponent},
       {path: 'employees/create', component: EmployeeCreateComponent},
       {path: 'employees/edit/:id', component: EmployeeEditComponent},
-      {path: 'roles', component: RolesComponent},
+      {path: 'skills', component: SkillsComponent},
       {path: "**", redirectTo: "employees"}
     ]
   }

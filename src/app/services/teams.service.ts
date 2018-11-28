@@ -3,11 +3,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ReferenceService } from './reference.service';
 import { map } from 'rxjs/operators';
 import {Employee} from '../models/employee.model';
-import {Role} from '../models/role.model';
 import {EmployeeService} from './employee.service';
 import {combineLatest} from 'rxjs';
-import {RolesService} from './roles.service';
 import {UserAccessService} from './user-access.service';
+import {SkillsService} from './skills.service';
+import {Skill} from '../models/skill.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class TeamsService {
         private userAccessService: UserAccessService,
         private refService: ReferenceService,
         private employeeService: EmployeeService,
-        private rolesService: RolesService
+        private skillsService: SkillsService
     ) { }
 
     queryTeamsList() {
@@ -40,9 +40,9 @@ export class TeamsService {
         return combineLatest(
             this.employeeService.getEmployees(),
             this.queryTeamsList(),
-            this.rolesService.getRoles()
+            this.skillsService.getSkills()
         ).pipe(
-            map(([employeeList, teamsList, rolesList]) => 
+            map(([employeeList, teamsList, skillsList]) => 
                 {
                     return teamsList.map(
                         (team) => {
@@ -50,8 +50,9 @@ export class TeamsService {
                                 const matchData = [];
                                 team.employees.map(emp=>{
                                     const parseEmp = JSON.parse(emp);
+                                    console.log('parseEmp', parseEmp);
                                     const matchEmployee = employeeList.filter(employee=>(employee['id'] === parseEmp['employee']))[0];
-                                    const matchSkill = rolesList.filter(role=>(role['id'] === parseEmp['role']))[0];
+                                    const matchSkill = skillsList.filter(skill=>(skill['id'] === parseEmp['skill']))[0];
                                     matchData.push({
                                         employee: matchEmployee,
                                         skill: matchSkill
@@ -71,12 +72,12 @@ export class TeamsService {
 
     formatMembersData(data) {
         return data.map(item=>{
-            let itemToString = JSON.stringify({employee: item.employee.id, role: item.skill.id});
+            let itemToString = JSON.stringify({employee: item.employee.id, skill: item.skill.id});
             return itemToString;
         })
     }
 
-    updateTeam(editItem: {name: string, tower: string, members: [{employee: Employee, skill: Role}]}, key: string) {
+    updateTeam(editItem: {name: string, tower: string, members: [{employee: Employee, skill: Skill}]}, key: string) {
         let newTowerRef = this.refService.getReferencePath(editItem.tower);
         let formattedMembers = this.formatMembersData(editItem.members);
         let userLoginRef = this.db.collection('employees').doc(this.userAccessService.hasUserLoggedIn()).ref;
@@ -90,7 +91,7 @@ export class TeamsService {
         return this.db.collection('teams').doc(key).update(updatedData);
     }
 
-    addTeam(item: {name: string, tower: string, members: [{employee: Employee, skill: Role}]}) {
+    addTeam(item: {name: string, tower: string, members: [{employee: Employee, skill: Skill}]}) {
         let newTowerRef = this.refService.getReferencePath(item.tower);
         let formattedMembers = this.formatMembersData(item.members);
         let userLoginRef = this.db.collection('employees').doc(this.userAccessService.hasUserLoggedIn()).ref;

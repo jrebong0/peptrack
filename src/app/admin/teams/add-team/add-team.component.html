@@ -1,7 +1,7 @@
 <form [formGroup]="teamForm" (ngSubmit)="onSubmitTeam()">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">{{editMode? 'Edit': 'Create'}} Team</h5>
+            <h5 class="modal-title">Create Team</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onCancel()">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -65,7 +65,7 @@
                         <label for="memberSkill">Skill</label>
                         <select id="memberSkill" class="form-control"  formControlName="skill">
                             <option disabled selected value> -- select a skill -- </option>
-                            <option [ngValue]="role" *ngFor="let role of roleList">{{role.name | uppercase}}</option>
+                            <option [ngValue]="skill" *ngFor="let skill of skillList">{{skill.name | uppercase}}</option>
                         </select>
                     </div>
                     <div class="form-group col-sm-3 d-flex align-items-end">
@@ -81,7 +81,7 @@
                     data-dismiss="modal" 
                     (click)="onCancel()" 
                 >Cancel</button>
-                <button type="submit" class="btn btn-primary" [disabled]="teamForm.invalid">{{editMode? 'Update': 'Create'}}</button>
+                <button type="submit" class="btn btn-primary" [disabled]="teamForm.invalid">Create</button>
             </div>
         </div>
 </form>
