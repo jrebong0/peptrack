@@ -1,9 +1,9 @@
-import { TowerFilterPipe } from './studio/studio.pipe';
+import { ProjectFilterPipe } from './teams/teams.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
-import { StudioComponent } from './studio/studio.component';
+import { TeamsComponent } from './teams/teams.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeCreateComponent } from './employees/employee-create/employee-create.component';
 import { EmployeeEditComponent } from './employees/employee-edit/employee-edit.component';
@@ -21,13 +21,17 @@ import { SecurityGroupAddComponent } from './security/security-group-add/securit
 import { SecurityGroupDeleteComponent } from './security/security-group-delete/security-group-delete.component';
 import { SecurityGroupEditComponent } from './security/security-group-edit/security-group-edit.component';
 
+import { AddTeamComponent } from './teams/add-team/add-team.component';
+import { UpdateTeamComponent } from './teams/update-team/update-team.component';
+import { RolesComponent } from './roles/roles.component';
+
 @NgModule({
   declarations: [
     AdminComponent,
     ProjectsComponent,
     EngagementComponent,
-    TowerFilterPipe,
-    StudioComponent,
+    ProjectFilterPipe,
+    TeamsComponent,
     EmployeesComponent,
     EmployeeCreateComponent,
     EmployeeEditComponent,
@@ -36,7 +40,10 @@ import { SecurityGroupEditComponent } from './security/security-group-edit/secur
     SecurityComponent,
     SecurityGroupAddComponent,
     SecurityGroupDeleteComponent,
-    SecurityGroupEditComponent
+    SecurityGroupEditComponent,
+    AddTeamComponent,
+    UpdateTeamComponent,
+    RolesComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +60,9 @@ import { SecurityGroupEditComponent } from './security/security-group-edit/secur
     AddTowerDialogComponent,
     UpdateTowerDialogComponent,
     SecurityGroupAddComponent,
-    SecurityGroupDeleteComponent
+    SecurityGroupDeleteComponent,
+    AddTeamComponent,
+    UpdateTeamComponent
 ],
 })
 export class AdminModule { }

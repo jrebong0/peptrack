@@ -9,8 +9,8 @@ import { map } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
 import { SecurityGroup } from 'src/app/models/security.group.model';
 import { Router } from '@angular/router';
-import { StudioService } from 'src/app/services/studio.service';
-import { Studio } from 'src/app/models/studio.model';
+import { TeamsService } from 'src/app/services/teams.service';
+import { Team } from 'src/app/models/team.model';
 
 @Component({
   selector: 'employee-create',
@@ -21,7 +21,7 @@ export class EmployeeCreateComponent implements OnInit {
   @ViewChild('f') employeeForm: NgForm;
   securityGroups: SecurityGroup[];
   roles: Role[];
-  studios: Studio[];
+  teams: Team[];
 
   submitted = false;
 
@@ -31,7 +31,7 @@ export class EmployeeCreateComponent implements OnInit {
     private employeeService: EmployeeService,
     private rolesService: RolesService,
     private securityGroupService: SecurityGroupService,
-    private studiosService: StudioService,
+    private teamsService: TeamsService,
     private router: Router
   ) { }
 
@@ -39,15 +39,15 @@ export class EmployeeCreateComponent implements OnInit {
     combineLatest(
       this.rolesService.getRoles(),
       this.securityGroupService.getSecurityGroups(),
-      this.studiosService.getStudioList()
+      this.teamsService.getTeamList()
     ).pipe(
-      map(([roles, securityGroups, studios]) => {
-        return { roles, securityGroups, studios };
+      map(([roles, securityGroups, teams]) => {
+        return { roles, securityGroups, teams };
       })
     ).subscribe((observer) => {
       this.roles = observer.roles;
       this.securityGroups = observer.securityGroups;
-      this.studios = observer.studios;
+      this.teams = observer.teams;
     });
   }
 
