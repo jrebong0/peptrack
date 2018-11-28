@@ -74,11 +74,11 @@ export class EmployeeService {
   addEmployee(data) {
     const roleRef = this.db.doc('/roles/' + data.role).ref;
     const securityGroupRef = this.db.doc('/securityGroups/' + data.securityGroup).ref;
-    const studioRef = this.db.doc('/studio/' + data.studio).ref;
+    const teamRef = this.db.doc('/teams/' + data.team).ref;
 
     data.role = roleRef;
     data.securityGroup = securityGroupRef;
-    data.studio = studioRef;
+    data.team = teamRef;
     data.deleted = false;
     data.dateCreated = data.dateModified = new Date();
 
@@ -92,11 +92,11 @@ export class EmployeeService {
   editEmployee(data) {
     const roleRef = this.db.doc('/roles/' + data.role).ref;
     const securityGroupRef = this.db.doc('/securityGroups/' + data.securityGroup).ref;
-    const studioRef = this.db.doc('/studio/' + data.studio).ref;
+    const teamRef = this.db.doc('/teams/' + data.team).ref;
 
     data.role = roleRef;
     data.securityGroup = securityGroupRef;
-    data.studio = studioRef;
+    data.team = teamRef;
     data.dateModified = new Date();
 
     return this.db.doc('/employees/' + data.id).update(data);

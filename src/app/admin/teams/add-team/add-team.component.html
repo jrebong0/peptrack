@@ -1,0 +1,87 @@
+<form [formGroup]="teamForm" (ngSubmit)="onSubmitTeam()">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">{{editMode? 'Edit': 'Create'}} Team</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onCancel()">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" class="form-control" formControlName="name">
+                <div class="help-control text-danger" *ngIf="teamFormName.invalid &&  (teamFormName.dirty || teamFormName.touched)">Name is required</div>
+                <div class="help-control text-danger" *ngIf="showNameExist">Name is already exist</div>
+            </div>
+            <div class="form-group">
+                    <label for="tower">Tower</label>
+                    <select name="tower" id="tower" class="form-control" formControlName="tower">
+                        <option disabled selected value> -- select a tower -- </option>
+                        <option [value]="tower.key" *ngFor="let tower of towerList">{{tower?.name | uppercase}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="container" *ngIf="membersList.value.length > 0">
+                <label>Members</label>
+                <div class="mt-3 border border-secondary rounded">
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let member of membersList.value; let i = index">
+                            <div class="d-flex">
+                            <div class="d-inline-flex align-items-center col-sm-6">
+                                <span class="text-truncate">{{member.employee.firstName.concat(' ', member.employee.lastName)}}</span>
+                            </div>
+                            <div class="d-inline-flex align-items-center col-sm -2">
+                                <span>{{member.skill.name}}</span>
+                            </div>
+                            <button type="button" class="btn btn-danger" (click)="onRemoveMember(i)">
+                                <span class="fa fa-times"></span>
+                            </button>
+                        </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container">
+                <form [formGroup]="membersForm" (ngSubmit)="onAddMember()" class="row">
+                    <div class="form-group col-sm-6">
+                        <ng-template #rt let-r="result" let-t="term">
+                            <ngb-highlight [result]="r.firstName" [term]="t"></ngb-highlight>
+                        </ng-template>
+                        <label for="memberName">Name</label>
+                        <input 
+                            type="text" 
+                            id="memberName" 
+                            class="form-control"
+                            formControlName="employee" 
+                            [ngbTypeahead]="search"
+                            [resultTemplate]="rt"
+                            [inputFormatter]="formatter"
+                            (focus)="focus$.next($event.target.value)"
+                            (click)="clickEvents($event, instance)"
+                            #instance="ngbTypeahead"
+                        >
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label for="memberSkill">Skill</label>
+                        <select id="memberSkill" class="form-control"  formControlName="skill">
+                            <option disabled selected value> -- select a skill -- </option>
+                            <option [ngValue]="role" *ngFor="let role of roleList">{{role.name | uppercase}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-3 d-flex align-items-end">
+                    <button class="btn btn-primary " type="submit" [disabled]="membersForm.invalid">Add</button>
+                </div>
+                </form>
+            </div>
+            <hr class="mt-1">
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-secondary" 
+                    data-dismiss="modal" 
+                    (click)="onCancel()" 
+                >Cancel</button>
+                <button type="submit" class="btn btn-primary" [disabled]="teamForm.invalid">{{editMode? 'Update': 'Create'}}</button>
+            </div>
+        </div>
+</form>

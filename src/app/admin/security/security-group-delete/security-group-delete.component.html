@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h5 class="modal-title">Delete Role</h5>
+  <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <h6 class="mb-3">You are about to delete a record.<br />All references to this data will be removed.</h6>
+  <div class="input-group input-group-lg">
+    <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i _ngcontent-c4="" aria-hidden="true" class="fa fa-users"></i>
+        </span>
+    </div>
+    <div class="form-control">{{securityGroup.name}}</div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="submit()">Delete Role</button>
+  <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+</div>

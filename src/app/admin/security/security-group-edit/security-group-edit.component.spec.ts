@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StudioComponent } from './studio.component';
+import { SecurityGroupEditComponent } from './security-group-edit.component';
 
-describe('StudioComponent', () => {
-  let component: StudioComponent;
-  let fixture: ComponentFixture<StudioComponent>;
+describe('SecurityGroupEditComponent', () => {
+  let component: SecurityGroupEditComponent;
+  let fixture: ComponentFixture<SecurityGroupEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StudioComponent ]
+      declarations: [ SecurityGroupEditComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StudioComponent);
+    fixture = TestBed.createComponent(SecurityGroupEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
