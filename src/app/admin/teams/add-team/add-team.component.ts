@@ -19,7 +19,7 @@ export class AddTeamComponent implements OnInit {
     employeeList: Employee[] = [];
     teamForm = new FormGroup({
         name: new FormControl(null, [Validators.required]),
-        tower: new FormControl(null, [Validators.required]),
+        project: new FormControl(null, [Validators.required]),
         members: new FormControl([])
     });
     membersForm: FormGroup;
@@ -35,7 +35,7 @@ export class AddTeamComponent implements OnInit {
     ngOnInit() {
         this.teamForm = new FormGroup({
             name: new FormControl(null, [Validators.required]),
-            tower: new FormControl(null, [Validators.required]),
+            project: new FormControl(null, [Validators.required]),
             members: new FormControl([]),
         });
         this.membersForm = new FormGroup({
@@ -107,6 +107,6 @@ export class AddTeamComponent implements OnInit {
     }
 
     get teamFormName() {return this.teamForm.get('name');}
-    get teamFormTower() {return this.teamForm.get('tower');}
+    get teamFormProject() {return this.teamForm.get('project');}
     get membersList() {return this.teamForm.get('members');}
 }

@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { ReferenceService } from './reference.service';
-import { map } from 'rxjs/operators';
-import {Employee} from '../models/employee.model';
-import {EmployeeService} from './employee.service';
+import {Injectable} from '@angular/core';
+import {AngularFirestore} from '@angular/fire/firestore';
 import {combineLatest} from 'rxjs';
-import {UserAccessService} from './user-access.service';
-import {SkillsService} from './skills.service';
+import {map} from 'rxjs/operators';
+import {Employee} from '../models/employee.model';
 import {Skill} from '../models/skill.model';
+import {EmployeeService} from './employee.service';
+import {ReferenceService} from './reference.service';
+import {SkillsService} from './skills.service';
+import {UserAccessService} from './user-access.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class TeamsService {
 
@@ -19,16 +19,16 @@ export class TeamsService {
         private refService: ReferenceService,
         private employeeService: EmployeeService,
         private skillsService: SkillsService
-    ) { }
+    ) {}
 
     queryTeamsList() {
         return this.db.collection('teams').snapshotChanges().pipe(
-            map(items=>{
+            map(items => {
                 return items.map(
-                    (item:any) => {
+                    (item: any) => {
                         let key = item.payload.doc.id;
                         let data = item.payload.doc.data();
-                        data.tower = data.tower.path;
+                        data.project = data.project.id;
                         return {key, ...data};
                     }
                 );
@@ -42,48 +42,46 @@ export class TeamsService {
             this.queryTeamsList(),
             this.skillsService.getSkills()
         ).pipe(
-            map(([employeeList, teamsList, skillsList]) => 
-                {
-                    return teamsList.map(
-                        (team) => {
-                            if(team.employees) {
-                                const matchData = [];
-                                team.employees.map(emp=>{
-                                    const parseEmp = JSON.parse(emp);
-                                    console.log('parseEmp', parseEmp);
-                                    const matchEmployee = employeeList.filter(employee=>(employee['id'] === parseEmp['employee']))[0];
-                                    const matchSkill = skillsList.filter(skill=>(skill['id'] === parseEmp['skill']))[0];
-                                    matchData.push({
-                                        employee: matchEmployee,
-                                        skill: matchSkill
-                                    });
+            map(([employeeList, teamsList, skillsList]) => {
+                return teamsList.map(
+                    (team) => {
+                        if (team.employees) {
+                            const matchData = [];
+                            team.employees.map(emp => {
+                                const parseEmp = JSON.parse(emp);
+                                const matchEmployee = employeeList.filter(employee => (employee['id'] === parseEmp['employee']))[0];
+                                const matchSkill = skillsList.filter(skill => (skill['id'] === parseEmp['skill']))[0];
+                                matchData.push({
+                                    employee: matchEmployee,
+                                    skill: matchSkill
                                 });
-                                team.employees = matchData;
-                                return {...team}
-                            } else {
-                                return team;
-                            }
+                            });
+                            team.employees = matchData;
+                            return {...team}
+                        } else {
+                            return team;
                         }
-                    )
-                }
+                    }
+                )
+            }
             )
         )
     }
 
     formatMembersData(data) {
-        return data.map(item=>{
+        return data.map(item => {
             let itemToString = JSON.stringify({employee: item.employee.id, skill: item.skill.id});
             return itemToString;
         })
     }
 
-    updateTeam(editItem: {name: string, tower: string, members: [{employee: Employee, skill: Skill}]}, key: string) {
-        let newTowerRef = this.refService.getReferencePath(editItem.tower);
+    updateTeam(editItem: {name: string, project: string, members: [{employee: Employee, skill: Skill}]}, key: string) {
+        let newProjectRef = this.refService.getReferencePath('projects/'.concat(editItem.project));
         let formattedMembers = this.formatMembersData(editItem.members);
         let userLoginRef = this.db.collection('employees').doc(this.userAccessService.hasUserLoggedIn()).ref;
         let updatedData = {
             name: editItem.name,
-            tower: newTowerRef,
+            project: newProjectRef,
             employees: formattedMembers,
             updatedBy: userLoginRef,
             dateUpdated: new Date()
@@ -91,15 +89,14 @@ export class TeamsService {
         return this.db.collection('teams').doc(key).update(updatedData);
     }
 
-    addTeam(item: {name: string, tower: string, members: [{employee: Employee, skill: Skill}]}) {
-        let newTowerRef = this.refService.getReferencePath(item.tower);
+    addTeam(item: {name: string, project: string, members: [{employee: Employee, skill: Skill}]}) {
+        let newProjectRef = this.refService.getReferencePath('projects/'.concat(item.project));
         let formattedMembers = this.formatMembersData(item.members);
         let userLoginRef = this.db.collection('employees').doc(this.userAccessService.hasUserLoggedIn()).ref;
         let addData = {
             name: item.name,
-            tower: newTowerRef,
+            project: newProjectRef,
             employees: formattedMembers,
-            type: 'admin',
             createdBy: userLoginRef,
             dateCreated: new Date()
         };

@@ -1,7 +1,7 @@
 export class Team {
     id: string;
     name: string;
-    tower: string;
+    project: string;
     type: string;
     key: string;
     members?: any[];
@@ -11,12 +11,12 @@ export class Team {
     constructor(
         id: string = '',
         name: string = '',
-        tower: string = '',
+        project: string = '',
         employees: any[] = []
     ) {
         this.id = id;
         this.name = name;
-        this.tower = tower;
+        this.project = project;
         this.employees = employees;
     }
 }

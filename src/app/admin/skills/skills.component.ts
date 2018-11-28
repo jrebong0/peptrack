@@ -24,7 +24,8 @@ export class SkillsComponent implements OnInit {
         this.skillService.getSkills().subscribe(
             list => {
                 this.skills = list;
-            }
+            },
+            (error) => console.log('skillService error response', error),
         )
     }
 

@@ -19,7 +19,7 @@ export class UpdateTeamComponent implements OnInit {
     employeeList: Employee[] = [];
     teamForm = new FormGroup({
         name: new FormControl(null, [Validators.required, Validators.minLength(2)]),
-        tower: new FormControl(null, [Validators.required]),
+        project: new FormControl(null, [Validators.required]),
         members: new FormControl([])
     });
     membersForm: FormGroup;
@@ -36,12 +36,11 @@ export class UpdateTeamComponent implements OnInit {
 
     ngOnInit() {
         this.editTeamData = _.cloneDeep(this.teamList[this.editIndex]);
-        let {name, tower, employees} = this.editTeamData;
+        let {name, project, employees} = this.editTeamData;
         employees = employees ? employees : [];
-        console.log('employees', employees)
         this.teamForm.setValue({
             name: name,
-            tower: tower,
+            project: project,
             members: employees
         });
         this.membersForm = new FormGroup({
@@ -126,6 +125,6 @@ export class UpdateTeamComponent implements OnInit {
     }
 
     get teamFormName() {return this.teamForm.get('name');}
-    get teamFormTower() {return this.teamForm.get('tower');}
+    get teamFormProject() {return this.teamForm.get('project');}
     get membersList() {return this.teamForm.get('members');}
 }
