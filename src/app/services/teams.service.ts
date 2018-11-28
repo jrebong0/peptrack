@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {ReferenceService} from './reference.service';
+import {combineLatest} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Employee} from '../models/employee.model';
-import {EmployeeService} from './employee.service';
-import {combineLatest} from 'rxjs';
-import {UserAccessService} from './user-access.service';
-import {SkillsService} from './skills.service';
 import {Skill} from '../models/skill.model';
+import {EmployeeService} from './employee.service';
+import {ReferenceService} from './reference.service';
+import {SkillsService} from './skills.service';
+import {UserAccessService} from './user-access.service';
 
 @Injectable({
     providedIn: 'root'
@@ -26,12 +26,9 @@ export class TeamsService {
             map(items => {
                 return items.map(
                     (item: any) => {
-                        console.log('item', item);
                         let key = item.payload.doc.id;
                         let data = item.payload.doc.data();
-                        console.log('doc', item.payload.doc.data());
                         data.project = data.project.id;
-                        console.log('data', data);
                         return {key, ...data};
                     }
                 );
@@ -52,7 +49,6 @@ export class TeamsService {
                             const matchData = [];
                             team.employees.map(emp => {
                                 const parseEmp = JSON.parse(emp);
-                                console.log('parseEmp', parseEmp);
                                 const matchEmployee = employeeList.filter(employee => (employee['id'] === parseEmp['employee']))[0];
                                 const matchSkill = skillsList.filter(skill => (skill['id'] === parseEmp['skill']))[0];
                                 matchData.push({

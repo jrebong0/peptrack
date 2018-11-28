@@ -38,7 +38,6 @@ export class UpdateTeamComponent implements OnInit {
         this.editTeamData = _.cloneDeep(this.teamList[this.editIndex]);
         let {name, project, employees} = this.editTeamData;
         employees = employees ? employees : [];
-        console.log('project', project)
         this.teamForm.setValue({
             name: name,
             project: project,
