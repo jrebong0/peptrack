@@ -16,16 +16,6 @@
     font-size: 20px;
     padding: 0 10px;
 }
-.project-names a {
-    text-align: right;
-    padding: 0 5px;
-}
-.project-names {
-    width: 100%;
-    padding: 0;
-    max-height: 537px;
-    overflow-y: auto;
-}
 .project-remove {
     color: red!important;
 }
@@ -37,5 +27,16 @@
     background-color: #a8c7dc;
 }
 .table tbody small {
-    color: #bbb;
+    color: #999;
 }
+/* .table tbody {
+    display: block;
+    max-height: 465px;
+    overflow-y: auto;
+}
+.table thead,
+.table tbody tr {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+} */

@@ -1,60 +1,87 @@
-import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Project } from 'src/app/models/project.model';
 import { ProjectService } from 'src/app/services/project.service';
-import { EngagementService } from 'src/app/services/engagement.service';
 import { Engagement } from 'src/app/models/engagement.model';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-edit-project',
   templateUrl: './edit-project.component.html',
   styleUrls: ['./edit-project.component.css']
 })
-export class EditProjectComponent {
+export class EditProjectComponent implements OnInit{
+  @Input()
+  updateProjectData: Project;
   projects: Project[];
+  projectList: Project[];
   engagements: Engagement[];
+  engagementList: Engagement[];
   isExisting: boolean = false;
-  errorMessage: string = "";
   errorRequiredMessage: string = "Project name is requried.";
+  errorMessage: string = "Project already exist.";
+  updateProject: any;
+  editProjectForm = new FormGroup({
+    key: new FormControl(),
+    updateName: new FormControl(null, [Validators.required]),
+    engagementName: new FormControl(null, [Validators.required])
+  });
 
   constructor(public activeModal: NgbActiveModal,
-    private projectService: ProjectService,
-    private engagementService: EngagementService) { }
+    private projectService: ProjectService) { }
 
   ngOnInit() {
-    this.getProjectsAndEngagements();
+    this.editProjectForm.reset();
+    this.projects = _.cloneDeep(this.projectList);
+    this.updateProject = _.cloneDeep(this.updateProjectData);
+    this.editProjectForm.setValue({
+      key: this.updateProject.key,
+      updateName: this.updateProject.name,
+      engagementName: this.engagementList.filter(
+        item => item.name === this.updateProject.engagement
+      )[0].key
+    });
   }
 
-  getProjectsAndEngagements() {
-    this.engagementService.getEngagementList().subscribe(
-      (engagementList: any) => {
-        this.engagements = engagementList;
+  checkExistence() {
+    try {
+      let nameExist = this.projects.filter(
+        project => project.name === this.editProjectForm.value.updateName
+      );
+      let projectExist = nameExist.some(
+        item => item.engagement === this.engagementList.filter(
+          item => item.key === this.editProjectForm.value.engagementName
+        )[0].name
+      );
+      if(projectExist) {
+        this.isExisting = true;
       }
-    );
-    this.projectService.getCleanProjects().subscribe(
-      (projectList: any) => {
-        this.projects = projectList;
+      else {
+        this.isExisting = false;
       }
-    );
+    } catch(e) {}
+
   }
 
-  onSubmitUpdateProject(form: NgForm) {
-    if(this.projects.some(
-        project => project.name === form.value.updateName
-      )) {
-      this.isExisting = true;
-      this.errorMessage = "Project name already exist.";
-    }
-    else {
-      this.isExisting = false;
-      this.projectService.updateProject(form);
+  onSubmitUpdateProject() {
+    this.checkExistence();
+    if(!this.isExisting) {
+      this.projectService.updateProject(this.editProjectForm.value);
       this.activeModal.close();
     }
   }
 
   dismiss() {
     this.activeModal.close();
+  }
+
+  get updatedName() {
+    return this.editProjectForm.get('updateName');
+  }
+
+  get updatedEngagement() {
+    return this.editProjectForm.get('engagementName');
   }
 
 }

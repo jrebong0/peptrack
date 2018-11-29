@@ -19,7 +19,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let engagement of engagements">
-            <td>{{ engagement.name }}</td>
+            <td>
+              {{ engagement.name }}
+              <small>({{ engagement.acronyms }})</small>
+            </td>
             <td>
               <span>
                 <small class="font-italic">

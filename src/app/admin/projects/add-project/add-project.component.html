@@ -5,9 +5,8 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<form
-  (ngSubmit)="onSubmitAddProject(addProjectForm)"
-  #addProjectForm="ngForm">
+<form [formGroup]="addProjectForm"
+  (ngSubmit)="onSubmitAddProject()">
   <div class="modal-body">
       <div class="form-group">
         <strong>
@@ -18,18 +17,32 @@
         </strong>
         <div class="input-group">
           <input
-            ngModel
             id="projectName"
             name="projectName"
             class="form-control"
-            [ngClass]="projectName.errors?.required &&
-            (projectName.touched || projectName.dirty) || isExisting ?
-            'border border-danger' : ''"
+            [ngClass]="isExisting || newName.invalid &&
+            (newName.touched || newName.dirty) ?
+            'border-danger' : ''"
             type="text"
             placeholder="e.g. Project A"
-            #projectName="ngModel"
-            required>
+            formControlName="projectName"
+            (change)="checkExistence()">
         </div>
+        <span
+          class="text-danger"
+          *ngIf="newName.invalid &&
+            (newName.touched || newName.dirty)">
+          <small>
+              {{ errorRequiredMessage }}
+          </small>
+        </span>
+        <span
+          class="text-danger"
+          *ngIf="isExisting && newName.valid">
+          <small>
+            {{ errorMessage }}
+          </small>
+        </span>
         <br>
         <strong>
           <label for="engagementName">
@@ -39,43 +52,32 @@
         </strong>
         <div class="input-group">
           <select
-            ngModel
             class="form-control"
-            [ngClass]="engagementName.errors?.required &&
-            (engagementName.touched || engagementName.dirty) ?
-            'border border-danger' : ''"
+            [ngClass]="engage.touched && engage.pristine ?
+            'border-danger' : ''"
             name="engagementName"
             id="engagementName"
-            #engagementName="ngModel"
-            required>
+            formControlName="engagementName">
             <option
               *ngFor="let engagement of engagements"
-              value="{{ engagement.key }}">
+              [value]="engagement.key">
               {{ engagement.name }}
             </option>
           </select>
         </div>
         <span
           class="text-danger"
-          *ngIf="projectName.errors?.required &&
-            (projectName.touched || projectName.dirty)">
+          *ngIf="engage.touched && engage.pristine">
           <small>
-              {{ errorRequiredMessage }}
-          </small>
-        </span>
-        <span
-          class="text-danger"
-          *ngIf="isExisting && !projectName.errors?.required
-          (projectName.touched || projectName.dirty)">
-          <small>
-            {{ errorMessage }}
+            {{ errorRequiredEngagement }}
           </small>
         </span>
       </div>
   </div>
   <div class="modal-footer">
     <button type="submit" class="btn btn-primary"
-      title="Add" [disabled]="projectName.errors?.required">
+      title="Add" [disabled]="newName.invalid &&
+        (newName.pristine || engage.pristine)">
       Add
     </button>
   </div>

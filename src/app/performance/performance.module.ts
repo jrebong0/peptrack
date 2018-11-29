@@ -3,18 +3,22 @@ import { NgModule } from "@angular/core";
 import { PerformanceRoutingModule } from "src/app/performance/performance-routing.module";
 import { ReferenceService } from "src/app/services/reference.service";
 import { PerformanceComponent } from "src/app/performance/performance.component";
-import { AddPerformanceReportComponent } from './add-performance-report/add-performance-report.component';
 import { CommonModule } from "@angular/common";
+import { CommonAppModule } from "../common/common.module";
+import { ReportsComponent } from './reports/reports.component';
+import { AddReportComponent } from './reports/add-report/add-report.component';
 
 @NgModule({
   declarations: [
     // TardinessComponent,
     PerformanceComponent,
-    AddPerformanceReportComponent
+    ReportsComponent,
+    AddReportComponent
   ],
   imports: [
     PerformanceRoutingModule,
-    CommonModule
+    CommonModule,
+    CommonAppModule
   ],
   providers: [ReferenceService],
   entryComponents: [

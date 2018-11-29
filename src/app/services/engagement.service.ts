@@ -28,28 +28,45 @@ export class EngagementService {
       );
   }
 
-  updateEngagement(form: NgForm) {
-      this.engagement = {
-          name: form.value.updateName,
-          dateCreated: Date(),
-          createdBy: this.refService.getReferencePath(
-              'employee/'.concat(localStorage.getItem('currentUser')))
-      };
-      this.db.collection('engagements').doc(form.value.key)
-        .update(this.engagement);
+  updateEngagement(form: any) {
+    this.engagement = {
+        name: form.updateName,
+        dateCreated: Date(),
+        createdBy: this.refService.getReferencePath(
+            'employee/'.concat(localStorage.getItem('currentUser'))),
+        acronyms: this.getAcronyms(form.updateName)
+    };
+    this.db.collection('engagements').doc(form.key)
+    .update(this.engagement);
   }
 
-  addEngagement(form: NgForm) {
-      this.engagement = {
-          name: form.value.engagementName,
-          dateCreated: Date(),
-          createdBy: this.refService.getReferencePath(
-              'employee/'.concat(localStorage.getItem('currentUser')))
-        };
-      this.db.collection('engagements').add(this.engagement);
+  addEngagement(form: any) {
+    this.engagement = {
+        name: form.engagementName,
+        dateCreated: Date(),
+        createdBy: this.refService.getReferencePath(
+            'employee/'.concat(localStorage.getItem('currentUser'))),
+        acronyms: this.getAcronyms(form.engagementName)
+    };
+    this.db.collection('engagements').add(this.engagement);
   }
 
   deleteEngagement(key: string) {
     this.db.doc('/engagements/' + key).delete();
+  }
+
+
+  getAcronyms(toAcronym: string) {
+    let nameSplit = toAcronym.split(" ");
+    let acronyms = "";
+    if(nameSplit.length > 1) {
+        for(let per of nameSplit) {
+            acronyms += per.substr(0, 1);
+        }
+    }
+    else {
+        acronyms = nameSplit[0].substr(0, 3);
+    }
+    return acronyms.toUpperCase();
   }
 }

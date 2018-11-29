@@ -6,8 +6,8 @@
   </button>
 </div>
 <form
-  (ngSubmit)="onSubmitUpdateEngagement(updateEngagementForm)"
-  #updateEngagementForm="ngForm">
+  (ngSubmit)="onSubmitUpdateEngagement()"
+  [formGroup]="updateEngagementForm">
   <div class="modal-body">
       <div class="form-group">
         <strong>
@@ -21,33 +21,30 @@
             id="updateName"
             name="updateName"
             class="form-control"
-            [ngClass]="updateName.errors?.required &&
-            (updateName.touched || updateName.dirty) || isExisting ?
+            [ngClass]="updatedName.invalid &&
+            (updatedName.touched || updatedName.dirty) || isExisting ?
             'border border-danger' : ''"
             type="text"
             placeholder="e.g. Engagement A"
-            #updateName="ngModel"
-            required
-            [(ngModel)]="updateEngagementData.name">
+            formControlName="updateName"
+            (change)="checkExistence()">
             <input
               id="key"
               name="key"
               type="hidden"
-              [(ngModel)]="updateEngagementData.key"
-              #key="ngModel">
+              formControlName="key">
         </div>
         <span
           class="text-danger"
-          *ngIf="updateName.errors?.required &&
-            (updateName.touched || updateName.dirty)">
+          *ngIf="updatedName.invalid &&
+            (updatedName.touched || updatedName.dirty)">
           <small>
               {{ errorRequiredMessage }}
           </small>
         </span>
         <span
           class="text-danger"
-          *ngIf="isExisting && !updateName.errors?.required
-          (updateName.touched || updateName.dirty)">
+          *ngIf="isExisting && updatedName.valid">
           <small>
             {{ errorMessage }}
           </small>
@@ -56,7 +53,7 @@
   </div>
   <div class="modal-footer">
     <button type="submit" class="btn btn-success"
-      title="Update" [disabled]="updateName.errors?.required">
+      title="Update" [disabled]="updatedName.invalid">
       Save
     </button>
   </div>
