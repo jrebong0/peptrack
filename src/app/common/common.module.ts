@@ -33,6 +33,7 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     NgbModule,
     AgGridModule.withComponents([]),
+    CommonModule,
   ],
   exports: [
     HomeComponent,

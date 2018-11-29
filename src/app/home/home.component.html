@@ -1,29 +1,26 @@
 <div class="container">
-  <div class="row button-row">
-    <div class="col-md-6 text-center">
-      <button
-        class="main-button"
-        (click)="routeToPerformance()"
-        title="Performance Data">
-          <i class="fa fa-bar-chart image"></i>
-          <br>
-          Performance Data
-      </button>
-    </div>
-    <div class="col-md-6 text-center button-container">
-        <button class="main-button" title="YTD PEP Data">
-            <i class="fa fa-bar-chart image text-center"></i>
-            <br>
-            YTD PEP Data
-            <br>
-            <small>
-              <small>
-                <small>
-                  (Page under construction)
-                </small>
-              </small>
-            </small>
-        </button>
+  <div class="row">
+    <div
+      class="col-lg-4 col-md-4 col-sm-12 col-xs-12 home-card"
+      *ngFor="let engagement of engagements">
+      <div class=" text-center home-card-container">
+        <div class="home-card-title">
+          <i class="fa fa-users image text-center"></i><br>
+          {{ engagement.name }}
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 card-button text-center" 
+              (click)="routeToPerformance(engagement.key)">
+              Performance Data
+            </div>
+            <div class="col-md-6 card-button text-center"
+              (click)="routeToYTDPerformance(engagement.key)">
+              Year-to-date Data
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
