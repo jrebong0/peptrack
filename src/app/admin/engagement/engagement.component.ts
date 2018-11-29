@@ -39,7 +39,7 @@ export class EngagementComponent implements OnInit {
     this.activeModal = this.modalService.open(AddEngagementComponent, {
       ariaLabelledBy: 'modal-basic-title'
     });
-    this.activeModal.componentInstance.engagement = this.engagements;
+    this.activeModal.componentInstance.engagementList = this.engagements;
     this.activeModal.result.then(result => {
       this.getEngagements();
     }, reason =>{
@@ -52,7 +52,7 @@ export class EngagementComponent implements OnInit {
       ariaLabelledBy: 'modal-basic-title'
     });
 
-    this.activeModal.componentInstance.engagement = this.engagements;
+    this.activeModal.componentInstance.engagementList = this.engagements;
     this.activeModal.componentInstance.updateEngagementData =
       Object.assign({}, engagementUpdate);
 

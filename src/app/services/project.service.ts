@@ -31,26 +31,26 @@ export class ProjectService {
         );
     }
 
-    updateProject(form: NgForm) {
+    updateProject(form: any) {
         this.project = {
-            name: form.value.updateName,
+            name: form.updateName,
             dateCreated: Date(),
             createdBy: this.refService.getReferencePath(
                 'employee/'.concat(localStorage.getItem('currentUser'))),
             engagement: this.refService.getReferencePath(
-                'engagements/'.concat(form.value.engagementName))
+                'engagements/'.concat(form.engagementName))
         };
-        this.db.collection('projects').doc(form.value.key).update(this.project);
+        this.db.collection('projects').doc(form.key).update(this.project);
     }
 
-    addProject(form: NgForm) {
+    addProject(form: any) {
         this.project = {
-            name: form.value.projectName,
+            name: form.projectName,
             dateCreated: Date(),
             createdBy: this.refService.getReferencePath(
                 'employee/'.concat(localStorage.getItem('currentUser'))),
             engagement: this.refService.getReferencePath(
-                'engagements/'.concat(form.value.engagementName))
+                'engagements/'.concat(form.engagementName))
           };
         this.db.collection('projects').add(this.project);
     }
@@ -63,20 +63,20 @@ export class ProjectService {
         return combineLatest([
             this.getProjectList(),
             this.engagementService.getEngagementList()
-          ]).pipe(
+        ]).pipe(
             map(([projectList, engagementList]) => {
-              return projectList.map(
-                project => {
-                  const assocEngagement = engagementList.find(engage => (
-                    engage.key === project.engagement.id
-                  ));
-                  let projectData = {
-                    engagement: assocEngagement.name
-                  }
-                  return {...project, ...projectData};
-                }
-              );
+                return projectList.map(
+                    project => {
+                        const assocEngagement = engagementList.find(engage => (
+                            engage.key === project.engagement.id
+                        ));
+                        let projectData = {
+                            engagement: assocEngagement.name
+                        }
+                        return {...project, ...projectData};
+                    }
+                );
             })
-          )
+        )
     }
 }

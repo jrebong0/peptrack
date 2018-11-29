@@ -6,8 +6,8 @@
   </button>
 </div>
 <form
-  (ngSubmit)="onSubmitAddEngagement(addEngagementForm)"
-  #addEngagementForm="ngForm">
+  (ngSubmit)="onSubmitAddEngagement()"
+  [formGroup]="addEngagementForm">
   <div class="modal-body">
       <div class="form-group">
         <strong>
@@ -18,30 +18,28 @@
         </strong>
         <div class="input-group">
           <input
-            ngModel
             id="engagementName"
             name="engagementName"
             class="form-control"
-            [ngClass]="engagementName.errors?.required &&
-            (engagementName.touched || engagementName.dirty) || isExisting ?
-            'border border-danger' : ''"
+            [ngClass]="newName.invalid &&
+            (newName.touched || newName.dirty) || isExisting ?
+            'border-danger' : ''"
             type="text"
             placeholder="e.g. Engagement A"
-            #engagementName="ngModel"
-            required>
+            formControlName="engagementName"
+            (change)="checkExistence()">
         </div>
         <span
           class="text-danger"
-          *ngIf="engagementName.errors?.required &&
-            (engagementName.touched || engagementName.dirty)">
+          *ngIf="newName.invalid &&
+            (newName.touched || newName.dirty)">
           <small>
               {{ errorRequiredMessage }}
           </small>
         </span>
         <span
           class="text-danger"
-          *ngIf="isExisting && !engagementName.errors?.required
-          (engagementName.touched || engagementName.dirty)">
+          *ngIf="isExisting && newName.valid">
           <small>
             {{ errorMessage }}
           </small>
@@ -50,7 +48,7 @@
   </div>
   <div class="modal-footer">
     <button type="submit" class="btn btn-primary"
-      title="Add" [disabled]="engagementName.errors?.required">
+      title="Add" [disabled]="newName.invalid">
       Add
     </button>
   </div>

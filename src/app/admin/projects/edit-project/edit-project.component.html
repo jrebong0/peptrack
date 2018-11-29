@@ -5,9 +5,8 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<form
-  (ngSubmit)="onSubmitUpdateProject(updateProjectForm)"
-  #updateProjectForm="ngForm">
+<form [formGroup]="editProjectForm"
+  (ngSubmit)="onSubmitUpdateProject()">
   <div class="modal-body">
       <div class="form-group">
         <strong>
@@ -21,21 +20,32 @@
             id="updateName"
             name="updateName"
             class="form-control"
-            [ngClass]="updateName.errors?.required &&
-            (updateName.touched || updateName.dirty) || isExisting ?
-            'border border-danger' : ''"
+            [ngClass]="isExisting || updatedName.invalid &&
+            (updatedName.touched || updatedName.dirty) ?
+            'border-danger' : ''"
             type="text"
             placeholder="e.g. Project A"
-            #updateName="ngModel"
-            required
-            [(ngModel)]="updateProjectData.name">
-            <input
-              id="key"
-              name="key"
-              type="hidden"
-              [(ngModel)]="updateProjectData.key"
-              #key="ngModel">
+            formControlName="updateName"
+            (change)="checkExistence()">
+          <input
+            id="key"
+            name="key"
+            type="hidden"
+            formControlName="key">
         </div>
+        <span class="help-control text-danger"
+          *ngIf="updatedName.invalid &&
+            (updatedName.touched || updatedName.dirty)">
+          <small>
+              {{ errorRequiredMessage }}
+          </small>
+        </span>
+        <span class="help-control text-danger"
+          *ngIf="isExisting && updatedName.valid">
+          <small>
+            {{ errorMessage }}
+          </small>
+        </span>
         <br>
         <strong>
           <label for="engagementName">
@@ -44,44 +54,23 @@
           </label>
         </strong>
         <div class="input-group">
-          <select
-            [(ngModel)]="updateProjectData.engagement"
-            class="form-control"
-            [ngClass]="updateEngagementName.errors?.required &&
-            (updateEngagementName.touched || updateEngagementName.dirty) ?
-            'border border-danger' : ''"
+          <select class="form-control"
             name="engagementName"
             id="engagementName"
-            #updateEngagementName="ngModel"
-            required>
+            formControlName="engagementName">
             <option
-              *ngFor="let engagement of engagements"
-              value="{{ engagement.key }}">
+              *ngFor="let engagement of engagementList"
+              [value]="engagement.key">
               {{ engagement.name }}
             </option>
           </select>
         </div>
-        <span
-          class="text-danger"
-          *ngIf="updateName.errors?.required &&
-            (updateName.touched || updateName.dirty)">
-          <small>
-              {{ errorRequiredMessage }}
-          </small>
-        </span>
-        <span
-          class="text-danger"
-          *ngIf="isExisting && !updateName.errors?.required
-          (updateName.touched || updateName.dirty)">
-          <small>
-            {{ errorMessage }}
-          </small>
-        </span>
       </div>
   </div>
   <div class="modal-footer">
     <button type="submit" class="btn btn-success"
-      title="Update" [disabled]="updateName.errors?.required">
+      title="Update" [disabled]="updatedName.invalid ||
+        (updatedName.pristine && updatedEngagement.pristine)">
       Save
     </button>
   </div>

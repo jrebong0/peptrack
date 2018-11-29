@@ -6,6 +6,7 @@ import { AddProjectComponent } from './add-project/add-project.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
 import { DeleteProjectComponent } from './delete-project/delete-project.component';
 import { EngagementService } from 'src/app/services/engagement.service';
+import { Engagement } from 'src/app/models/engagement.model';
 
 @Component({
   selector: 'app-projects',
@@ -16,6 +17,7 @@ export class ProjectsComponent implements OnInit {
   updateProjectData: Project;
   selectedEngagementKey: string;
   projects: Project[];
+  engagements: Engagement[];
   activeModal: NgbModalRef;
   projectToDelete: {
     name: string,
@@ -28,6 +30,11 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit() {
     this.getProjectList();
+    this.engagementService.getEngagementList().subscribe(
+      (list: any) => {
+        this.engagements = list;
+      }
+    );
   }
 
   getProjectList() {
@@ -42,7 +49,8 @@ export class ProjectsComponent implements OnInit {
     this.activeModal = this.modalService.open(AddProjectComponent, {
       ariaLabelledBy: 'modal-basic-title'
     });
-    this.activeModal.componentInstance.project = this.projects;
+    this.activeModal.componentInstance.projectList = this.projects;
+    this.activeModal.componentInstance.engagementList = this.engagements;
     this.activeModal.result.then(result => {
       this.getProjectList();
     }, reason =>{
@@ -54,18 +62,10 @@ export class ProjectsComponent implements OnInit {
     this.activeModal = this.modalService.open(EditProjectComponent, {
       ariaLabelledBy: 'modal-basic-title'
     });
-
-    this.activeModal.componentInstance.project = this.projects;
+    this.activeModal.componentInstance.projectList = this.projects;
     this.activeModal.componentInstance.updateProjectData =
       Object.assign({}, projectUpdate);
-    this.engagementService.getEngagementList().subscribe(
-      (list: any) => {
-        this.activeModal.componentInstance.selectedEngagementKey = list.filter(
-          item => item.name === projectUpdate.engagement
-        )[0].key;
-      }
-    );
-
+    this.activeModal.componentInstance.engagementList = this.engagements;
     this.activeModal.result.then(result => {
       this.getProjectList();
     }, reason =>{

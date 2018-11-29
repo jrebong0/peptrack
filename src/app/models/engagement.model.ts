@@ -3,4 +3,5 @@ export interface Engagement {
     name: string;
     dateCreated: string;
     createdBy: any;
+    acronyms?: string;
 }

@@ -1,4 +1,4 @@
-.engagement-container a {
+.report-container a {
     cursor: pointer;
 }
 .table-header a:hover {
@@ -16,10 +16,10 @@
     font-size: 20px;
     padding: 0 10px;
 }
-.engagement-remove {
+.report-remove {
     color: red!important;
 }
-.engagement-edit {
+.report-edit {
     color: green!important;
 }
 .table thead {
@@ -27,7 +27,7 @@
     background-color: #a8c7dc;
 }
 .table tbody small {
-    color: #999;
+    color: #bbb;
 }
 /* .table tbody {
     display: block;
